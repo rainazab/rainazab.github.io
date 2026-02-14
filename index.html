@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLIP - The People's Bottle Network</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style style="display:none;">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green: #00D95F;
+            --dark-green: #00A843;
+            --black: #0A0A0A;
+            --white: #FEFEFE;
+            --red: #FF3B30;
+            --yellow: #FFD60A;
+            --gray: #6B7280;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+        }
+
+        /* Brutal header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--black);
+            color: var(--white);
+            z-index: 1000;
+            border-bottom: 4px solid var(--green);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem;
+            letter-spacing: -1px;
+            text-decoration: none;
+            color: var(--green);
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        nav a:hover {
+            border-bottom-color: var(--green);
+        }
+
+        .btn-header {
+            background: var(--green);
+            color: var(--black);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            border-bottom: none !important;
+        }
+
+        .btn-header:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Bold diagonal stripe background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 800px;
+            height: 150%;
+            background: linear-gradient(135deg, var(--green) 0%, var(--dark-green) 100%);
+            transform: rotate(15deg);
+            opacity: 0.08;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        /* Brutalist badge */
+        .badge {
+            display: inline-block;
+            background: var(--black);
+            color: var(--green);
+            padding: 0.5rem 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 2rem;
+            border: 3px solid var(--green);
+        }
+
+        h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 7rem;
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            letter-spacing: -3px;
+        }
+
+        h1 .highlight {
+            color: var(--green);
+            display: block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            line-height: 1.5;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            font-weight: 500;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            gap: 4rem;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-top: 3px solid var(--black);
+            border-bottom: 3px solid var(--black);
+            max-width: max-content;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: var(--black);
+            padding: 1.25rem 2.5rem;
+            border: 3px solid var(--black);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 6px 6px 0 var(--black);
+        }
+
+        .btn-primary:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 var(--black);
+        }
+
+        .btn-primary:active {
+            transform: translate(6px, 6px);
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--black);
+            padding: 1.25rem 2.5rem;
+            border: 3px solid var(--black);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 6px 6px 0 var(--black);
+        }
+
+        .btn-secondary:hover {
+            background: var(--black);
+            color: var(--white);
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 var(--black);
+        }
+
+        /* Problem Section - Bold blocks */
+        .problem {
+            background: var(--black);
+            color: var(--white);
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .problem::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--green);
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            color: var(--green);
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4.5rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 2rem;
+            max-width: 900px;
+        }
+
+        .section-description {
+            font-size: 1.35rem;
+            line-height: 1.6;
+            max-width: 700px;
+            opacity: 0.9;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        .problem-card {
+            background: var(--black);
+            border: 3px solid var(--white);
+            padding: 3rem 2.5rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .problem-card:hover {
+            background: var(--green);
+            color: var(--black);
+            border-color: var(--green);
+            transform: scale(1.02);
+            z-index: 10;
+        }
+
+        .problem-card:hover .problem-number {
+            color: var(--black);
+        }
+
+        .problem-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 5rem;
+            line-height: 1;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-card h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .problem-card p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 8rem 2rem;
+            background: var(--white);
+            position: relative;
+        }
+
+        .solution::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--black);
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            margin-top: 4rem;
+            align-items: start;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .feature-item {
+            background: var(--white);
+            border: 3px solid var(--black);
+            border-bottom: none;
+            padding: 2.5rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .feature-item:last-child {
+            border-bottom: 3px solid var(--black);
+        }
+
+        .feature-item:hover {
+            background: var(--green);
+            padding-left: 3rem;
+        }
+
+        .feature-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .feature-item:hover .feature-number {
+            color: var(--black);
+        }
+
+        .feature-item h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.75rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .feature-item p {
+            line-height: 1.7;
+            color: var(--gray);
+        }
+
+        .feature-item:hover p {
+            color: var(--black);
+        }
+
+        /* Visual grid */
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .visual-card {
+            aspect-ratio: 1;
+            background: var(--white);
+            border: 3px solid var(--black);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }
+
+        .visual-card:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .visual-card:hover .visual-icon {
+            background: var(--green);
+        }
+
+        .visual-title {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .visual-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--black);
+            margin: auto 0;
+            transition: all 0.2s;
+        }
+
+        .visual-description {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--green);
+            color: var(--black);
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--black);
+        }
+
+        .cta-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 5rem;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+        }
+
+        .cta-description {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 5rem;
+        }
+
+        .btn-cta {
+            background: var(--black);
+            color: var(--white);
+            padding: 1.25rem 2.5rem;
+            border: 3px solid var(--black);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 6px 6px 0 var(--black);
+        }
+
+        .btn-cta:hover {
+            background: var(--white);
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 var(--black);
+        }
+
+        /* Stats banner */
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            padding-top: 4rem;
+            border-top: 4px solid var(--black);
+        }
+
+        .stat-block {
+            text-align: center;
+            padding: 2rem;
+            border-right: 3px solid var(--black);
+        }
+
+        .stat-block:last-child {
+            border-right: none;
+        }
+
+        .stat-block-value {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-block-label {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 4rem 2rem 2rem 2rem;
+            border-top: 8px solid var(--green);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .footer-brand p {
+            line-height: 1.7;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--green);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--green);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0.6;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-bottom-links a {
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .problem-grid,
+            .solution-grid,
+            .stats-banner,
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .problem-card,
+            .stat-block {
+                border-right: none;
+                border-bottom: 3px solid var(--white);
+            }
+
+            .stat-block:last-child {
+                border-bottom: none;
+            }
+
+            .cta h2 {
+                font-size: 3rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+
+        /* Print-style texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.02) 2px,
+                    rgba(0, 0, 0, 0.02) 4px
+                );
+            pointer-events: none;
+            z-index: 9999;
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">FLIP</a>
+            <button class="mobile-menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-collectors.html">For Collectors</a></li>
+                    <li><a href="for-donors.html">For Donors</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html" class="btn-header">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="badge">The People's Bottle Network</div>
+                
+                <h1>
+                    Bottle<br>
+                    Redemption<br>
+                    <span class="highlight">For All</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Connecting 150,000 California collectors with real opportunities. 
+                    Dignified work. Fair pay. Community power.
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">150K</div>
+                        <div class="stat-label">Working Collectors</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">$1.5B</div>
+                        <div class="stat-label">Annual Market</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">40%</div>
+                        <div class="stat-label">Never Redeemed</div>
+                    </div>
+                </div>
+
+                <div class="cta-group">
+                    <a href="#join" class="btn-primary">Join the Movement</a>
+                    <a href="#problem" class="btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="problem" id="problem">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">The Problem</div>
+                <h2 class="section-title">The System is Broken</h2>
+                <p class="section-description">
+                    California's $1.5 billion bottle redemption industry exploits workers, 
+                    wastes resources, and fails communities.
+                </p>
+            </div>
+
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-number">$15</div>
+                    <h3>Poverty Wages</h3>
+                    <p>
+                        Collectors walk 5+ miles daily through trash for just $15 in 6 hours. 
+                        No benefits. No dignity. No future.
+                    </p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-number">$600M</div>
+                    <h3>Wasted Value</h3>
+                    <p>
+                        40% of bottles never get redeemed. Restaurants dump hundreds weekly 
+                        while collectors search empty-handed.
+                    </p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-number">ZERO</div>
+                    <h3>Zero Power</h3>
+                    <p>
+                        Collectors have no voice, no organization, no bargaining power. 
+                        An invisible workforce exploited by a broken system.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution -->
+    <section class="solution" id="solution">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">The Solution</div>
+                <h2 class="section-title">Power to the Collectors</h2>
+                <p class="section-description">
+                    A worker-first marketplace that connects collectors directly with high-value opportunities. 
+                    Fair pricing. Transparent work. Community strength.
+                </p>
+            </div>
+
+            <div class="solution-grid">
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <div class="feature-number">01</div>
+                        <h3>Real-Time Jobs</h3>
+                        <p>
+                            See every available bottle pickup on a live map. No more wandering. 
+                            No more digging through trash. Claim high-value jobs instantly.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-number">02</div>
+                        <h3>Fair Pay, Guaranteed</h3>
+                        <p>
+                            $179 average weekly earnings. Track every dollar in real-time. 
+                            No hidden fees. No wage theft. Your work, your money.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-number">03</div>
+                        <h3>Build Your Rep</h3>
+                        <p>
+                            Earn ratings, unlock recurring contracts, access premium routes. 
+                            Top collectors earn 3x average. Merit matters.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-number">04</div>
+                        <h3>Collective Power</h3>
+                        <p>
+                            150,000 collectors, one network. Track community impact. 
+                            Build solidarity. Organize for better conditions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="visual-grid">
+                    <div class="visual-card">
+                        <div class="visual-title">For Collectors</div>
+                        <div class="visual-icon"></div>
+                        <div class="visual-description">
+                            Find work. Earn fair wages. Build a future.
+                        </div>
+                    </div>
+
+                    <div class="visual-card">
+                        <div class="visual-title">For Donors</div>
+                        <div class="visual-icon"></div>
+                        <div class="visual-description">
+                            Support workers. Reduce waste. Make impact.
+                        </div>
+                    </div>
+
+                    <div class="visual-card">
+                        <div class="visual-title">Community-First</div>
+                        <div class="visual-icon"></div>
+                        <div class="visual-description">
+                            Worker ownership. Democratic governance.
+                        </div>
+                    </div>
+
+                    <div class="visual-card">
+                        <div class="visual-title">Data Transparency</div>
+                        <div class="visual-icon"></div>
+                        <div class="visual-description">
+                            Public metrics. Open platform. Your data.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="join">
+        <div class="cta-container">
+            <h2>Join the Movement</h2>
+            <p class="cta-description">
+                150,000 collectors deserve dignity, fair pay, and collective power. 
+                Whether you collect bottles or want to support those who do—join us.
+            </p>
+
+            <div class="cta-actions">
+                <a href="#" class="btn-cta">Download iOS</a>
+                <a href="#" class="btn-cta">Download Android</a>
+            </div>
+
+            <div class="stats-banner">
+                <div class="stat-block">
+                    <div class="stat-block-value">150K+</div>
+                    <div class="stat-block-label">Active Collectors</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-block-value">2M+</div>
+                    <div class="stat-block-label">Bottles Rescued</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-block-value">$3M+</div>
+                    <div class="stat-block-label">Paid to Workers</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-block-value">100%</div>
+                    <div class="stat-block-label">Worker-Owned</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">FLIP</a>
+                <p>
+                    Building worker power in California's bottle redemption economy. 
+                    One collector, one bottle, one community at a time.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul class="footer-links">
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-collectors.html">For Collectors</a></li>
+                    <li><a href="for-donors.html">For Donors</a></li>
+                    <li><a href="contact.html">Pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Organization</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="about.html#values">Our Values</a></li>
+                    <li><a href="about.html#rights">Worker Rights</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li><a href="contact.html">Security</a></li>
+                    <li><a href="contact.html">Support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>&copy; 2026 Flip Workers Collective</div>
+            <div class="footer-bottom-links">
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="menu.js"></script>
+</body>
+</html>

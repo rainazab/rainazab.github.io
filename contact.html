@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - FLIP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">FLIP</a>
+            <button class="mobile-menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-collectors.html">For Collectors</a></li>
+                    <li><a href="for-donors.html">For Donors</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html" class="btn-header">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="section-container">
+            <div class="badge">Get in Touch</div>
+            <h1 class="page-title">Contact Us</h1>
+            <p class="page-subtitle">
+                Questions? Feedback? Want to partner? We're here to help.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Options -->
+    <section class="contact-options">
+        <div class="section-container">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>Download the App</h3>
+                    <p>Get started as a collector or donor today.</p>
+                    <div class="contact-actions">
+                        <a href="#" class="btn-secondary">Download iOS</a>
+                        <a href="#" class="btn-secondary">Download Android</a>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h3>General Inquiries</h3>
+                    <p>Have questions about FLIP?</p>
+                    <a href="mailto:hello@flipbottles.org" class="contact-link">hello@flipbottles.org</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">🤝</div>
+                    <h3>Business Partnerships</h3>
+                    <p>Interested in recurring pickups for your business?</p>
+                    <a href="mailto:business@flipbottles.org" class="contact-link">business@flipbottles.org</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">🛠️</div>
+                    <h3>Support</h3>
+                    <p>Need help with your account or a pickup?</p>
+                    <a href="mailto:support@flipbottles.org" class="contact-link">support@flipbottles.org</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📰</div>
+                    <h3>Press & Media</h3>
+                    <p>Media inquiries and press kit.</p>
+                    <a href="mailto:press@flipbottles.org" class="contact-link">press@flipbottles.org</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <h3>Join Our Team</h3>
+                    <p>Want to work with us?</p>
+                    <a href="mailto:jobs@flipbottles.org" class="contact-link">jobs@flipbottles.org</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Send Us a Message</h2>
+            </div>
+
+            <div class="form-container">
+                <form class="contact-form" action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">I am a... *</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select one</option>
+                            <option value="collector">Collector</option>
+                            <option value="donor">Donor/Individual</option>
+                            <option value="business">Business Owner</option>
+                            <option value="press">Press/Media</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Section -->
+    <section class="office-section">
+        <div class="section-container">
+            <div class="office-grid">
+                <div class="office-info">
+                    <h2>FLIP Workers Collective</h2>
+                    <div class="office-details">
+                        <p><strong>Address:</strong></p>
+                        <p>123 Mission Street, Suite 400<br>
+                        San Francisco, CA 94105</p>
+                        
+                        <p><strong>Hours:</strong></p>
+                        <p>Monday - Friday: 9am - 6pm PST<br>
+                        Saturday - Sunday: Closed</p>
+
+                        <p><strong>Emergency Support:</strong></p>
+                        <p>For urgent collector safety issues:<br>
+                        <a href="tel:+14155551234">(415) 555-1234</a> (24/7)</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <h3>Follow Us</h3>
+                    <div class="social-grid">
+                        <a href="#" class="social-card">
+                            <div class="social-icon">🐦</div>
+                            <div class="social-name">Twitter</div>
+                        </a>
+                        <a href="#" class="social-card">
+                            <div class="social-icon">📸</div>
+                            <div class="social-name">Instagram</div>
+                        </a>
+                        <a href="#" class="social-card">
+                            <div class="social-icon">📘</div>
+                            <div class="social-name">Facebook</div>
+                        </a>
+                        <a href="#" class="social-card">
+                            <div class="social-icon">💼</div>
+                            <div class="social-name">LinkedIn</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">FLIP</a>
+                <p>
+                    Building worker power in California's bottle redemption economy. 
+                    One collector, one bottle, one community at a time.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul class="footer-links">
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-collectors.html">For Collectors</a></li>
+                    <li><a href="for-donors.html">For Donors</a></li>
+                    <li><a href="contact.html">Pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Organization</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="about.html#values">Our Values</a></li>
+                    <li><a href="about.html#rights">Worker Rights</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li><a href="contact.html">Security</a></li>
+                    <li><a href="contact.html">Support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>&copy; 2026 Flip Workers Collective</div>
+            <div class="footer-bottom-links">
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="menu.js"></script>
+</body>
+</html>
