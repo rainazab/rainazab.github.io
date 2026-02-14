@@ -1,58 +1,234 @@
-// Mobile menu toggle functionality
+// ============================================
+// FLIP - Premium Interaction Logic
+// ============================================
+
+// ============================================
+// PREMIUM HAMBURGER MENU
+// ============================================
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const menuOverlay = document.getElementById('menuOverlay');
+const body = document.body;
+
+// Toggle menu
 function toggleMenu() {
-    const nav = document.getElementById('mainNav');
-    const overlay = document.getElementById('menuOverlay');
-    nav.classList.toggle('active');
-    if (overlay) {
-        overlay.classList.toggle('active');
+    const isActive = mobileMenu.classList.contains('active');
+    
+    if (isActive) {
+        closeMenu();
+    } else {
+        openMenu();
     }
 }
 
-// Close menu when clicking outside or on overlay
-document.addEventListener('click', function(event) {
-    const nav = document.getElementById('mainNav');
-    const toggle = document.querySelector('.mobile-menu-toggle');
-    const overlay = document.getElementById('menuOverlay');
+// Open menu
+function openMenu() {
+    hamburger.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    mobileMenu.classList.add('active');
+    menuOverlay.classList.add('active');
+    body.style.overflow = 'hidden'; // Disable scroll
     
-    if (nav && toggle && !nav.contains(event.target) && !toggle.contains(event.target)) {
-        nav.classList.remove('active');
-        if (overlay) {
-            overlay.classList.remove('active');
-        }
-    }
-});
+    // Trap focus
+    trapFocus(mobileMenu);
+}
+
+// Close menu
+function closeMenu() {
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileMenu.classList.remove('active');
+    menuOverlay.classList.remove('active');
+    body.style.overflow = ''; // Re-enable scroll
+}
+
+// Event listeners
+hamburger.addEventListener('click', toggleMenu);
+menuOverlay.addEventListener('click', closeMenu);
 
 // Close menu when clicking a link
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', function() {
-            const nav = document.getElementById('mainNav');
-            const overlay = document.getElementById('menuOverlay');
-            if (nav) {
-                nav.classList.remove('active');
-            }
-            if (overlay) {
-                overlay.classList.remove('active');
-            }
-        });
+mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        closeMenu();
     });
 });
 
-// Prevent body scroll when mobile menu is open
-document.addEventListener('DOMContentLoaded', function() {
-    const nav = document.getElementById('mainNav');
-    if (nav) {
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.attributeName === 'class') {
-                    if (nav.classList.contains('active')) {
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        document.body.style.overflow = '';
-                    }
-                }
-            });
-        });
-        observer.observe(nav, { attributes: true });
+// Close menu on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        closeMenu();
     }
+});
+
+// ============================================
+// FOCUS TRAP (Accessibility)
+// ============================================
+
+function trapFocus(element) {
+    const focusableElements = element.querySelectorAll(
+        'a[href], button, textarea, input, select'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    
+    element.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab') return;
+        
+        if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+                lastElement.focus();
+                e.preventDefault();
+            }
+        } else {
+            if (document.activeElement === lastElement) {
+                firstElement.focus();
+                e.preventDefault();
+            }
+        }
+    });
+}
+
+// ============================================
+// SCROLL PROGRESS BAR
+// ============================================
+
+const scrollProgress = document.getElementById('scrollProgress');
+
+function updateScrollProgress() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    
+    if (scrollProgress) {
+        scrollProgress.style.transform = `scaleX(${progress / 100})`;
+    }
+}
+
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+// ============================================
+// FADE-IN ON SCROLL ANIMATION
+// ============================================
+
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+// Observe all fade-in-up elements
+document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-in-up');
+    fadeElements.forEach(el => observer.observe(el));
+});
+
+// ============================================
+// SMOOTH SCROLL TO ANCHOR LINKS
+// ============================================
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        
+        // Don't prevent default for just "#"
+        if (href === '#') return;
+        
+        e.preventDefault();
+        const target = document.querySelector(href);
+        
+        if (target) {
+            const headerOffset = 70;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// ============================================
+// PREVENT SCROLL BOUNCE ON iOS
+// ============================================
+
+let scrollPosition = 0;
+
+function disableBodyScroll() {
+    scrollPosition = window.pageYOffset;
+    body.style.overflow = 'hidden';
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollPosition}px`;
+    body.style.width = '100%';
+}
+
+function enableBodyScroll() {
+    body.style.removeProperty('overflow');
+    body.style.removeProperty('position');
+    body.style.removeProperty('top');
+    body.style.removeProperty('width');
+    window.scrollTo(0, scrollPosition);
+}
+
+// Update menu functions to use these
+const originalOpenMenu = openMenu;
+openMenu = function() {
+    originalOpenMenu();
+    disableBodyScroll();
+};
+
+const originalCloseMenu = closeMenu;
+closeMenu = function() {
+    originalCloseMenu();
+    enableBodyScroll();
+};
+
+// ============================================
+// PERFORMANCE OPTIMIZATION
+// ============================================
+
+// Debounce function for resize events
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Handle window resize
+const handleResize = debounce(() => {
+    // Close mobile menu if window is resized to desktop
+    if (window.innerWidth >= 1024 && mobileMenu.classList.contains('active')) {
+        closeMenu();
+    }
+}, 250);
+
+window.addEventListener('resize', handleResize);
+
+// ============================================
+// PRELOAD CRITICAL RESOURCES
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Add loaded class to body for CSS transitions
+    body.classList.add('loaded');
+    
+    // Log for demo purposes
+    console.log('🚀 FLIP - Hackathon Demo Ready');
+    console.log('📱 Mobile-first design loaded');
+    console.log('✨ Premium animations active');
 });
