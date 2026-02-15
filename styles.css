@@ -116,6 +116,11 @@ header {
     transition: transform 0.2s var(--ease-smooth);
     display: flex;
     align-items: center;
+    gap: 0.55rem;
+}
+
+.logo-text {
+    line-height: 1;
 }
 
 .logo-img {
@@ -1107,12 +1112,18 @@ footer {
 
 .footer-brand .logo {
     margin-bottom: 1rem;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
 }
 
 .footer-brand .logo-img {
     height: 50px;
     width: auto;
+}
+
+.footer-brand .logo .logo-text {
+    color: var(--white);
 }
 
 .footer-brand p {
