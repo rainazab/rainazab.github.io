@@ -598,10 +598,11 @@ h1 .highlight {
 
 .app-gallery {
     display: flex;
+    flex-wrap: nowrap;
     gap: 1rem;
     margin-top: 2rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    overflow-x: hidden;
+    overflow-y: hidden;
     padding: 0.2rem 0.2rem 0.8rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -613,7 +614,6 @@ h1 .highlight {
 
 .app-screen-card {
     flex: 0 0 clamp(210px, 74vw, 270px);
-    scroll-snap-align: center;
     background: transparent;
     border: none;
     border-radius: 0;
