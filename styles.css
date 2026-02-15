@@ -1231,6 +1231,36 @@ footer {
     color: var(--green);
 }
 
+/* Footer link groups used by index.html */
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-links a {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-deep);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-transform: lowercase;
+    letter-spacing: 0.25px;
+    padding: 0.2rem 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s var(--ease-smooth), border-color 0.2s var(--ease-smooth), transform 0.2s var(--ease-smooth);
+}
+
+.footer-links a:hover {
+    color: var(--google-green);
+    border-bottom-color: var(--primary-strong);
+    transform: translateX(2px);
+}
+
 .footer-lwhites {
     list-style: none;
 }
@@ -1287,15 +1317,20 @@ footer {
 }
 
 /* Keep existing HTML footer link classes legible */
-.footer-links a,
 .footer-bottom-links a {
     color: var(--primary-deep);
     text-decoration: none;
+    text-transform: lowercase;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.4px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s var(--ease-smooth), border-color 0.2s var(--ease-smooth);
 }
 
-.footer-links a:hover,
 .footer-bottom-links a:hover {
     color: var(--google-green);
+    border-bottom-color: var(--primary-strong);
 }
 
 /* ============================================
