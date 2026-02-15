@@ -15,11 +15,12 @@
 
 :root {
     /* Your beautiful colors - keeping them! */
-    --green: #00D95F;
-    --dark-green: #00A843;
-    --black: #0A0A0A;
-    --white: #FEFEFE;
+    --green: #78b6F6;
+    --dark-green: #78B6F6;
+    --black: #ffffff;
+    --white: #78B6F6;
     --gray: #6B7280;
+    --logo-green: #027c43;
     
     /* Spacing */
     --container-padding: clamp(1rem, 5vw, 2rem);
@@ -50,7 +51,7 @@ body {
 
 /* Improve tap targets */
 a, button {
-    -webkit-tap-highlight-color: rgba(0, 217, 95, 0.2);
+    -webkit-tap-highlight-color: #78b6F6;
 }
 
 /* ============================================
@@ -100,8 +101,8 @@ header {
     font-size: clamp(1.25rem, 5vw, 1.75rem);
     letter-spacing: -0.5px;
     text-decoration: none;
-    color: var(--green);
-    text-transform: uppercase;
+    color: var(--logo-green);
+    text-transform: lowercase;
     position: relative;
     z-index: 1001;
     transition: transform 0.2s var(--ease-smooth);
@@ -135,7 +136,7 @@ header {
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-size: 0.75rem;
     letter-spacing: 0.5px;
     cursor: pointer;
@@ -271,7 +272,7 @@ header {
     font-weight: 600;
     font-size: 1.125rem;
     letter-spacing: 0.5px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     border-bottom: 1px solid rgba(0, 217, 95, 0.15);
     transition: all 0.2s var(--ease-smooth);
 }
@@ -348,7 +349,7 @@ header {
     color: var(--green);
     padding: 0.5rem 1rem;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-size: 0.7rem;
     letter-spacing: 1.5px;
     border: 2px solid var(--green);
@@ -365,7 +366,7 @@ h1 {
     font-family: var(--font-display);
     font-size: clamp(3rem, 12vw, 4.5rem);
     line-height: 0.95;
-    text-transform: uppercase;
+    text-transform: lowercase;
     margin-bottom: 1.5rem;
     letter-spacing: -2px;
 }
@@ -407,7 +408,7 @@ h1 .highlight {
 }
 
 .stat-label {
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -474,9 +475,8 @@ h1 .highlight {
     border-radius: 50px;
     font-size: 0.7rem;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 12px rgba(0, 217, 95, 0.4);
     white-space: nowrap;
     animation: float-label 3s ease-in-out infinite;
 }
@@ -577,7 +577,7 @@ h1 .highlight {
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
     color: var(--green);
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 1px;
     font-weight: 700;
 }
@@ -659,7 +659,7 @@ h1 .highlight {
 .problem-card h3 {
     font-family: var(--font-display);
     font-size: 1.5rem;
-    text-transform: uppercase;
+    text-transform: lowercase;
     margin-bottom: 0.75rem;
     letter-spacing: -0.5px;
 }
@@ -685,7 +685,7 @@ h1 .highlight {
     display: inline-block;
     padding: 1rem 2rem;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-size: 0.875rem;
     letter-spacing: 0.5px;
     text-decoration: none;
@@ -753,7 +753,7 @@ h1 .highlight {
 
 .section-label {
     color: var(--green);
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-weight: 700;
     font-size: 0.75rem;
     letter-spacing: 2px;
@@ -764,7 +764,7 @@ h1 .highlight {
     font-family: var(--font-display);
     font-size: clamp(2rem, 8vw, 3.5rem);
     line-height: 1.1;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: -1.5px;
     margin-bottom: 1.5rem;
 }
@@ -820,7 +820,7 @@ h1 .highlight {
 .step-card h3 {
     font-family: var(--font-display);
     font-size: 1.35rem;
-    text-transform: uppercase;
+    text-transform: lowercase;
     margin-bottom: 0.75rem;
     letter-spacing: -0.5px;
 }
@@ -901,7 +901,7 @@ h1 .highlight {
 }
 
 .impact-label {
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 1px;
@@ -945,7 +945,7 @@ h1 .highlight {
     font-family: var(--font-display);
     font-size: clamp(2.5rem, 10vw, 4rem);
     line-height: 1;
-    text-transform: uppercase;
+    text-transform: lowercase;
     margin-bottom: 1.5rem;
     letter-spacing: -2px;
 }
@@ -971,7 +971,7 @@ h1 .highlight {
     border: 2px solid var(--black);
     border-radius: 50px;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-size: 0.875rem;
     letter-spacing: 0.5px;
     cursor: pointer;
@@ -1032,7 +1032,7 @@ h1 .highlight {
 }
 
 .stat-block-label {
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 1px;
@@ -1077,7 +1077,7 @@ footer {
 
 .footer-section h4 {
     font-family: var(--font-display);
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-size: 0.9rem;
     margin-bottom: 1rem;
     color: var(--green);
@@ -1128,7 +1128,7 @@ footer {
 .footer-bottom-links a {
     color: var(--white);
     text-decoration: none;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-size: 0.75rem;
     font-weight: 600;
     transition: color 0.2s var(--ease-smooth);
@@ -1260,7 +1260,7 @@ footer {
         color: var(--white);
         text-decoration: none;
         font-weight: 600;
-        text-transform: uppercase;
+        text-transform: lowercase;
         font-size: 0.8rem;
         letter-spacing: 0.5px;
         padding: 0.5rem 0;
@@ -1329,14 +1329,6 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0, 0, 0, 0.015) 2px,
-            rgba(0, 0, 0, 0.015) 4px
-        );
     pointer-events: none;
     z-index: 9999;
 }
