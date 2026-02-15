@@ -596,24 +596,41 @@ h1 .highlight {
     text-transform: lowercase;
 }
 
-.app-gallery {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 1rem;
+.app-gallery-marquee {
     margin-top: 2rem;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    padding: 0.2rem 0.2rem 0.8rem;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
 }
 
-.app-gallery::-webkit-scrollbar {
-    display: none;
+.app-gallery-track {
+    display: flex;
+    width: max-content;
+    animation: demo-marquee 46s linear infinite;
+    will-change: transform;
+}
+
+.app-gallery-group {
+    display: flex;
+    gap: 1rem;
+    padding-right: 1rem;
+}
+
+@keyframes demo-marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.app-gallery-marquee:hover .app-gallery-track {
+    animation-play-state: paused;
 }
 
 .app-screen-card {
-    flex: 0 0 clamp(210px, 74vw, 270px);
+    flex: 0 0 clamp(220px, 76vw, 280px);
     background: transparent;
     border: none;
     border-radius: 0;
@@ -638,11 +655,16 @@ h1 .highlight {
 
 .app-screen-card figcaption {
     margin-top: 0.8rem;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.82rem;
+    font-weight: 700;
     color: var(--google-green);
-    letter-spacing: 0.2px;
+    letter-spacing: 0.3px;
     text-transform: lowercase;
+    background: rgba(52, 168, 83, 0.08);
+    border: 1px solid rgba(52, 168, 83, 0.24);
+    border-radius: 999px;
+    padding: 0.35rem 0.6rem;
+    display: inline-block;
 }
 
 .live-demo-actions {
@@ -1639,9 +1661,7 @@ footer {
         gap: 2rem;
     }
 
-    .app-screen-card {
-        flex-basis: 235px;
-    }
+    .app-screen-card { flex-basis: 250px; }
 
     .live-demo-actions {
         flex-direction: row;
@@ -1760,9 +1780,7 @@ footer {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .app-screen-card {
-        flex-basis: 250px;
-    }
+    .app-screen-card { flex-basis: 270px; }
     
     .problem-grid {
         grid-template-columns: repeat(3, 1fr);
