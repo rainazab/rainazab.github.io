@@ -263,7 +263,7 @@ header {
     right: 0;
     bottom: 0;
     width: min(85vw, 320px);
-    background: var(--black);
+    background: var(--white);
     border-left: 3px solid var(--green);
     padding-top: 80px;
     transform: translateX(100%);
@@ -296,20 +296,20 @@ header {
 .mobile-menu a {
     display: block;
     padding: 1.25rem 2rem;
-    color: var(--baby-blues);
+    color: var(--primary-deep);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.125rem;
     letter-spacing: 0.5px;
     text-transform: lowercase;
-    border-bottom: 1px solid rgba(0, 217, 95, 0.15);
+    border-bottom: 1px solid rgba(54, 148, 232, 0.2);
     transition: all 0.2s var(--ease-smooth);
 }
 
 .mobile-menu a:hover,
 .mobile-menu a:active {
-    background: var(--green);
-    color: var(--black);
+    background: var(--primary-strong);
+    color: var(--white);
     padding-left: 2.5rem;
 }
 
