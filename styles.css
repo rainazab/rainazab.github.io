@@ -576,6 +576,75 @@ h1 .highlight {
     margin-top: 3rem;
 }
 
+.demo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+}
+
+.demo-tag {
+    background: var(--soft);
+    color: var(--google-green);
+    border: 1px solid rgba(52, 168, 83, 0.35);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-transform: lowercase;
+}
+
+.app-gallery {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0.2rem 0.2rem 0.8rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.app-gallery::-webkit-scrollbar {
+    display: none;
+}
+
+.app-screen-card {
+    flex: 0 0 clamp(210px, 74vw, 270px);
+    scroll-snap-align: center;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    text-align: center;
+    transition: transform 0.25s var(--ease-smooth);
+}
+
+.app-screen-card:hover {
+    transform: translateY(-4px);
+}
+
+.app-screen-img {
+    width: 100%;
+    height: auto;
+    border-radius: 28px;
+    display: block;
+    margin: 0 auto;
+    border: none;
+    background: transparent;
+}
+
+.app-screen-card figcaption {
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--google-green);
+    letter-spacing: 0.2px;
+    text-transform: lowercase;
+}
+
 .live-demo-actions {
     display: flex;
     flex-direction: column;
@@ -1570,6 +1639,10 @@ footer {
         gap: 2rem;
     }
 
+    .app-screen-card {
+        flex-basis: 235px;
+    }
+
     .live-demo-actions {
         flex-direction: row;
         justify-content: center;
@@ -1685,6 +1758,10 @@ footer {
     
     .demo-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .app-screen-card {
+        flex-basis: 250px;
     }
     
     .problem-grid {

@@ -232,3 +232,4 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('📱 Mobile-first design loaded');
     console.log('✨ Premium animations active');
 });
+
