@@ -14,12 +14,19 @@
 }
 
 :root {
-    /* Your beautiful colors - keeping them! */
-    --green: #78b6F6;
-    --dark-green: #78B6F6;
-    --black: #ffffff;
-    --white: #78B6F6;
-    --gray: #6B7280;
+    /* Updated baby blue system with stronger hierarchy */
+    --primary: #BFE4FF;
+    --primary-strong: #3BA7FF;
+    --primary-deep: #1E78D7;
+    --ink: #0B1220;
+    --white: #FFFFFF;
+    --soft: #F5FAFF;
+    --gray: #5B6B7C;
+    
+    /* Backward-compatible aliases for existing selectors */
+    --green: var(--primary-strong);
+    --dark-green: var(--primary-deep);
+    --black: var(--ink);
     --logo-green: #027c43;
     
     /* Spacing */
@@ -43,15 +50,15 @@ html {
 
 body {
     font-family: var(--font-body);
-    background: var(--white);
-    color: var(--black);
+    background: var(--soft);
+    color: var(--ink);
     line-height: 1.6;
     overflow-x: hidden;
 }
 
 /* Improve tap targets */
 a, button {
-    -webkit-tap-highlight-color: #78b6F6;
+    -webkit-tap-highlight-color: var(--primary);
 }
 
 /* ============================================
@@ -131,19 +138,29 @@ header {
 }
 
 .btn-header {
-    background: var(--green);
-    color: var(--black);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
+    background: var(--primary-strong);
+    color: var(--ink);
+    padding: 0.85rem 1.6rem;
+    border: 3px solid var(--ink);
     font-weight: 700;
-    text-transform: lowercase;
-    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
     letter-spacing: 0.5px;
     cursor: pointer;
-    transition: all 0.2s var(--ease-smooth);
+    box-shadow: 6px 6px 0 var(--ink);
+    transition: all 0.15s ease;
     text-decoration: none;
     display: inline-block;
-    border: none;
+}
+
+.btn-header:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--ink);
+}
+
+.btn-header:active {
+    transform: translate(6px, 6px);
+    box-shadow: none;
 }
 
 /* ============================================
@@ -372,7 +389,7 @@ h1 {
 }
 
 h1 .highlight {
-    color: var(--green);
+    color: var(--primary-strong);
     display: block;
 }
 
@@ -611,8 +628,8 @@ h1 .highlight {
 
 .problem-section {
     padding: var(--section-gap) var(--container-padding);
-    background: var(--black);
-    color: var(--white);
+    background: var(--white);
+    color: var(--ink);
     position: relative;
 }
 
@@ -622,8 +639,8 @@ h1 .highlight {
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
-    background: var(--green);
+    height: 6px;
+    background: var(--primary-strong);
 }
 
 .problem-grid {
@@ -634,8 +651,8 @@ h1 .highlight {
 }
 
 .problem-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: var(--white);
+    border: 2px solid var(--ink);
     border-radius: 12px;
     padding: 2rem 1.5rem;
     text-align: center;
@@ -643,8 +660,8 @@ h1 .highlight {
 }
 
 .problem-card:hover {
-    background: rgba(0, 217, 95, 0.1);
-    border-color: var(--green);
+    background: var(--primary);
+    border-color: var(--primary-deep);
     transform: translateY(-4px);
 }
 
@@ -652,7 +669,7 @@ h1 .highlight {
     font-family: var(--font-display);
     font-size: clamp(3rem, 10vw, 5rem);
     line-height: 1;
-    color: var(--green);
+    color: var(--primary-deep);
     margin-bottom: 1rem;
 }
 
@@ -683,41 +700,52 @@ h1 .highlight {
 .btn-primary,
 .btn-secondary {
     display: inline-block;
-    padding: 1rem 2rem;
+    padding: 1.2rem 2.4rem;
     font-weight: 700;
-    text-transform: lowercase;
+    text-transform: uppercase;
     font-size: 0.875rem;
     letter-spacing: 0.5px;
     text-decoration: none;
     text-align: center;
-    border-radius: 50px;
-    transition: all 0.2s var(--ease-smooth);
+    border-radius: 0;
+    transition: all 0.15s ease;
     cursor: pointer;
-    border: 2px solid var(--black);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
 }
 
 .btn-primary {
-    background: var(--green);
-    color: var(--black);
+    background: var(--primary-strong);
+    color: var(--ink);
 }
 
 .btn-primary:hover,
 .btn-primary:active {
-    transform: scale(1.03);
-    box-shadow: 0 6px 20px rgba(0, 217, 95, 0.3);
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--ink);
+}
+
+.btn-primary:active {
+    transform: translate(6px, 6px);
+    box-shadow: none;
 }
 
 .btn-secondary {
     background: var(--white);
-    color: var(--black);
+    color: var(--ink);
 }
 
 .btn-secondary:hover,
 .btn-secondary:active {
-    background: var(--black);
+    background: var(--ink);
     color: var(--white);
-    transform: scale(1.03);
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--ink);
+}
+
+.btn-secondary:active {
+    transform: translate(6px, 6px);
+    box-shadow: none;
 }
 
 /* ============================================
@@ -726,8 +754,8 @@ h1 .highlight {
 
 .demo-flow {
     padding: var(--section-gap) var(--container-padding);
-    background: var(--black);
-    color: var(--white);
+    background: var(--primary);
+    color: var(--ink);
     position: relative;
 }
 
@@ -737,8 +765,8 @@ h1 .highlight {
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
-    background: var(--green);
+    height: 6px;
+    background: var(--primary-strong);
 }
 
 .section-container {
@@ -789,8 +817,8 @@ h1 .highlight {
 }
 
 .step-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(0, 217, 95, 0.2);
+    background: var(--white);
+    border: 2px solid var(--ink);
     border-radius: 16px;
     padding: 2rem 1.5rem;
     text-align: center;
@@ -800,8 +828,8 @@ h1 .highlight {
 }
 
 .step-card:hover {
-    background: rgba(0, 217, 95, 0.1);
-    border-color: var(--green);
+    background: #e8f3ff;
+    border-color: var(--primary-deep);
     transform: translateY(-4px);
 }
 
@@ -919,8 +947,8 @@ h1 .highlight {
    ============================================ */
 
 .cta {
-    background: var(--green);
-    color: var(--black);
+    background: var(--ink);
+    color: var(--white);
     padding: var(--section-gap) var(--container-padding);
     text-align: center;
     position: relative;
@@ -932,8 +960,8 @@ h1 .highlight {
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
-    background: var(--black);
+    height: 8px;
+    background: var(--primary-strong);
 }
 
 .cta-container {
@@ -965,39 +993,52 @@ h1 .highlight {
 }
 
 .btn-cta {
-    background: var(--black);
-    color: var(--white);
-    padding: 1rem 2rem;
-    border: 2px solid var(--black);
-    border-radius: 50px;
+    background: var(--primary-strong);
+    color: var(--ink);
+    padding: 1.2rem 2.4rem;
+    border: 3px solid var(--ink);
+    border-radius: 0;
     font-weight: 700;
-    text-transform: lowercase;
+    text-transform: uppercase;
     font-size: 0.875rem;
     letter-spacing: 0.5px;
     cursor: pointer;
-    transition: all 0.2s var(--ease-smooth);
+    transition: all 0.15s ease;
     text-decoration: none;
     display: inline-block;
+    box-shadow: 6px 6px 0 var(--ink);
     width: 100%;
     max-width: 300px;
 }
 
 .btn-cta:hover,
 .btn-cta:active {
-    background: var(--white);
-    color: var(--black);
-    transform: scale(1.03);
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--ink);
+}
+
+.btn-cta:active {
+    transform: translate(6px, 6px);
+    box-shadow: none;
 }
 
 .btn-outline {
     background: transparent;
-    color: var(--black);
-    border: 2px solid var(--black);
+    color: var(--white);
+    border: 3px solid var(--white);
+    box-shadow: 6px 6px 0 var(--white);
 }
 
 .btn-outline:hover {
-    background: var(--black);
-    color: var(--white);
+    background: var(--white);
+    color: var(--ink);
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--white);
+}
+
+.cta .btn-primary {
+    background: var(--primary-strong);
+    color: var(--ink);
 }
 
 /* Stats Banner in CTA */
@@ -1270,6 +1311,20 @@ footer {
     
     .desktop-nav a:hover {
         border-bottom-color: var(--green);
+    }
+
+    .desktop-nav .btn-header {
+        color: var(--ink);
+        border: 3px solid var(--ink);
+        box-shadow: 6px 6px 0 var(--ink);
+        border-bottom: 3px solid var(--ink);
+    }
+    
+    .desktop-nav .btn-header:hover {
+        border-bottom: 3px solid var(--ink);
+        transform: translate(3px, 3px);
+        box-shadow: 3px 3px 0 var(--ink);
+        background: var(--primary);
     }
     
     /* Desktop layouts */
