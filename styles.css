@@ -426,7 +426,7 @@ h1 {
     text-transform: lowercase;
     margin-bottom: 1.5rem;
     letter-spacing: -2px;
-    color: var(--primary-deep);
+    color: var(--white);
 }
 
 h1 .highlight {
@@ -746,7 +746,7 @@ h1 .highlight {
 
 .problem-card {
     background: var(--white);
-    border: 2px solid var(--white);
+    border: 2px solid var(--primary-strong);
     border-radius: 12px;
     padding: 2rem 1.5rem;
     text-align: center;
@@ -1184,7 +1184,7 @@ h1 .highlight {
 footer {
     background: var(--soft);
     color: var(--primary-deep);
-    padding: 3rem var(--container-padding) 2rem;
+    padding: 3rem clamp(0.5rem, 2vw, 1rem) 2rem;
     border-top: 4px solid var(--green);
 }
 
