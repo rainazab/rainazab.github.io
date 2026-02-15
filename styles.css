@@ -700,10 +700,10 @@ h1 .highlight {
 }
 
 .tech-item {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.22);
     padding: 0.875rem 1.25rem;
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(54, 148, 232, 0.35);
     font-size: 0.9rem;
     transition: all 0.3s var(--ease-smooth);
     font-weight: 500;
