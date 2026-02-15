@@ -151,7 +151,11 @@ header {
     box-shadow: 6px 6px 0 var(--ink);
     transition: all 0.15s ease;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    white-space: nowrap;
 }
 
 .btn-header:hover {
@@ -476,8 +480,6 @@ h1 .highlight {
     border-radius: 30px;
     box-shadow: 0 20px 50px rgba(11, 18, 32, 0.22);
     animation: none;
-    /* Helps suppress white backing from non-transparent mockups */
-    mix-blend-mode: multiply;
 }
 
 @keyframes float-phone {
@@ -1316,17 +1318,22 @@ footer {
         border-bottom-color: var(--green);
     }
 
-    .desktop-nav .btn-header {
+    .desktop-nav a.btn-header {
         color: var(--ink);
+        padding: 0.85rem 1.35rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+        line-height: 1;
+        border-radius: 0;
         border: 3px solid var(--ink);
         box-shadow: 6px 6px 0 var(--ink);
         border-bottom: 3px solid var(--ink);
     }
     
-    .desktop-nav .btn-header:hover {
+    .desktop-nav a.btn-header:hover {
         border-bottom: 3px solid var(--ink);
-        transform: translate(3px, 3px);
-        box-shadow: 3px 3px 0 var(--ink);
+        transform: translate(2px, 2px);
+        box-shadow: 4px 4px 0 var(--ink);
         background: var(--primary);
     }
     
