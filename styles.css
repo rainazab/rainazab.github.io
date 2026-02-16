@@ -623,23 +623,43 @@ h1 .highlight {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: clamp(2.2rem, 7vw, 5.2rem);
+    width: clamp(4.2rem, 11vw, 8.8rem);
     pointer-events: none;
     z-index: 2;
 }
 
 .app-gallery-marquee::before {
     left: 0;
-    background: linear-gradient(90deg, var(--white) 0%, rgba(255, 255, 255, 0.78) 38%, rgba(255, 255, 255, 0) 100%);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 12%,
+        rgba(255, 255, 255, 0.99) 24%,
+        rgba(255, 255, 255, 0.95) 40%,
+        rgba(255, 255, 255, 0.84) 58%,
+        rgba(255, 255, 255, 0.62) 74%,
+        rgba(255, 255, 255, 0.32) 88%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 .app-gallery-marquee::after {
     right: 0;
-    background: linear-gradient(270deg, var(--white) 0%, rgba(255, 255, 255, 0.78) 38%, rgba(255, 255, 255, 0) 100%);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: linear-gradient(
+        270deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 12%,
+        rgba(255, 255, 255, 0.99) 24%,
+        rgba(255, 255, 255, 0.95) 40%,
+        rgba(255, 255, 255, 0.84) 58%,
+        rgba(255, 255, 255, 0.62) 74%,
+        rgba(255, 255, 255, 0.32) 88%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 .app-gallery-track {
@@ -1356,8 +1376,8 @@ footer {
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .footer-brand .logo {
@@ -1385,7 +1405,9 @@ footer {
 .footer-section h4 {
     font-family: var(--font-display);
     text-transform: lowercase;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     margin-bottom: 1rem;
     color: var(--green);
 }
@@ -1395,7 +1417,7 @@ footer {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.75rem;
     margin: 0;
     padding: 0;
 }
@@ -1405,19 +1427,33 @@ footer {
     align-items: center;
     color: var(--primary-deep);
     text-decoration: none;
-    font-size: 0.92rem;
-    font-weight: 600;
+    font-size: 0.95rem;
+    font-weight: 500;
     text-transform: lowercase;
     letter-spacing: 0.25px;
     padding: 0.2rem 0;
     border-bottom: 2px solid transparent;
-    transition: color 0.2s var(--ease-smooth), border-color 0.2s var(--ease-smooth), transform 0.2s var(--ease-smooth);
+    transition: color 0.24s var(--ease-smooth), border-color 0.24s var(--ease-smooth), transform 0.24s var(--ease-smooth);
+}
+
+.footer-links a::after {
+    content: "→";
+    opacity: 0;
+    transform: translateX(-8px);
+    margin-left: 0;
+    transition: opacity 0.24s var(--ease-smooth), transform 0.24s var(--ease-smooth), margin-left 0.24s var(--ease-smooth);
 }
 
 .footer-links a:hover {
     color: var(--google-green);
     border-bottom-color: var(--primary-strong);
-    transform: translateX(2px);
+    transform: translateX(6px);
+}
+
+.footer-links a:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+    margin-left: 0.35rem;
 }
 
 .footer-lwhites {
@@ -1505,14 +1541,15 @@ footer {
     padding: clamp(6rem, 14vw, 8.5rem) var(--container-padding) clamp(3rem, 8vw, 4.5rem);
     background: linear-gradient(180deg, #dff2ff 0%, #f6fbff 100%);
     border-bottom: 1px solid rgba(54, 148, 232, 0.25);
+    text-align: center;
 }
 
 .subpage .page-title {
     font-family: var(--font-display);
     color: var(--google-green);
-    font-size: clamp(2.2rem, 8vw, 4rem);
+    font-size: clamp(2.4rem, 8.5vw, 4.2rem);
     line-height: 1.05;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
     text-transform: none;
     margin-bottom: 0.9rem;
 }
@@ -1520,9 +1557,10 @@ footer {
 .subpage .page-subtitle {
     color: var(--primary-deep);
     max-width: 760px;
-    font-size: clamp(1rem, 2.8vw, 1.18rem);
+    font-size: clamp(1.05rem, 3vw, 1.25rem);
     line-height: 1.75;
     margin: 0 auto;
+    text-align: center;
 }
 
 .subpage .legal-date {
@@ -1566,7 +1604,34 @@ footer {
 
 .subpage .section-title {
     text-transform: none;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.8px;
+}
+
+.subpage .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.subpage .section-label {
+    display: inline-block;
+    color: var(--primary-strong);
+    text-transform: uppercase;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    margin-bottom: 0.7rem;
+}
+
+.subpage .badge {
+    background: rgba(52, 168, 83, 0.14);
+    color: var(--google-green);
+    border: 1px solid rgba(52, 168, 83, 0.45);
+    border-radius: 999px;
+    padding: 0.5rem 1.2rem;
+    text-transform: lowercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.4px;
+    margin-bottom: 1rem;
 }
 
 .subpage .steps-grid,
@@ -1579,12 +1644,12 @@ footer {
 .subpage .business-features {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.1rem;
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 .subpage .step-card,
 .subpage .benefit-card,
-.subpage .earnings-card,
 .subpage .testimonial-card,
 .subpage .value-card,
 .subpage .right-item,
@@ -1593,8 +1658,21 @@ footer {
     background: var(--white);
     border: 1px solid rgba(54, 148, 232, 0.24);
     border-radius: 16px;
-    padding: 1.35rem 1.2rem;
+    padding: 1.5rem 1.4rem;
     box-shadow: 0 8px 22px rgba(54, 148, 232, 0.08);
+    transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth);
+}
+
+.subpage .step-card:hover,
+.subpage .benefit-card:hover,
+.subpage .testimonial-card:hover,
+.subpage .value-card:hover,
+.subpage .right-item:hover,
+.subpage .donor-step:hover,
+.subpage .feature-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(54, 148, 232, 0.14);
+    border-color: rgba(54, 148, 232, 0.42);
 }
 
 .subpage .step-card {
@@ -1606,14 +1684,16 @@ footer {
 
 .subpage .step-card h3,
 .subpage .benefit-card h3,
-.subpage .earnings-card h3,
 .subpage .value-card h3,
 .subpage .right-item h3,
 .subpage .donor-step h3,
 .subpage .feature-item h3 {
     text-transform: none;
     color: var(--google-green);
-    font-size: 1.08rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
     margin-bottom: 0.45rem;
 }
 
@@ -1648,20 +1728,23 @@ footer {
 }
 
 .subpage .testimonial-text {
-    font-size: 0.97rem;
-    line-height: 1.75;
+    font-size: 1.05rem;
+    line-height: 1.8;
 }
 
 .subpage .testimonial-author {
-    margin-top: 0.65rem;
+    margin-top: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--primary-strong);
 }
 
 .subpage .large-text {
     max-width: 900px;
-    margin: 0 auto 1rem;
-    line-height: 1.85;
+    margin: 0 auto 1.5rem;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    text-align: center;
 }
 
 .subpage .business-cta {
@@ -1688,36 +1771,59 @@ footer {
     margin: 0 auto;
     background: var(--white);
     border: 1px solid rgba(54, 148, 232, 0.2);
-    border-radius: 18px;
-    padding: clamp(1.2rem, 3vw, 2rem);
+    border-radius: 20px;
+    padding: clamp(1.8rem, 4vw, 3rem);
     box-shadow: 0 12px 30px rgba(54, 148, 232, 0.08);
 }
 
 .subpage .legal-document h2 {
     color: var(--google-green);
-    margin: 1.2rem 0 0.55rem;
-    font-size: 1.18rem;
+    margin: 1.45rem 0 0.6rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.25px;
 }
 
 .subpage .legal-document h3 {
     color: var(--primary-strong);
-    margin: 0.9rem 0 0.45rem;
-    font-size: 1rem;
+    margin: 1rem 0 0.5rem;
+    font-size: 1.02rem;
+    font-weight: 700;
+}
+
+.subpage .legal-document h2:first-child {
+    margin-top: 0;
+}
+
+.subpage .legal-document p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
 }
 
 .subpage .legal-document ul,
 .subpage .legal-document ol {
     padding-left: 1.15rem;
-    margin: 0.45rem 0 0.9rem;
+    margin: 0.55rem 0 1.05rem;
+    line-height: 1.7;
 }
 
 .subpage .legal-document li {
     margin-bottom: 0.3rem;
 }
 
+.subpage .step-number {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    line-height: 1;
+    letter-spacing: -1px;
+    opacity: 0.3;
+    margin-bottom: 1rem;
+}
+
 @media (min-width: 760px) {
     .subpage .steps-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
     }
 
     .subpage .benefits-grid,
@@ -1727,6 +1833,7 @@ footer {
     .subpage .donor-steps,
     .subpage .business-features {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem;
     }
 
     .subpage .earnings-grid {
@@ -1954,7 +2061,7 @@ footer {
     
     .footer-content {
         grid-template-columns: repeat(2, 1fr);
-        gap: 3rem;
+        gap: 3.5rem;
     }
     
     .demo-grid {
@@ -2198,7 +2305,7 @@ body::before {
     }
 
     .footer-content {
-        gap: 1.5rem;
+        gap: 2rem;
     }
 
     .mobile-menu {
