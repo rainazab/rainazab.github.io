@@ -615,51 +615,30 @@ h1 .highlight {
     margin-top: 2rem;
     overflow: hidden;
     position: relative;
+    --carousel-edge-fade: clamp(3.2rem, 8.5vw, 6.8rem);
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 var(--carousel-edge-fade),
+        #000 calc(100% - var(--carousel-edge-fade)),
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 var(--carousel-edge-fade),
+        #000 calc(100% - var(--carousel-edge-fade)),
+        transparent 100%
+    );
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
 }
 
 .app-gallery-marquee::before,
 .app-gallery-marquee::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: clamp(4.2rem, 11vw, 8.8rem);
-    pointer-events: none;
-    z-index: 2;
-}
-
-.app-gallery-marquee::before {
-    left: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 1) 12%,
-        rgba(255, 255, 255, 0.99) 24%,
-        rgba(255, 255, 255, 0.95) 40%,
-        rgba(255, 255, 255, 0.84) 58%,
-        rgba(255, 255, 255, 0.62) 74%,
-        rgba(255, 255, 255, 0.32) 88%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-}
-
-.app-gallery-marquee::after {
-    right: 0;
-    background: linear-gradient(
-        270deg,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 1) 12%,
-        rgba(255, 255, 255, 0.99) 24%,
-        rgba(255, 255, 255, 0.95) 40%,
-        rgba(255, 255, 255, 0.84) 58%,
-        rgba(255, 255, 255, 0.62) 74%,
-        rgba(255, 255, 255, 0.32) 88%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    content: none;
 }
 
 .app-gallery-track {
