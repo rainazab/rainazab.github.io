@@ -91,11 +91,20 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.92);
     color: var(--primary);
     z-index: 1000;
-    border-bottom: 3px solid var(--green);
-    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(54, 148, 232, 0.25);
+    backdrop-filter: saturate(160%) blur(10px);
+    -webkit-backdrop-filter: saturate(160%) blur(10px);
+    box-shadow: 0 1px 0 rgba(54, 148, 232, 0.08);
+    transition: background-color 0.24s var(--ease-smooth), box-shadow 0.24s var(--ease-smooth), border-color 0.24s var(--ease-smooth);
+}
+
+header.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom-color: rgba(54, 148, 232, 0.2);
+    box-shadow: 0 8px 22px rgba(11, 18, 32, 0.08);
 }
 
 .header-content {
@@ -106,6 +115,12 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: padding 0.24s var(--ease-smooth);
+}
+
+header.scrolled .header-content {
+    padding-top: 0.66rem;
+    padding-bottom: 0.66rem;
 }
 
 .logo {
@@ -600,14 +615,17 @@ h1 .highlight {
     margin-top: 2rem;
     overflow: hidden;
     position: relative;
-    mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
 }
 
 .app-gallery-track {
     display: flex;
     width: max-content;
     animation: demo-marquee 46s linear infinite;
-    will-change: transform;
+    -webkit-animation: demo-marquee 46s linear infinite;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .app-gallery-group {
@@ -618,15 +636,31 @@ h1 .highlight {
 
 @keyframes demo-marquee {
     from {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
     }
     to {
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+@-webkit-keyframes demo-marquee {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+    to {
+        -webkit-transform: translate3d(-50%, 0, 0);
     }
 }
 
 .app-gallery-marquee:hover .app-gallery-track {
     animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .app-gallery-track {
+        animation: none;
+        -webkit-animation: none;
+    }
 }
 
 .app-screen-card {
@@ -1826,6 +1860,11 @@ body::before {
    ============================================ */
 
 @media (max-width: 767px) {
+    header {
+        backdrop-filter: saturate(150%) blur(8px);
+        -webkit-backdrop-filter: saturate(150%) blur(8px);
+    }
+
     .hero {
         padding-top: 70px;
     }

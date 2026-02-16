@@ -10,6 +10,10 @@ const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 const menuOverlay = document.getElementById('menuOverlay');
 const body = document.body;
+const header = document.querySelector('header');
+const appGalleryTrack = document.querySelector('.app-gallery-track');
+const isIOS = /iP(ad|hone|od)/.test(navigator.userAgent)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
 // Toggle menu
 function toggleMenu() {
@@ -94,6 +98,7 @@ function trapFocus(element) {
 // ============================================
 
 const scrollProgress = document.getElementById('scrollProgress');
+let marqueeRestartTimer;
 
 function updateScrollProgress() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -105,7 +110,44 @@ function updateScrollProgress() {
     }
 }
 
-window.addEventListener('scroll', updateScrollProgress, { passive: true });
+function updateHeaderState() {
+    if (header) {
+        header.classList.toggle('scrolled', window.scrollY > 24);
+    }
+}
+
+function restartMarqueeAnimation() {
+    if (!appGalleryTrack) return;
+    appGalleryTrack.style.animation = 'none';
+    appGalleryTrack.style.webkitAnimation = 'none';
+    // Force a reflow so iOS Safari reattaches the keyframe timeline.
+    void appGalleryTrack.offsetWidth;
+    appGalleryTrack.style.animation = '';
+    appGalleryTrack.style.webkitAnimation = '';
+}
+
+function scheduleMarqueeRecovery() {
+    if (!isIOS || !appGalleryTrack) return;
+    clearTimeout(marqueeRestartTimer);
+    marqueeRestartTimer = window.setTimeout(restartMarqueeAnimation, 140);
+}
+
+let scrollTicking = false;
+window.addEventListener('scroll', () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+        updateScrollProgress();
+        updateHeaderState();
+        scheduleMarqueeRecovery();
+        scrollTicking = false;
+    });
+}, { passive: true });
+
+window.addEventListener('load', () => {
+    updateScrollProgress();
+    updateHeaderState();
+});
 
 // ============================================
 // FADE-IN ON SCROLL ANIMATION
@@ -156,6 +198,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+if (isIOS && appGalleryTrack) {
+    window.addEventListener('pageshow', restartMarqueeAnimation);
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            restartMarqueeAnimation();
+        }
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        window.setTimeout(restartMarqueeAnimation, 150);
+    });
+}
 
 // ============================================
 // PREVENT SCROLL BOUNCE ON iOS
