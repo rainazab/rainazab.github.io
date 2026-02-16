@@ -1,5 +1,5 @@
 // ============================================
-// FLIP - Premium Interaction Logic
+// bottlr - Interaction Logic
 // ============================================
 
 // ============================================
@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
     body.classList.add('loaded');
     
     // Log for demo purposes
-    console.log('🚀 FLIP - Hackathon Demo Ready');
+    console.log('🚀 bottlr - Hackathon Demo Ready');
     console.log('📱 Mobile-first design loaded');
     console.log('✨ Premium animations active');
 });
