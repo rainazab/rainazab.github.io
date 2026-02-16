@@ -3,40 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - FLIP</title>
+    <title>About Us - bottlr</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" type="image/png" href="Green Modern Fitness App Logo (3).png">
+    <link rel="apple-touch-icon" href="Green Modern Fitness App Logo (3).png">
 </head>
 <body>
-    <!-- Header -->
+    <div class="scroll-progress" id="scrollProgress"></div>
     <header>
         <div class="header-content">
-            <a href="index.html" class="logo">FLIP</a>
-            <button class="mobile-menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
-            <nav id="mainNav">
+            <a href="index.html" class="logo">
+                <img src="greenLogo1.3.png" alt="bottlr" class="logo-img">
+                <span class="logo-text">bottlr</span>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <nav class="desktop-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="how-it-works.html">How It Works</a></li>
                     <li><a href="for-collectors.html">For Collectors</a></li>
                     <li><a href="for-donors.html">For Donors</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html" class="btn-header">Get Started</a></li>
+                    <li><a href="https://shipyardhq.tech/projects/e9af272d-1dfe-4da8-ba7b-196fc92f9f7a" target="_blank" rel="noopener noreferrer" class="btn-header">Shipyard</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <nav class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li style="--i: 0"><a href="index.html">Home</a></li>
+            <li style="--i: 1"><a href="how-it-works.html">How It Works</a></li>
+            <li style="--i: 2"><a href="for-collectors.html">For Collectors</a></li>
+            <li style="--i: 3"><a href="for-donors.html">For Donors</a></li>
+            <li style="--i: 4"><a href="about.html">About</a></li>
+            <li style="--i: 5"><a href="https://shipyardhq.tech/projects/e9af272d-1dfe-4da8-ba7b-196fc92f9f7a" target="_blank" rel="noopener noreferrer">Shipyard</a></li>
+        </ul>
+    </nav>
 
     <!-- Page Hero -->
     <section class="page-hero">
         <div class="section-container">
             <div class="badge">Our Story</div>
-            <h1 class="page-title">About FLIP</h1>
+            <h1 class="page-title">About bottlr</h1>
             <p class="page-subtitle">
                 Building a fair, transparent marketplace that puts workers first.
             </p>
@@ -57,7 +74,7 @@
                     ($600M in value) never get redeemed because the system is broken.
                 </p>
                 <p class="large-text">
-                    FLIP fixes this by connecting collectors directly with bottle donors through 
+                    bottlr fixes this by connecting collectors directly with bottle donors through 
                     technology. No middlemen. No exploitation. Just fair work and fair pay.
                 </p>
                 <p class="large-text">
@@ -140,7 +157,7 @@
                 <div class="right-item">
                     <h3>Fair Compensation</h3>
                     <p>
-                        Collectors earn the full CRV value of bottles collected. FLIP takes a minimal 
+                        Collectors earn the full CRV value of bottles collected. bottlr takes a minimal 
                         platform fee (5%) only from donor postings, never from collector earnings.
                     </p>
                 </div>
@@ -198,17 +215,17 @@
 
             <div class="team-content">
                 <p class="large-text">
-                    FLIP was founded by former bottle collectors, labor organizers, and technologists 
+                    bottlr was founded by former bottle collectors, labor organizers, and technologists 
                     who believe technology should serve workers, not replace them.
                 </p>
                 <p class="large-text">
                     Our team includes people who've lived the reality of bottle collecting—walking miles 
                     through trash, dealing with exploitative recycling centers, earning poverty wages. 
-                    We built FLIP because we know the problem firsthand.
+                    We built bottlr because we know the problem firsthand.
                 </p>
                 <p class="large-text">
                     Today, 60% of our staff are current or former collectors. We don't make decisions 
-                    about workers without workers. That's the FLIP way.
+                    about workers without workers. That's the bottlr way.
                 </p>
             </div>
         </div>
@@ -222,20 +239,31 @@
                 Whether you collect bottles or want to support those who do—join us.
             </p>
             <div class="cta-actions">
-                <a href="contact.html" class="btn-cta">Get Started</a>
-                <a href="contact.html" class="btn-cta">Contact Us</a>
+                <a href="https://shipyardhq.tech/projects/e9af272d-1dfe-4da8-ba7b-196fc92f9f7a" target="_blank" rel="noopener noreferrer" class="btn-cta">View Shipyard Project</a>
+                <a href="https://github.com/rainazab/SFH26" target="_blank" rel="noopener noreferrer" class="btn-cta">View GitHub Repo</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <a href="index.html" class="logo">FLIP</a>
+                <a href="index.html" class="logo">
+                    <img src="greenLogo1.3.png" alt="bottlr" class="logo-img">
+                    <span class="logo-text">bottlr</span>
+                </a>
                 <p>
-                    Coordinating California bottle pickups with live jobs, claims, and earnings visibility.
+                    Real-time pickup coordination for collectors and donors.
+                    Built for clear jobs, clean handoffs, and transparent earnings.
                 </p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Hackathon</h4>
+                <ul class="footer-links">
+                    <li><a href="https://shipyardhq.tech/projects/e9af272d-1dfe-4da8-ba7b-196fc92f9f7a" target="_blank">Shipyard</a></li>
+                    <li><a href="https://github.com/rainazab/SFH26" target="_blank">GitHub</a></li>
+                </ul>
             </div>
 
             <div class="footer-section">
@@ -244,38 +272,21 @@
                     <li><a href="how-it-works.html">How It Works</a></li>
                     <li><a href="for-collectors.html">For Collectors</a></li>
                     <li><a href="for-donors.html">For Donors</a></li>
-                    <li><a href="contact.html">Pricing</a></li>
                 </ul>
             </div>
 
             <div class="footer-section">
-                <h4>Organization</h4>
+                <h4>About</h4>
                 <ul class="footer-links">
                     <li><a href="about.html">About Us</a></li>
-                    <li><a href="about.html#values">Our Values</a></li>
-                    <li><a href="about.html#rights">Worker Rights</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <ul class="footer-links">
+                    <li><a href="terms.html">TOS</a></li>
                     <li><a href="privacy.html">Privacy</a></li>
-                    <li><a href="terms.html">Terms</a></li>
-                    <li><a href="contact.html">Security</a></li>
-                    <li><a href="contact.html">Support</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <div>&copy; 2026 Flip Workers Collective</div>
-            <div class="footer-bottom-links">
-                <a href="#">Twitter</a>
-                <a href="#">Instagram</a>
-                <a href="contact.html">Contact</a>
-            </div>
+            <div>SF Hacks 2026 • Feb 13-15</div>
         </div>
     </footer>
 
