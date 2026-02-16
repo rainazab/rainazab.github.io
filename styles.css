@@ -1468,6 +1468,248 @@ footer {
 }
 
 /* ============================================
+   SUBPAGE SYSTEM (HOW IT WORKS / COLLECTORS / HOSTS / ABOUT / LEGAL)
+   ============================================ */
+
+.subpage {
+    background: var(--soft);
+    color: var(--primary-deep);
+}
+
+.subpage .page-hero {
+    padding: clamp(6rem, 14vw, 8.5rem) var(--container-padding) clamp(3rem, 8vw, 4.5rem);
+    background: linear-gradient(180deg, #dff2ff 0%, #f6fbff 100%);
+    border-bottom: 1px solid rgba(54, 148, 232, 0.25);
+}
+
+.subpage .page-title {
+    font-family: var(--font-display);
+    color: var(--google-green);
+    font-size: clamp(2.2rem, 8vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -1px;
+    text-transform: none;
+    margin-bottom: 0.9rem;
+}
+
+.subpage .page-subtitle {
+    color: var(--primary-deep);
+    max-width: 760px;
+    font-size: clamp(1rem, 2.8vw, 1.18rem);
+    line-height: 1.75;
+    margin: 0 auto;
+}
+
+.subpage .legal-date {
+    margin-top: 0.9rem;
+    font-size: 0.86rem;
+    color: var(--primary-deep);
+    opacity: 0.72;
+    font-weight: 600;
+}
+
+.subpage .steps-section,
+.subpage .benefits-section,
+.subpage .earnings-section,
+.subpage .testimonials-section,
+.subpage .donors-process,
+.subpage .business-section,
+.subpage .impact-stats,
+.subpage .mission-section,
+.subpage .values-section,
+.subpage .rights-section,
+.subpage .legal-content {
+    padding: var(--section-gap) var(--container-padding);
+}
+
+.subpage .benefits-section,
+.subpage .testimonials-section,
+.subpage .values-section,
+.subpage .legal-content {
+    background: var(--white);
+}
+
+.subpage .steps-section,
+.subpage .earnings-section,
+.subpage .donors-process,
+.subpage .business-section,
+.subpage .impact-stats,
+.subpage .mission-section,
+.subpage .rights-section {
+    background: #f2f9ff;
+}
+
+.subpage .section-title {
+    text-transform: none;
+    letter-spacing: -0.5px;
+}
+
+.subpage .steps-grid,
+.subpage .benefits-grid,
+.subpage .earnings-grid,
+.subpage .testimonials-grid,
+.subpage .values-grid,
+.subpage .rights-list,
+.subpage .donor-steps,
+.subpage .business-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+}
+
+.subpage .step-card,
+.subpage .benefit-card,
+.subpage .earnings-card,
+.subpage .testimonial-card,
+.subpage .value-card,
+.subpage .right-item,
+.subpage .donor-step,
+.subpage .feature-item {
+    background: var(--white);
+    border: 1px solid rgba(54, 148, 232, 0.24);
+    border-radius: 16px;
+    padding: 1.35rem 1.2rem;
+    box-shadow: 0 8px 22px rgba(54, 148, 232, 0.08);
+}
+
+.subpage .step-card {
+    height: auto;
+    min-height: 0;
+    max-width: none;
+    text-align: left;
+}
+
+.subpage .step-card h3,
+.subpage .benefit-card h3,
+.subpage .earnings-card h3,
+.subpage .value-card h3,
+.subpage .right-item h3,
+.subpage .donor-step h3,
+.subpage .feature-item h3 {
+    text-transform: none;
+    color: var(--google-green);
+    font-size: 1.08rem;
+    margin-bottom: 0.45rem;
+}
+
+.subpage .feature-list-items {
+    margin-top: 0.8rem;
+    padding-left: 1rem;
+}
+
+.subpage .feature-list-items li {
+    margin-bottom: 0.35rem;
+}
+
+.subpage .benefit-icon,
+.subpage .step-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.55rem;
+}
+
+.subpage .earnings-value,
+.subpage .feature-number {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    line-height: 1;
+    color: var(--primary-strong);
+    margin-bottom: 0.35rem;
+}
+
+.subpage .earnings-label {
+    font-weight: 700;
+    color: var(--google-green);
+    margin-bottom: 0.35rem;
+}
+
+.subpage .testimonial-text {
+    font-size: 0.97rem;
+    line-height: 1.75;
+}
+
+.subpage .testimonial-author {
+    margin-top: 0.65rem;
+    font-weight: 700;
+    color: var(--primary-strong);
+}
+
+.subpage .large-text {
+    max-width: 900px;
+    margin: 0 auto 1rem;
+    line-height: 1.85;
+}
+
+.subpage .business-cta {
+    margin-top: 1.4rem;
+    background: var(--white);
+    border: 1px solid rgba(54, 148, 232, 0.24);
+    border-radius: 16px;
+    padding: 1.2rem;
+    text-align: center;
+    box-shadow: 0 8px 22px rgba(54, 148, 232, 0.08);
+}
+
+.subpage .business-cta h3 {
+    margin-bottom: 0.3rem;
+    color: var(--google-green);
+}
+
+.subpage .business-cta p {
+    margin-bottom: 0.9rem;
+}
+
+.subpage .legal-document {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--white);
+    border: 1px solid rgba(54, 148, 232, 0.2);
+    border-radius: 18px;
+    padding: clamp(1.2rem, 3vw, 2rem);
+    box-shadow: 0 12px 30px rgba(54, 148, 232, 0.08);
+}
+
+.subpage .legal-document h2 {
+    color: var(--google-green);
+    margin: 1.2rem 0 0.55rem;
+    font-size: 1.18rem;
+}
+
+.subpage .legal-document h3 {
+    color: var(--primary-strong);
+    margin: 0.9rem 0 0.45rem;
+    font-size: 1rem;
+}
+
+.subpage .legal-document ul,
+.subpage .legal-document ol {
+    padding-left: 1.15rem;
+    margin: 0.45rem 0 0.9rem;
+}
+
+.subpage .legal-document li {
+    margin-bottom: 0.3rem;
+}
+
+@media (min-width: 760px) {
+    .subpage .steps-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .subpage .benefits-grid,
+    .subpage .values-grid,
+    .subpage .rights-list,
+    .subpage .testimonials-grid,
+    .subpage .donor-steps,
+    .subpage .business-features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .subpage .earnings-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* ============================================
    TEAM SECTION
    ============================================ */
 
