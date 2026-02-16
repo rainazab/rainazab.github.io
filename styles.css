@@ -1820,3 +1820,134 @@ body::before {
         padding-right: max(0px, env(safe-area-inset-right));
     }
 }
+
+/* ============================================
+   IPHONE-FIRST TUNING
+   ============================================ */
+
+@media (max-width: 767px) {
+    .hero {
+        padding-top: 70px;
+    }
+
+    .hero-container {
+        gap: 2rem;
+        padding-top: clamp(2rem, 8vw, 3rem);
+        padding-bottom: clamp(2.5rem, 10vw, 4rem);
+    }
+
+    h1 {
+        /* Prevent oversized title wrapping on narrow phones */
+        font-size: clamp(2.2rem, 12vw, 3.2rem);
+        line-height: 1;
+        letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        line-height: 1.55;
+    }
+
+    .hero-stats {
+        gap: 0.8rem;
+        padding: 1rem 0;
+    }
+
+    .stat-number {
+        font-size: clamp(1.6rem, 8vw, 2.2rem);
+    }
+
+    .stat-label {
+        font-size: 0.68rem;
+        line-height: 1.35;
+    }
+
+    .step-card {
+        height: auto;
+        min-height: 0;
+        padding: 1.5rem 1.2rem;
+    }
+
+    .step-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .section-header {
+        margin-bottom: 2.2rem;
+    }
+
+    .demo-grid,
+    .problem-grid,
+    .tech-grid,
+    .impact-grid {
+        margin-top: 2rem;
+        gap: 1rem;
+    }
+
+    .demo-card,
+    .problem-card,
+    .impact-stat,
+    .team-card {
+        padding: 1.25rem 1rem;
+    }
+
+    .footer-content {
+        gap: 1.5rem;
+    }
+
+    .mobile-menu {
+        width: min(90vw, 340px);
+        padding-top: 74px;
+    }
+}
+
+@media (max-width: 520px) {
+    :root {
+        --container-padding: clamp(0.85rem, 4vw, 1rem);
+        --section-gap: clamp(2.25rem, 10vw, 3rem);
+    }
+
+    .header-content {
+        padding-top: 0.72rem;
+        padding-bottom: 0.72rem;
+    }
+
+    .logo-img {
+        height: 34px;
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr;
+        text-align: left;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+    }
+
+    .stat {
+        text-align: left;
+    }
+
+    .quick-links {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .quick-link {
+        width: 100%;
+        text-align: center;
+    }
+
+    .mobile-menu a {
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+    }
+}
