@@ -832,19 +832,19 @@
                 <div class="support-icon business" aria-hidden="true"></div>
                 <h3>be an early host business</h3>
                 <p>Join as one of our first restaurants, offices, or shops. You help shape the workflow and get priority support as we scale.</p>
-                <a href="mailto:hello@bottlr.tech?subject=Early%20Business%20Pilot" class="support-link">apply for pilot -></a>
+                <a href="#contact-form" class="support-link">apply for pilot -></a>
             </div>
             <div class="support-card fade-in-up" style="--delay:0.12s">
                 <div class="support-icon community" aria-hidden="true"></div>
                 <h3>community partner</h3>
                 <p>Nonprofits, community orgs, and sustainability groups - if you work with collectors, let's build local pickup infrastructure together.</p>
-                <a href="mailto:hello@bottlr.tech?subject=Community%20Partnership" class="support-link">start a partnership -></a>
+                <a href="#contact-form" class="support-link">start a partnership -></a>
             </div>
             <div class="support-card fade-in-up" style="--delay:0.2s">
                 <div class="support-icon grants" aria-hidden="true"></div>
                 <h3>grants and research support</h3>
                 <p>We're actively pursuing grant and university support to scale responsibly. If you're connected to funding opportunities, we'd love to connect.</p>
-                <a href="mailto:hello@bottlr.tech?subject=Grant%20or%20Research%20Support" class="support-link">reach out -></a>
+                <a href="#contact-form" class="support-link">reach out -></a>
             </div>
         </div>
 
@@ -853,7 +853,7 @@
                 <h3>let's talk</h3>
                 <p>Whether you're a business, partner, or supporter - drop your email and we'll reach out directly.</p>
             </div>
-            <form class="contact-form" onsubmit="handleContact(event)">
+            <form class="contact-form" id="contact-form" onsubmit="handleContact(event)">
                 <input type="email" class="contact-input" id="contactEmail" placeholder="your@email.com" required>
                 <button type="submit" class="contact-btn" id="contactBtn">send it</button>
             </form>
@@ -916,7 +916,7 @@
             <ul class="footer-links">
                 <li><a href="about.html">about us</a></li>
                 <li><a href="funding.html">funding and partners</a></li>
-                <li><a href="mailto:hello@bottlr.tech">contact</a></li>
+                <li><a href="#contact-form">contact form</a></li>
             </ul>
         </div>
         <div class="footer-col">
@@ -969,17 +969,10 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in-up').forEach((el) => io.observe(el));
 
-    function handleContact(e) {
-        e.preventDefault();
-        const btn = document.getElementById('contactBtn');
-        const emailInput = document.getElementById('contactEmail');
-        btn.textContent = "✓ we'll be in touch!";
-        btn.style.background = '#d2f1db';
-        btn.style.color = '#34A853';
-        btn.disabled = true;
-        console.log('Contact lead:', emailInput.value);
-        emailInput.value = '';
-    }
 </script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="contact-firebase.js"></script>
 </body>
 </html>
