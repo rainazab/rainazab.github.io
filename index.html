@@ -400,7 +400,80 @@
             padding: 2rem; transition: all 0.3s var(--ease);
         }
         .support-card:hover { background: var(--white); transform: translateY(-4px); border-color: var(--google-green); }
-        .support-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .support-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            border: 2px solid rgba(54,148,232,0.28);
+            background: linear-gradient(180deg, #ffffff 0%, #edf6ff 100%);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .support-icon::before,
+        .support-icon::after {
+            content: '';
+            position: absolute;
+        }
+        .support-icon.business::before {
+            width: 18px;
+            height: 20px;
+            left: 13px;
+            top: 11px;
+            border: 2px solid var(--primary-deep);
+            border-radius: 3px;
+            background:
+                linear-gradient(var(--primary-deep), var(--primary-deep)) 4px 5px / 2px 2px no-repeat,
+                linear-gradient(var(--primary-deep), var(--primary-deep)) 8px 5px / 2px 2px no-repeat,
+                linear-gradient(var(--primary-deep), var(--primary-deep)) 12px 5px / 2px 2px no-repeat,
+                linear-gradient(var(--primary-deep), var(--primary-deep)) 4px 9px / 2px 2px no-repeat,
+                linear-gradient(var(--primary-deep), var(--primary-deep)) 8px 9px / 2px 2px no-repeat,
+                linear-gradient(var(--primary-deep), var(--primary-deep)) 12px 9px / 2px 2px no-repeat;
+        }
+        .support-icon.business::after {
+            width: 5px;
+            height: 7px;
+            left: 20px;
+            top: 24px;
+            background: var(--primary-deep);
+            border-radius: 2px 2px 0 0;
+        }
+        .support-icon.community::before {
+            width: 7px;
+            height: 7px;
+            left: 12px;
+            top: 12px;
+            border-radius: 50%;
+            background: var(--primary-deep);
+            box-shadow: 15px 0 0 var(--primary-deep);
+        }
+        .support-icon.community::after {
+            width: 24px;
+            height: 10px;
+            left: 9px;
+            top: 23px;
+            border: 2px solid var(--primary-deep);
+            border-radius: 10px 10px 8px 8px;
+            background: transparent;
+        }
+        .support-icon.grants::before {
+            width: 16px;
+            height: 16px;
+            left: 14px;
+            top: 10px;
+            border: 2px solid var(--primary-deep);
+            border-radius: 50%;
+            background: transparent;
+        }
+        .support-icon.grants::after {
+            width: 12px;
+            height: 11px;
+            left: 16px;
+            top: 26px;
+            border: 2px solid var(--primary-deep);
+            border-top: none;
+            border-radius: 0 0 7px 7px;
+            background: transparent;
+        }
         .support-card h3 {
             font-family: var(--font-display); font-size: 1.15rem;
             text-transform: lowercase; letter-spacing: -0.4px;
@@ -756,19 +829,19 @@
 
         <div class="support-grid">
             <div class="support-card fade-in-up" style="--delay:0.05s">
-                <div class="support-icon">🏢</div>
+                <div class="support-icon business" aria-hidden="true"></div>
                 <h3>be an early host business</h3>
                 <p>Join as one of our first restaurants, offices, or shops. You help shape the workflow and get priority support as we scale.</p>
                 <a href="mailto:hello@bottlr.tech?subject=Early%20Business%20Pilot" class="support-link">apply for pilot -></a>
             </div>
             <div class="support-card fade-in-up" style="--delay:0.12s">
-                <div class="support-icon">🤝</div>
+                <div class="support-icon community" aria-hidden="true"></div>
                 <h3>community partner</h3>
                 <p>Nonprofits, community orgs, and sustainability groups - if you work with collectors, let's build local pickup infrastructure together.</p>
                 <a href="mailto:hello@bottlr.tech?subject=Community%20Partnership" class="support-link">start a partnership -></a>
             </div>
             <div class="support-card fade-in-up" style="--delay:0.2s">
-                <div class="support-icon">🎓</div>
+                <div class="support-icon grants" aria-hidden="true"></div>
                 <h3>grants and research support</h3>
                 <p>We're actively pursuing grant and university support to scale responsibly. If you're connected to funding opportunities, we'd love to connect.</p>
                 <a href="mailto:hello@bottlr.tech?subject=Grant%20or%20Research%20Support" class="support-link">reach out -></a>
@@ -832,16 +905,17 @@
         <div class="footer-col">
             <h4>product</h4>
             <ul class="footer-links">
+                <li><a href="how-it-works.html">how it works</a></li>
                 <li><a href="#collectors">for collectors</a></li>
                 <li><a href="#hosts">for businesses</a></li>
                 <li><a href="#demo">see the app</a></li>
-                <li><a href="#support">partner with us</a></li>
             </ul>
         </div>
         <div class="footer-col">
             <h4>company</h4>
             <ul class="footer-links">
                 <li><a href="about.html">about us</a></li>
+                <li><a href="funding.html">funding and partners</a></li>
                 <li><a href="mailto:hello@bottlr.tech">contact</a></li>
             </ul>
         </div>

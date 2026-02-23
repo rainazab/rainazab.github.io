@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of service - bottlr</title>
-    <meta name="description" content="Terms of service for bottlr.">
+    <title>Funding and partnerships - bottlr</title>
+    <meta name="description" content="Funding and partnership priorities for bottlr.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,12 +23,16 @@
         .hero { background: #dff1ff; border:1px solid var(--line); border-radius: 16px; padding: 2rem; margin-bottom: 1rem; }
         h1 { margin:0 0 .6rem; font-family:"Archivo Black",sans-serif; text-transform:lowercase; line-height:1.02; color:var(--deep); font-size:clamp(1.8rem,6vw,2.7rem); }
         .sub { margin:0; color:var(--muted); max-width:760px; }
+        .grid { display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1rem; }
         .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.15rem; }
-        h2 { margin:1rem 0 .5rem; font-size:1rem; color:var(--deep); text-transform:lowercase; }
-        p, li { margin:.2rem 0; line-height:1.65; color:var(--muted); }
-        ul { margin:.45rem 0 0; padding-left:1rem; }
+        h2 { margin:.1rem 0 .55rem; font-size:1rem; color:var(--deep); text-transform:lowercase; }
+        p { margin:.2rem 0; line-height:1.65; color:var(--muted); }
+        .list { margin:.45rem 0 0; padding-left:1rem; color:var(--muted); }
+        .cta { margin-top:1rem; background:#fff; border:1px solid var(--line); border-radius:14px; padding:1.15rem; }
+        .mail { color:var(--deep); font-weight:600; text-decoration:none; }
         footer { border-top:1px solid var(--line); padding:1.2rem 0 2rem; font-size:.84rem; color:var(--muted); }
         footer a { color:var(--deep); text-decoration:none; margin-right:.75rem; }
+        @media (min-width: 860px) { .grid { grid-template-columns: repeat(2,1fr); } }
     </style>
 </head>
 <body>
@@ -39,41 +43,39 @@
             <a href="index.html">home</a>
             <a href="about.html">about</a>
             <a href="how-it-works.html">how it works</a>
-            <a href="funding.html">funding</a>
             <a href="privacy.html">privacy</a>
+            <a href="terms.html">terms</a>
         </nav>
     </div>
 </header>
 <main>
     <div class="wrap">
         <section class="hero">
-            <h1>terms of service</h1>
-            <p class="sub">Last updated: February 23, 2026</p>
+            <h1>funding and partnerships</h1>
+            <p class="sub">We are onboarding first businesses and building a durable collector-first network. Strategic support helps us scale responsibly.</p>
         </section>
-        <section class="card">
-            <h2>acceptance</h2>
-            <p>By using bottlr, you agree to these terms and to applicable laws.</p>
-            <h2>accounts and eligibility</h2>
-            <ul>
-                <li>You must provide accurate registration information.</li>
-                <li>You are responsible for account security and account activity.</li>
-            </ul>
-            <h2>platform roles</h2>
-            <ul>
-                <li>Hosts should post accurate pickup details.</li>
-                <li>Collectors should complete accepted pickups responsibly.</li>
-            </ul>
-            <h2>prohibited behavior</h2>
-            <ul>
-                <li>No fraud, harassment, abuse, or unlawful conduct.</li>
-                <li>No intentional misinformation about pickup status or availability.</li>
-            </ul>
-            <h2>service availability</h2>
-            <p>Service may change or be interrupted. We may modify or discontinue features at any time.</p>
-            <h2>liability</h2>
-            <p>bottlr is provided as-is. To the fullest extent permitted by law, bottlr is not liable for indirect or consequential damages.</p>
-            <h2>contact</h2>
-            <p>For legal questions, contact <a href="mailto:hello@bottlr.tech">hello@bottlr.tech</a>.</p>
+        <section class="grid">
+            <article class="card">
+                <h2>what support helps most</h2>
+                <ul class="list">
+                    <li>Early host business pilots</li>
+                    <li>Community implementation partners</li>
+                    <li>Research and innovation grants</li>
+                </ul>
+            </article>
+            <article class="card">
+                <h2>how funding is used</h2>
+                <ul class="list">
+                    <li>Collector and host onboarding operations</li>
+                    <li>Product reliability and support tooling</li>
+                    <li>Compliance and reporting workflows</li>
+                </ul>
+            </article>
+        </section>
+        <section class="cta">
+            <h2>get in touch</h2>
+            <p>If you are interested in partnership, grants, or supporting pilot rollout, contact us directly.</p>
+            <p><a class="mail" href="mailto:hello@bottlr.tech">hello@bottlr.tech</a></p>
         </section>
     </div>
 </main>
