@@ -3,17 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>bottlr: The People's Bottle Network</title>
-    <meta name="description" content="bottlr connects bottle collectors with hosts in real time. Join our beta, launching on the App Store soon.">
+    <title>bottlr - The People's Bottle Network</title>
+    <meta name="description" content="bottlr connects bottle collectors with hosts in real time. Free for collectors. Available now on the App Store.">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="bottlr: The People's Bottle Network">
-    <meta property="og:description" content="Real-time bottle pickup coordination. Launching on iOS soon.">
+    <meta property="og:title" content="bottlr - The People's Bottle Network">
+    <meta property="og:description" content="Real-time bottle pickup coordination. Free for collectors. Now on iOS.">
     <meta property="og:url" content="https://bottlr.tech/">
-    <meta property="og:image" content="https://bottlr.tech/preview.jpeg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="bottlr: The People's Bottle Network">
-    <meta name="twitter:description" content="Real-time bottle pickup coordination. Launching on iOS soon.">
-    <meta name="twitter:image" content="https://bottlr.tech/preview.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -36,9 +31,10 @@
             --font-body: 'Inter', system-ui, sans-serif;
             --ease: cubic-bezier(0.4, 0, 0.2, 1);
             --container: clamp(1rem, 5vw, 2rem);
+            --section-gap: clamp(3.5rem, 8vw, 6rem);
         }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
         body {
             font-family: var(--font-body);
@@ -50,9 +46,9 @@
 
         .scroll-progress {
             position: fixed; top: 0; left: 0; height: 2.5px;
-            background: var(--primary-strong);
-            transform-origin: left; transform: scaleX(0);
-            transition: transform 0.1s linear; z-index: 10000; width: 100%;
+            background: var(--primary-strong); transform-origin: left;
+            transform: scaleX(0); transition: transform 0.1s linear;
+            z-index: 10000; width: 100%;
         }
 
         header {
@@ -73,78 +69,72 @@
             display: flex; align-items: center; justify-content: space-between;
         }
         .logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem; color: var(--google-green);
-            text-decoration: none; text-transform: lowercase;
-            display: flex; align-items: center; gap: 0.5rem;
-            position: relative; z-index: 1001;
+            font-family: var(--font-display); font-size: 1.5rem;
+            color: var(--google-green); text-decoration: none; text-transform: lowercase;
+            display: flex; align-items: center; gap: 0.5rem; z-index: 1001;
         }
         .logo-img { height: 38px; width: auto; display: block; }
 
         nav.desktop-nav { display: none; }
-        .desktop-nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
+        .desktop-nav ul { list-style: none; display: flex; gap: 1.75rem; align-items: center; }
         .desktop-nav a {
-            color: var(--primary-strong); text-decoration: none;
-            font-weight: 600; text-transform: lowercase; font-size: 0.82rem;
-            letter-spacing: 0.4px; border-bottom: 2px solid transparent;
-            transition: border-color 0.2s var(--ease); padding: 0.4rem 0;
+            color: var(--primary-strong); text-decoration: none; font-weight: 600;
+            text-transform: lowercase; font-size: 0.82rem; letter-spacing: 0.4px;
+            border-bottom: 2px solid transparent; transition: border-color 0.2s; padding: 0.4rem 0;
         }
         .desktop-nav a:hover { border-bottom-color: var(--primary-strong); }
+
         .btn-nav {
-            background: linear-gradient(90deg, var(--primary-strong) 0%, var(--google-green) 100%);
-            color: var(--white) !important; padding: 0.7rem 1.3rem !important;
-            border: 2px solid var(--white); border-radius: 6px;
-            font-weight: 700 !important; font-size: 0.8rem !important;
-            box-shadow: 4px 4px 0 rgba(54,148,232,0.22);
-            transition: all 0.15s ease !important; border-bottom: 2px solid var(--white) !important;
+            background: linear-gradient(90deg, var(--primary-strong), var(--google-green));
+            color: var(--white) !important; padding: 0.65rem 1.25rem !important;
+            border-radius: 6px; font-weight: 700 !important; font-size: 0.8rem !important;
+            border: 2px solid var(--white); border-bottom: 2px solid var(--white) !important;
+            box-shadow: 4px 4px 0 rgba(54,148,232,0.2);
+            transition: all 0.15s ease !important; white-space: nowrap;
         }
-        .btn-nav:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 rgba(54,148,232,0.22); }
+        .btn-nav:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 rgba(54,148,232,0.2) !important; }
 
         .hamburger {
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            width: 44px; height: 44px; background: none; border: none;
-            cursor: pointer; z-index: 1001; gap: 5px;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; width: 44px; height: 44px;
+            background: none; border: none; cursor: pointer; z-index: 1001; gap: 5px;
         }
         .hamburger span {
             display: block; width: 22px; height: 2px;
-            background: var(--primary-strong); border-radius: 2px;
-            transition: all 0.25s ease;
+            background: var(--primary-strong); border-radius: 2px; transition: all 0.25s ease;
         }
         .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        .mobile-menu {
-            position: fixed; top: 0; right: 0; bottom: 0;
-            width: min(85vw, 300px);
-            background: var(--white);
-            border-left: 3px solid var(--primary-strong);
-            transform: translateX(100%);
-            transition: transform 0.3s var(--ease);
-            z-index: 999; padding-top: 72px;
-        }
-        .mobile-menu.open { transform: translateX(0); }
-        .mobile-menu a {
-            display: block; padding: 1.2rem 1.75rem;
-            color: var(--primary-deep); text-decoration: none;
-            font-weight: 700; font-size: 1.05rem; text-transform: lowercase;
-            border-bottom: 1px solid rgba(54,148,232,0.15);
-            transition: background 0.2s, padding-left 0.2s;
-        }
-        .mobile-menu a:hover { background: var(--primary); padding-left: 2.25rem; }
-        .mobile-menu a.cta { background: var(--google-green); color: var(--white); }
         .menu-overlay {
-            position: fixed; inset: 0; background: rgba(102,194,255,0.35);
+            position: fixed; inset: 0; background: rgba(102,194,255,0.3);
             backdrop-filter: blur(4px); opacity: 0; pointer-events: none;
             transition: opacity 0.3s; z-index: 998;
         }
         .menu-overlay.open { opacity: 1; pointer-events: all; }
 
+        .mobile-menu {
+            position: fixed; top: 0; right: 0; bottom: 0; width: min(85vw, 300px);
+            background: var(--white); border-left: 3px solid var(--primary-strong);
+            transform: translateX(100%); transition: transform 0.3s var(--ease);
+            z-index: 999; padding-top: 72px;
+        }
+        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu a {
+            display: block; padding: 1.2rem 1.75rem; color: var(--primary-deep);
+            text-decoration: none; font-weight: 700; font-size: 1.05rem;
+            text-transform: lowercase; border-bottom: 1px solid rgba(54,148,232,0.15);
+            transition: background 0.2s, padding-left 0.2s;
+        }
+        .mobile-menu a:hover { background: var(--primary); padding-left: 2.25rem; }
+        .mobile-menu a.cta-mobile { background: var(--google-green); color: var(--white); }
+        .mobile-menu a.cta-mobile:hover { background: #2d9147; }
+
         .hero {
             min-height: 100vh; min-height: 100svh;
             display: flex; align-items: center;
-            background: var(--baby-blues);
-            padding-top: 60px; overflow: hidden; position: relative;
+            background: var(--baby-blues); padding-top: 60px; overflow: hidden;
         }
         .hero-container {
             max-width: 1200px; margin: 0 auto;
@@ -153,158 +143,183 @@
             gap: 3rem; align-items: center; position: relative; z-index: 1;
         }
 
-        .live-badge {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            background: rgba(52,168,83,0.12); border: 1.5px solid rgba(52,168,83,0.4);
-            color: var(--google-green); padding: 0.4rem 1rem; border-radius: 100px;
-            font-size: 0.76rem; font-weight: 700; text-transform: lowercase;
-            letter-spacing: 0.3px; margin-bottom: 1.5rem; width: fit-content;
+        .app-live-badge {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            width: fit-content;
         }
-        .live-dot {
-            width: 7px; height: 7px; border-radius: 50%; background: var(--google-green);
-            animation: blink 1.8s ease-in-out infinite;
+        .app-live-badge img {
+            display: block;
+            width: clamp(180px, 36vw, 230px);
+            height: auto;
         }
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
         h1 {
             font-family: var(--font-display);
-            font-size: clamp(2.6rem, 10vw, 4.5rem);
-            line-height: 0.97; text-transform: lowercase;
-            letter-spacing: -2px; color: var(--white);
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.6rem, 10vw, 4.75rem);
+            line-height: 0.95; text-transform: lowercase;
+            letter-spacing: -2px; color: var(--white); margin-bottom: 1.5rem;
         }
         h1 .blue { color: var(--primary-strong); }
         h1 .green { color: var(--google-green); }
 
         .hero-sub {
-            font-size: clamp(1rem, 3.5vw, 1.2rem);
-            line-height: 1.65; color: var(--white);
-            opacity: 0.9; margin-bottom: 2rem; max-width: 540px;
+            font-size: clamp(1rem, 3.5vw, 1.2rem); line-height: 1.65;
+            color: var(--white); opacity: 0.9; margin-bottom: 2rem; max-width: 520px;
         }
 
-        .hero-cta-row { display: flex; gap: 0.875rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+        .hero-cta-row { display: flex; gap: 0.875rem; flex-wrap: wrap; margin-bottom: 2.5rem; align-items: center; }
 
-        .btn-primary {
-            display: inline-block;
-            background: linear-gradient(90deg, var(--primary-strong) 0%, var(--google-green) 100%);
-            color: var(--white); padding: 1rem 2rem;
+        .btn-appstore {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: var(--white); color: var(--primary-deep);
+            padding: 0.875rem 1.6rem; border-radius: 10px;
+            border: 2px solid var(--white);
             font-weight: 700; font-size: 0.88rem; text-transform: lowercase;
-            letter-spacing: 0.4px; border: 2.5px solid var(--white);
-            border-radius: 8px; text-decoration: none;
-            box-shadow: 5px 5px 0 rgba(255,255,255,0.3);
-            transition: all 0.15s ease;
+            text-decoration: none; box-shadow: 5px 5px 0 rgba(255,255,255,0.3);
+            transition: all 0.15s ease; white-space: nowrap;
         }
-        .btn-primary:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 rgba(255,255,255,0.3); }
+        .btn-appstore:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 rgba(255,255,255,0.3); }
 
-        .btn-ghost {
+        .btn-business {
             display: inline-block;
             background: rgba(255,255,255,0.15); color: var(--white);
-            padding: 1rem 1.75rem; font-weight: 600; font-size: 0.88rem;
-            text-transform: lowercase; letter-spacing: 0.4px;
+            padding: 0.875rem 1.6rem; border-radius: 10px;
             border: 2px solid rgba(255,255,255,0.5);
-            border-radius: 8px; text-decoration: none;
-            transition: background 0.2s, border-color 0.2s;
+            font-weight: 600; font-size: 0.88rem; text-transform: lowercase;
+            text-decoration: none; transition: background 0.2s, border-color 0.2s;
+            white-space: nowrap;
         }
-        .btn-ghost:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.8); }
+        .btn-business:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.8); }
+
+        .free-note {
+            font-size: 0.78rem; color: rgba(255,255,255,0.75);
+            font-weight: 500; display: flex; align-items: center; gap: 0.35rem;
+        }
+        .free-note::before { content: '✓'; color: var(--google-green); font-weight: 700; }
 
         .hero-stats {
             display: grid; grid-template-columns: repeat(3,1fr);
             gap: 1.25rem; padding: 1.5rem 0;
-            border-top: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid rgba(255,255,255,0.25);
         }
         .stat-number {
             font-family: var(--font-display);
-            font-size: clamp(1.8rem,6vw,2.8rem); line-height: 1;
-            color: var(--primary-strong); margin-bottom: 0.35rem;
+            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            line-height: 1; color: var(--primary-strong); margin-bottom: 0.3rem;
         }
-        .stat-label { font-size: 0.72rem; font-weight: 600; text-transform: lowercase; color: var(--white); opacity: 0.8; }
+        .stat-label { font-size: 0.72rem; font-weight: 600; text-transform: lowercase; color: rgba(255,255,255,0.8); }
 
-        .phone-mockup { display: none; position: relative; max-width: 340px; margin: 0 auto; }
+        .phone-mockup { display: none; position: relative; max-width: 320px; margin: 0 auto; }
         .phone-demo-img {
             width: 100%; border-radius: 30px;
-            box-shadow: 0 30px 60px rgba(11,18,32,0.2);
+            box-shadow: 0 30px 60px rgba(11,18,32,0.22);
             animation: float-phone 7s ease-in-out infinite;
         }
-        @keyframes float-phone { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+        @keyframes float-phone { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
 
-        .section-container { max-width: 1200px; margin: 0 auto; }
+        .section-wrap { max-width: 1200px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 3rem; }
         .section-label {
             display: inline-block; color: var(--primary-strong);
-            text-transform: uppercase; font-size: 0.72rem; font-weight: 700;
-            letter-spacing: 1.5px; margin-bottom: 0.75rem;
+            text-transform: uppercase; font-size: 0.72rem;
+            font-weight: 700; letter-spacing: 1.5px; margin-bottom: 0.75rem;
         }
         .section-title {
             font-family: var(--font-display);
             font-size: clamp(1.9rem, 6vw, 3rem);
-            text-transform: lowercase; letter-spacing: -1px; line-height: 1.05;
-            color: var(--google-green); margin-bottom: 1rem;
+            text-transform: lowercase; letter-spacing: -1px;
+            line-height: 1.05; color: var(--google-green); margin-bottom: 1rem;
         }
         .section-desc {
             font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-            line-height: 1.7; color: var(--gray);
-            max-width: 580px; margin: 0 auto;
+            line-height: 1.7; color: var(--gray); max-width: 580px; margin: 0 auto;
         }
 
-        .problem-section {
-            padding: clamp(3.5rem,8vw,6rem) var(--container);
+        .collectors-section {
+            padding: var(--section-gap) var(--container);
             background: var(--white); position: relative;
         }
-        .problem-section::before {
+        .collectors-section::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0;
             height: 5px; background: var(--primary-strong);
         }
-        .problem-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-top: 3rem; }
-        .problem-card {
-            border: 2px solid var(--google-green); border-radius: 12px;
-            padding: 2rem 1.5rem; text-align: center;
-            transition: all 0.3s var(--ease); background: var(--white);
+        .two-col {
+            display: grid; grid-template-columns: 1fr;
+            gap: 3rem; align-items: center; margin-top: 3rem;
         }
-        .problem-card:hover { background: var(--baby-green); transform: translateY(-4px); }
-        .problem-number {
-            font-family: var(--font-display);
-            font-size: clamp(2.8rem, 8vw, 4.5rem);
-            color: var(--google-green); line-height: 1; margin-bottom: 0.875rem;
+        .collectors-points { display: flex; flex-direction: column; gap: 1.5rem; }
+        .point { display: flex; gap: 1.25rem; align-items: flex-start; }
+        .point-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: var(--baby-green); border: 2px solid rgba(52,168,83,0.3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0;
         }
-        .problem-card h3 {
-            font-family: var(--font-display); font-size: 1.35rem;
-            text-transform: lowercase; letter-spacing: -0.5px;
-            margin-bottom: 0.625rem; color: var(--primary-deep);
+        .point-text h3 {
+            font-family: var(--font-display); font-size: 1rem;
+            text-transform: lowercase; letter-spacing: -0.3px;
+            color: var(--primary-deep); margin-bottom: 0.25rem;
         }
-        .problem-card p { font-size: 0.93rem; line-height: 1.68; color: var(--gray); }
+        .point-text p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
 
-        .how-section {
-            padding: clamp(3.5rem,8vw,6rem) var(--container);
+        .collector-cta-block {
+            background: var(--baby-blues); border-radius: 16px;
+            padding: 2.5rem; text-align: center;
+            border: 2px solid rgba(54,148,232,0.2);
+        }
+        .collector-cta-block h3 {
+            font-family: var(--font-display); font-size: 1.5rem;
+            text-transform: lowercase; letter-spacing: -0.5px;
+            color: var(--primary-deep); margin-bottom: 0.75rem;
+        }
+        .collector-cta-block p { color: var(--gray); font-size: 0.95rem; margin-bottom: 1.75rem; line-height: 1.65; }
+        .btn-download {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: var(--google-green); color: var(--white);
+            padding: 1rem 2rem; border-radius: 10px;
+            border: 2.5px solid var(--white); font-weight: 700;
+            font-size: 0.9rem; text-transform: lowercase; text-decoration: none;
+            box-shadow: 5px 5px 0 rgba(52,168,83,0.2);
+            transition: all 0.15s ease;
+        }
+        .btn-download:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 rgba(52,168,83,0.2); }
+        .free-forever { margin-top: 1rem; font-size: 0.8rem; color: var(--google-green); font-weight: 600; }
+
+        .hosts-section {
+            padding: var(--section-gap) var(--container);
             background: var(--primary); position: relative;
         }
-        .how-section::before {
+        .hosts-section::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0;
             height: 5px; background: var(--primary-strong);
         }
-        .how-section .section-title { color: var(--primary-strong); }
-        .how-section .section-desc { color: var(--primary-deep); }
+        .hosts-section .section-title { color: var(--primary-strong); }
+        .hosts-section .section-desc { color: var(--primary-deep); }
 
         .steps-flow {
             display: flex; flex-direction: column;
             gap: 1.25rem; align-items: center; margin-top: 3rem;
         }
         .step-card {
-            background: var(--white); border: 2px solid rgba(54,148,232,0.3);
+            background: var(--white); border: 2px solid rgba(54,148,232,0.25);
             border-radius: 14px; padding: 1.75rem 1.5rem; width: 100%;
-            max-width: 420px; text-align: center;
-            transition: all 0.3s var(--ease);
+            max-width: 420px; text-align: center; transition: all 0.3s var(--ease);
         }
         .step-card:hover { border-color: var(--primary-deep); transform: translateY(-4px); background: #e8f3ff; }
         .step-number { font-family: var(--font-display); font-size: 1.4rem; color: var(--primary-strong); margin-bottom: 0.6rem; }
         .step-card h3 {
-            font-family: var(--font-display); font-size: 1.2rem;
+            font-family: var(--font-display); font-size: 1.1rem;
             text-transform: lowercase; letter-spacing: -0.4px;
-            margin-bottom: 0.5rem; color: var(--primary-deep);
+            color: var(--primary-deep); margin-bottom: 0.5rem;
         }
         .step-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.65; }
-        .flow-arrow { font-size: 1.75rem; color: var(--primary-strong); transform: rotate(90deg); opacity: 0.45; }
+        .flow-arrow { font-size: 1.75rem; color: var(--primary-strong); transform: rotate(90deg); opacity: 0.4; }
 
-        .gallery-section { padding: clamp(3.5rem,8vw,6rem) 0; background: var(--soft); overflow: hidden; }
+        .gallery-section {
+            padding: var(--section-gap) 0;
+            background: var(--soft); overflow: hidden;
+        }
         .gallery-header { padding: 0 var(--container); margin-bottom: 2.5rem; text-align: center; }
         .demo-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
         .demo-tag {
@@ -312,9 +327,8 @@
             border: 1px solid rgba(52,168,83,0.3); border-radius: 999px;
             padding: 0.3rem 0.75rem; font-size: 0.77rem; font-weight: 700; text-transform: lowercase;
         }
-
         .app-gallery-marquee {
-            overflow: hidden; margin-bottom: 0;
+            overflow: hidden; margin-bottom: 3rem;
             -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
             mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
         }
@@ -324,8 +338,7 @@
         }
         .app-gallery-track:hover { animation-play-state: paused; }
         @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-        .app-screen-card { flex: 0 0 clamp(210px, 70vw, 260px); text-align: center; transition: transform 0.25s var(--ease); }
+        .app-screen-card { flex: 0 0 clamp(210px,70vw,255px); text-align: center; transition: transform 0.25s var(--ease); }
         .app-screen-card:hover { transform: translateY(-5px); }
         .app-screen-img { width: 100%; border-radius: 26px; display: block; }
         .app-screen-card figcaption {
@@ -335,151 +348,100 @@
             border-radius: 999px; padding: 0.3rem 0.65rem; display: inline-block;
         }
 
-        .feature-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; padding: 0 var(--container); }
-        .feature-card {
-            background: var(--white); border: 2px solid var(--google-green);
-            border-radius: 12px; padding: 1.25rem 1.5rem; transition: all 0.3s var(--ease);
+        .support-section {
+            padding: var(--section-gap) var(--container);
+            background: var(--baby-blues); position: relative;
         }
-        .feature-card:hover { background: var(--baby-green); transform: translateY(-3px); }
-        .feature-card h3 { font-size: 1rem; font-weight: 700; color: var(--google-green); margin-bottom: 0.35rem; text-transform: lowercase; }
-        .feature-card p { font-size: 0.875rem; color: var(--gray); line-height: 1.6; }
-
-        .funding-section {
-            padding: clamp(3.5rem,8vw,6rem) var(--container);
-            background: var(--white); position: relative;
-        }
-        .funding-section::before {
+        .support-section::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-strong) 0%, var(--google-green) 100%);
+            height: 5px; background: var(--google-green);
         }
-
-        .funding-hero-block {
-            background: var(--baby-blues); border-radius: 16px;
-            padding: clamp(2rem,5vw,3.5rem); margin-bottom: 2.5rem;
+        .support-section .section-title { color: var(--primary-deep); }
+        .support-section .section-desc { color: var(--primary-deep); opacity: 0.82; }
+        .support-grid {
+            display: grid; grid-template-columns: 1fr;
+            gap: 1.25rem; margin-top: 3rem;
         }
-        .funding-hero-block h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 6vw, 3rem);
-            text-transform: lowercase; letter-spacing: -1.5px; line-height: 1.05;
-            color: var(--primary-deep); margin-bottom: 1rem;
+        .support-card {
+            background: rgba(255,255,255,0.7); backdrop-filter: blur(8px);
+            border: 2px solid rgba(54,148,232,0.25); border-radius: 14px;
+            padding: 2rem; transition: all 0.3s var(--ease);
         }
-        .funding-hero-block p {
-            font-size: 1.05rem; line-height: 1.7; color: var(--primary-deep);
-            opacity: 0.85; max-width: 580px; margin-bottom: 2rem;
-        }
-        .funding-cta-row { display: flex; gap: 0.875rem; flex-wrap: wrap; }
-
-        .btn-green {
-            display: inline-block; background: var(--google-green); color: var(--white);
-            padding: 0.9rem 1.75rem; border-radius: 8px; border: 2.5px solid var(--white);
-            font-weight: 700; font-size: 0.88rem; text-transform: lowercase;
-            box-shadow: 4px 4px 0 rgba(52,168,83,0.22); text-decoration: none;
-            transition: all 0.15s ease;
-        }
-        .btn-green:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 rgba(52,168,83,0.22); }
-
-        .btn-outline-blue {
-            display: inline-block; background: transparent; color: var(--primary-deep);
-            padding: 0.9rem 1.75rem; border-radius: 8px;
-            border: 2px solid var(--primary-strong);
-            font-weight: 700; font-size: 0.88rem; text-transform: lowercase;
-            text-decoration: none; transition: background 0.2s;
-        }
-        .btn-outline-blue:hover { background: var(--primary); }
-
-        .opp-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2.5rem; }
-        .opp-card {
-            border: 2px solid var(--primary-strong); border-radius: 12px;
-            padding: 1.75rem; transition: all 0.3s var(--ease); background: var(--soft);
-        }
-        .opp-card:hover { border-color: var(--google-green); transform: translateY(-3px); background: var(--baby-blues); }
-        .opp-pill {
-            display: inline-block; border-radius: 999px;
-            padding: 0.28rem 0.8rem; font-size: 0.72rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 1rem;
-        }
-        .opp-pill.research { background: rgba(251,191,36,0.15); color: #b45309; }
-        .opp-pill.advancement { background: rgba(52,168,83,0.12); color: var(--google-green); }
-        .opp-pill.beta-tag { background: rgba(102,194,255,0.18); color: var(--primary-deep); }
-
-        .opp-card h3 {
+        .support-card:hover { background: var(--white); transform: translateY(-4px); border-color: var(--google-green); }
+        .support-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .support-card h3 {
             font-family: var(--font-display); font-size: 1.15rem;
             text-transform: lowercase; letter-spacing: -0.4px;
-            color: var(--primary-deep); margin-bottom: 0.625rem;
+            color: var(--primary-deep); margin-bottom: 0.6rem;
         }
-        .opp-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.65; margin-bottom: 1rem; }
-        .opp-link {
+        .support-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.65; margin-bottom: 1.25rem; }
+        .support-link {
             font-size: 0.85rem; font-weight: 700; color: var(--primary-strong);
             text-decoration: none; text-transform: lowercase;
             border-bottom: 2px solid transparent; transition: border-color 0.2s;
         }
-        .opp-link:hover { border-bottom-color: var(--primary-strong); }
+        .support-link:hover { border-bottom-color: var(--primary-strong); }
 
-        .beta-strip {
-            background: linear-gradient(90deg, var(--primary-strong) 0%, var(--google-green) 100%);
+        .contact-strip {
+            margin-top: 2.5rem;
+            background: linear-gradient(90deg, var(--primary-strong), var(--google-green));
             border-radius: 14px; padding: 2.5rem;
             display: flex; flex-direction: column; gap: 1.5rem;
         }
-        .beta-strip h3 {
+        .contact-strip h3 {
             font-family: var(--font-display); font-size: 1.6rem;
             text-transform: lowercase; letter-spacing: -0.5px;
             color: var(--white); margin-bottom: 0.35rem;
         }
-        .beta-strip p { color: rgba(255,255,255,0.85); font-size: 0.95rem; }
-        .beta-form { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-        .beta-input {
-            flex: 1; min-width: 220px; padding: 0.875rem 1.25rem;
-            border: 2.5px solid rgba(255,255,255,0.5); border-radius: 8px;
+        .contact-strip p { color: rgba(255,255,255,0.85); font-size: 0.95rem; line-height: 1.6; }
+        .contact-form { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .contact-input {
+            flex: 1; min-width: 200px; padding: 0.875rem 1.25rem;
+            border: 2px solid rgba(255,255,255,0.45); border-radius: 8px;
             background: rgba(255,255,255,0.18); color: var(--white);
             font-size: 0.9rem; font-family: var(--font-body); outline: none;
             transition: border-color 0.2s, background 0.2s;
         }
-        .beta-input::placeholder { color: rgba(255,255,255,0.6); }
-        .beta-input:focus { border-color: var(--white); background: rgba(255,255,255,0.25); }
-        .beta-btn {
+        .contact-input::placeholder { color: rgba(255,255,255,0.55); }
+        .contact-input:focus { border-color: var(--white); background: rgba(255,255,255,0.25); }
+        .contact-btn {
             background: var(--white); color: var(--google-green);
             padding: 0.875rem 1.5rem; border: none; border-radius: 8px;
             font-weight: 700; font-size: 0.88rem; text-transform: lowercase;
             cursor: pointer; font-family: var(--font-body); white-space: nowrap;
-            transition: transform 0.15s, box-shadow 0.15s;
-            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1); transition: all 0.15s ease;
         }
-        .beta-btn:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 rgba(0,0,0,0.1); }
+        .contact-btn:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 rgba(0,0,0,0.1); }
 
         .impact-section {
-            padding: clamp(3.5rem,8vw,6rem) var(--container);
-            background: var(--baby-blues); position: relative;
+            padding: var(--section-gap) var(--container);
+            background: var(--white); position: relative;
         }
         .impact-section::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 5px; background: var(--google-green);
+            height: 5px; background: var(--primary-strong);
         }
-        .impact-section .section-title { color: var(--primary-deep); }
-        .impact-section .section-desc { color: var(--primary-deep); opacity: 0.8; }
-
         .impact-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-top: 3rem; }
         .impact-stat {
-            background: rgba(255,255,255,0.65); backdrop-filter: blur(8px);
-            border: 2px solid rgba(54,148,232,0.3); border-radius: 12px;
-            padding: 2rem 1.5rem; text-align: center;
+            background: var(--soft); border: 2px solid rgba(54,148,232,0.2);
+            border-radius: 12px; padding: 2rem 1.5rem; text-align: center;
             transition: all 0.3s var(--ease);
         }
-        .impact-stat:hover { background: var(--white); transform: translateY(-4px); border-color: var(--google-green); }
+        .impact-stat:hover { transform: translateY(-4px); border-color: var(--google-green); background: var(--baby-green); }
         .impact-number {
             font-family: var(--font-display);
-            font-size: clamp(2.2rem,8vw,3.5rem); line-height: 1;
-            color: var(--primary-strong); margin-bottom: 0.5rem;
+            font-size: clamp(2.2rem, 8vw, 3.5rem);
+            line-height: 1; color: var(--primary-strong); margin-bottom: 0.5rem;
         }
         .impact-label {
-            text-transform: lowercase; font-size: 0.82rem; font-weight: 700;
-            letter-spacing: 0.5px; color: var(--primary-deep); margin-bottom: 0.75rem;
+            text-transform: lowercase; font-size: 0.82rem;
+            font-weight: 700; letter-spacing: 0.4px;
+            color: var(--primary-deep); margin-bottom: 0.6rem;
         }
         .impact-stat p { font-size: 0.88rem; color: var(--gray); line-height: 1.6; }
 
         footer {
-            background: var(--soft);
-            border-top: 4px solid var(--primary-strong);
+            background: var(--soft); border-top: 4px solid var(--primary-strong);
             padding: clamp(2.5rem,6vw,4rem) var(--container) 2rem;
         }
         .footer-inner {
@@ -495,8 +457,8 @@
         .footer-logo img { height: 40px; }
         .footer-brand p { font-size: 0.9rem; line-height: 1.7; color: var(--gray); }
         .footer-col h4 {
-            font-family: var(--font-display); text-transform: lowercase; font-size: 0.95rem;
-            color: var(--primary-strong); margin-bottom: 1rem;
+            font-family: var(--font-display); text-transform: lowercase;
+            font-size: 0.95rem; color: var(--primary-strong); margin-bottom: 1rem;
         }
         .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
         .footer-links a {
@@ -512,13 +474,15 @@
             display: flex; flex-direction: column; gap: 0.75rem;
             font-size: 0.82rem; color: var(--gray); text-align: center;
         }
-        .footer-badge {
+        .footer-appstore-badge {
             display: inline-flex; align-items: center; gap: 0.4rem;
             background: var(--primary); border: 1px solid rgba(54,148,232,0.3);
-            color: var(--primary-deep); padding: 0.35rem 0.875rem;
+            color: var(--primary-deep); padding: 0.375rem 0.875rem;
             border-radius: 999px; font-size: 0.78rem; font-weight: 600;
-            text-transform: lowercase; width: fit-content; margin: 0 auto;
+            text-transform: lowercase; text-decoration: none;
+            transition: background 0.2s; width: fit-content; margin: 0 auto;
         }
+        .footer-appstore-badge:hover { background: var(--baby-blues); }
 
         .fade-in-up {
             opacity: 0; transform: translateY(28px);
@@ -528,35 +492,32 @@
         .fade-in-up.visible { opacity: 1; transform: translateY(0); }
 
         @media (min-width: 640px) {
-            .problem-grid { grid-template-columns: repeat(2, 1fr); }
-            .opp-grid { grid-template-columns: repeat(2, 1fr); }
-            .feature-grid { grid-template-columns: repeat(2, 1fr); }
-            .impact-grid { grid-template-columns: repeat(2, 1fr); }
-            .beta-strip { flex-direction: row; align-items: center; justify-content: space-between; }
+            .support-grid { grid-template-columns: repeat(2,1fr); }
+            .impact-grid { grid-template-columns: repeat(2,1fr); }
+            .contact-strip { flex-direction: row; align-items: center; justify-content: space-between; }
         }
         @media (min-width: 768px) {
             .steps-flow { flex-direction: row; align-items: center; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
             .flow-arrow { transform: rotate(0deg); }
-            .step-card { max-width: 240px; }
-            .footer-inner { grid-template-columns: repeat(2, 1fr); }
+            .step-card { max-width: 230px; }
+            .two-col { grid-template-columns: 1fr 1fr; }
+            .footer-inner { grid-template-columns: repeat(2,1fr); }
         }
         @media (min-width: 1024px) {
             .hamburger { display: none; }
             nav.desktop-nav { display: block; }
             .hero-container { grid-template-columns: 1fr 1fr; }
             .phone-mockup { display: block; }
-            .problem-grid { grid-template-columns: repeat(3, 1fr); }
-            .opp-grid { grid-template-columns: repeat(3, 1fr); }
-            .feature-grid { grid-template-columns: repeat(3, 1fr); }
-            .impact-grid { grid-template-columns: repeat(4, 1fr); }
+            .support-grid { grid-template-columns: repeat(3,1fr); }
+            .impact-grid { grid-template-columns: repeat(4,1fr); }
             .footer-inner { grid-template-columns: 2fr 1fr 1fr 1fr; }
             .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
-            .footer-badge { margin: 0; }
+            .footer-appstore-badge { margin: 0; }
         }
         @media (max-width: 520px) {
             .hero-stats { grid-template-columns: 1fr; }
             .hero-cta-row { flex-direction: column; }
-            .btn-primary, .btn-ghost { text-align: center; }
+            .btn-appstore, .btn-business { text-align: center; justify-content: center; }
         }
     </style>
 </head>
@@ -574,11 +535,10 @@
         </button>
         <nav class="desktop-nav">
             <ul>
-                <li><a href="#problem">problem</a></li>
-                <li><a href="#how">how it works</a></li>
+                <li><a href="#collectors">collectors</a></li>
+                <li><a href="#hosts">for hosts</a></li>
                 <li><a href="#demo">the app</a></li>
-                <li><a href="#get-involved">funding page</a></li>
-                <li><a href="#get-involved" class="btn-nav">join the beta</a></li>
+                <li><a href="#support" class="btn-nav">partner with us</a></li>
             </ul>
         </nav>
     </div>
@@ -586,33 +546,36 @@
 
 <div class="menu-overlay" id="menuOverlay"></div>
 <nav class="mobile-menu" id="mobileMenu">
-    <a href="#problem">problem</a>
-    <a href="#how">how it works</a>
+    <a href="#collectors">for collectors</a>
+    <a href="#hosts">for hosts</a>
     <a href="#demo">the app</a>
-    <a href="#get-involved">funding page</a>
-    <a href="#get-involved" class="cta">join the beta</a>
+    <a href="#support">support bottlr</a>
+    <a href="#support" class="cta-mobile">partner with us -></a>
 </nav>
 
 <section class="hero">
     <div class="hero-container">
         <div class="hero-content fade-in-up">
-            <div class="live-badge">
-                <span class="live-dot"></span>
-                coming to the app store
-            </div>
+            <a class="app-live-badge" href="https://apps.apple.com" aria-label="Download on the App Store">
+                <img src="assets/images/download-badges/Download_on_the_App_Store_Badge.png" alt="Download on the App Store">
+            </a>
             <h1>
                 the people's<br>
                 <span class="blue">bottle</span><br>
                 <span class="green">network</span>
             </h1>
             <p class="hero-sub">
-                bottlr connects collectors with hosts in real time, clear jobs, live maps, transparent earnings. We're fixing a broken system, one pickup at a time.
+                bottlr connects bottle collectors with restaurants, offices, and events in real time. More earnings for collectors. Zero waste for hosts.
             </p>
             <div class="hero-cta-row">
-                <a href="#get-involved" class="btn-primary">join the beta</a>
-                <a href="#demo" class="btn-ghost">see the app</a>
+                <a href="https://apps.apple.com" class="btn-appstore">
+                    <svg width="18" height="22" viewBox="0 0 814 1000" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-42.3-150.3-109.2c-51.7-75.5-92.5-196.7-92.5-312C27.8 150.7 138.3 51.9 248.2 51.9c65.1 0 117.6 42.7 158.7 42.7 39.6 0 101.1-45.3 168.3-45.3 27.9 0 108.2 2.6 168.3 77.6zm-58-130.8c27.2-29.1 48.8-71.4 48.8-113.8 0-5.8-.6-11.7-1.9-16.2-45.3 1.9-99.3 26.5-132 57.8C619.5 159.9 594 205.9 594 248.3c0 4.5.6 9 1.3 12.9 2.6.6 6.5 1.3 10.4 1.3 40.2 0 92.2-26.5 124.4-52.1z"/></svg>
+                    download free
+                </a>
+                <a href="#hosts" class="btn-business">i'm a business -></a>
             </div>
-            <div class="hero-stats">
+            <p class="free-note">always free for collectors - 100% of CRV goes to you</p>
+            <div class="hero-stats" style="margin-top:2rem;">
                 <div>
                     <div class="stat-number">$1.5B</div>
                     <div class="stat-label">CA bottle industry</div>
@@ -623,7 +586,7 @@
                 </div>
                 <div>
                     <div class="stat-number">live</div>
-                    <div class="stat-label">real time job claiming</div>
+                    <div class="stat-label">real-time jobs</div>
                 </div>
             </div>
         </div>
@@ -633,197 +596,195 @@
     </div>
 </section>
 
-<section class="problem-section" id="problem">
-    <div class="section-container">
+<section class="collectors-section" id="collectors">
+    <div class="section-wrap">
         <div class="section-header fade-in-up">
-            <div class="section-label">the problem</div>
-            <h2 class="section-title">the system is broken</h2>
-            <p class="section-desc">California's bottle redemption industry exploits the workers who make it run, while hundreds of millions in value gets thrown away every year.</p>
+            <div class="section-label">for collectors</div>
+            <h2 class="section-title">more pickups. more money.</h2>
+            <p class="section-desc">Stop walking blind. bottlr shows you exactly where the bottles are - before you leave home.</p>
         </div>
-        <div class="problem-grid">
-            <div class="problem-card fade-in-up" style="--delay:0.05s">
-                <div class="problem-number">$15</div>
-                <h3>poverty wages</h3>
-                <p>Collectors walk 5+ miles daily through trash for $15 in 6 hours. No benefits, no stability, no way forward.</p>
+        <div class="two-col">
+            <div class="collectors-points">
+                <div class="point fade-in-up" style="--delay:0.05s">
+                    <div class="point-icon">🗺️</div>
+                    <div class="point-text">
+                        <h3>see live jobs on a map</h3>
+                        <p>Restaurants and hosts post pickup jobs with location, count, and timing. Claim the ones near you before anyone else does.</p>
+                    </div>
+                </div>
+                <div class="point fade-in-up" style="--delay:0.1s">
+                    <div class="point-icon">⚡</div>
+                    <div class="point-text">
+                        <h3>one tap to claim</h3>
+                        <p>No phone calls, no showing up and hoping. Claim a job instantly and get the address, bottle count, and best route.</p>
+                    </div>
+                </div>
+                <div class="point fade-in-up" style="--delay:0.15s">
+                    <div class="point-icon">💰</div>
+                    <div class="point-text">
+                        <h3>100% of CRV is yours</h3>
+                        <p>We never touch your earnings. Every cent of CRV redemption goes directly to you - that's the whole point.</p>
+                    </div>
+                </div>
+                <div class="point fade-in-up" style="--delay:0.2s">
+                    <div class="point-icon">📊</div>
+                    <div class="point-text">
+                        <h3>track your impact</h3>
+                        <p>See your completed pickups, bottles diverted, CO2 saved, and earnings history all in one dashboard.</p>
+                    </div>
+                </div>
             </div>
-            <div class="problem-card fade-in-up" style="--delay:0.12s">
-                <div class="problem-number">$600M</div>
-                <h3>wasted value</h3>
-                <p>40% of bottles are never redeemed. Restaurants dump hundreds weekly while collectors search empty handed.</p>
-            </div>
-            <div class="problem-card fade-in-up" style="--delay:0.2s">
-                <div class="problem-number">zero</div>
-                <h3>worker power</h3>
-                <p>No voice, no organization, no bargaining power. An invisible workforce left behind by a system not built for them.</p>
+            <div class="collector-cta-block fade-in-up" style="--delay:0.1s">
+                <h3>ready to find more pickups?</h3>
+                <p>Download bottlr free and start claiming jobs near you today. Available on iPhone.</p>
+                <a href="https://apps.apple.com" class="btn-download">
+                    <svg width="16" height="20" viewBox="0 0 814 1000" fill="currentColor"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-42.3-150.3-109.2c-51.7-75.5-92.5-196.7-92.5-312C27.8 150.7 138.3 51.9 248.2 51.9c65.1 0 117.6 42.7 158.7 42.7 39.6 0 101.1-45.3 168.3-45.3 27.9 0 108.2 2.6 168.3 77.6zm-58-130.8c27.2-29.1 48.8-71.4 48.8-113.8 0-5.8-.6-11.7-1.9-16.2-45.3 1.9-99.3 26.5-132 57.8C619.5 159.9 594 205.9 594 248.3c0 4.5.6 9 1.3 12.9 2.6.6 6.5 1.3 10.4 1.3 40.2 0 92.2-26.5 124.4-52.1z"/></svg>
+                    download on the app store
+                </a>
+                <p class="free-forever">✓ free forever for collectors</p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="how-section" id="how">
-    <div class="section-container">
+<section class="hosts-section" id="hosts">
+    <div class="section-wrap">
         <div class="section-header fade-in-up">
-            <div class="section-label">the solution</div>
-            <h2 class="section-title">four steps. one pickup.</h2>
-            <p class="section-desc">The entire flow, from posting a job to completing a pickup, lives inside the app.</p>
+            <div class="section-label">for businesses</div>
+            <h2 class="section-title">post once. bottles gone.</h2>
+            <p class="section-desc">Restaurants, offices, property managers, and event venues use bottlr to schedule verified bottle pickups - and get the impact reports to prove it.</p>
         </div>
         <div class="steps-flow">
             <div class="step-card fade-in-up" style="--delay:0.05s">
                 <div class="step-number">01</div>
-                <h3>hosts post pickups</h3>
-                <p>Add location, bottle count, and timing, in under a minute.</p>
+                <h3>post a pickup</h3>
+                <p>Add your location, bottle count, and when they're ready. Takes under a minute.</p>
             </div>
             <div class="flow-arrow fade-in-up" style="--delay:0.1s">→</div>
             <div class="step-card fade-in-up" style="--delay:0.15s">
                 <div class="step-number">02</div>
-                <h3>collectors claim jobs</h3>
-                <p>Live map shows nearby jobs. One tap to claim before someone else does.</p>
+                <h3>a collector claims it</h3>
+                <p>Nearby collectors see your job on the live map and claim it in real time.</p>
             </div>
             <div class="flow-arrow fade-in-up" style="--delay:0.2s">→</div>
             <div class="step-card fade-in-up" style="--delay:0.25s">
                 <div class="step-number">03</div>
-                <h3>complete the pickup</h3>
-                <p>Photo verification confirms the handoff, builds trust, creates records.</p>
+                <h3>verified pickup</h3>
+                <p>Photo verification confirms the handoff - you get a record for compliance.</p>
             </div>
             <div class="flow-arrow fade-in-up" style="--delay:0.3s">→</div>
             <div class="step-card fade-in-up" style="--delay:0.35s">
                 <div class="step-number">04</div>
-                <h3>earnings update live</h3>
-                <p>Jobs, earnings, and impact, all visible in one transparent dashboard.</p>
+                <h3>impact report</h3>
+                <p>Your dashboard tracks bottles diverted, CO2 saved, and pickup history - shareable for ESG reporting.</p>
             </div>
         </div>
     </div>
 </section>
 
 <section class="gallery-section" id="demo">
-    <div class="gallery-header fade-in-up">
+    <div class="gallery-header fade-in-up section-wrap">
         <div class="section-label">the app</div>
-        <h2 class="section-title">built for real pickups</h2>
-        <p class="section-desc">Real product screens that show both sides of every pickup flow.</p>
+        <h2 class="section-title">see it in action</h2>
+        <p class="section-desc">Real screens from bottlr - both the collector and host experience.</p>
+        <div class="demo-tags">
+            <span class="demo-tag">collector view</span>
+            <span class="demo-tag">host view</span>
+            <span class="demo-tag">live map</span>
+            <span class="demo-tag">onboarding</span>
+        </div>
     </div>
-
     <div class="app-gallery-marquee fade-in-up" style="--delay:0.1s">
         <div class="app-gallery-track">
-            <figure class="app-screen-card">
-                <img src="assets/images/screenshots/collector-map-view.png" alt="real-time pickup map" class="app-screen-img" loading="eager">
-                <figcaption>real time pickup map</figcaption>
-            </figure>
-            <figure class="app-screen-card">
-                <img src="assets/images/screenshots/collection-view.png" alt="pickup detail" class="app-screen-img" loading="eager">
-                <figcaption>pickup detail + claim</figcaption>
-            </figure>
-            <figure class="app-screen-card">
-                <img src="assets/images/screenshots/collections-list-view.png" alt="nearby pickups" class="app-screen-img" loading="lazy">
-                <figcaption>nearby pickups list</figcaption>
-            </figure>
-            <figure class="app-screen-card">
-                <img src="assets/images/screenshots/colleciton-view1.png" alt="job status" class="app-screen-img" loading="lazy">
-                <figcaption>job status + route</figcaption>
-            </figure>
-            <figure class="app-screen-card">
-                <img src="assets/images/screenshots/host-home-view-map.png" alt="host map" class="app-screen-img" loading="lazy">
-                <figcaption>host home map</figcaption>
-            </figure>
-            <figure class="app-screen-card">
-                <img src="assets/images/screenshots/host-post-view.png" alt="post form" class="app-screen-img" loading="lazy">
-                <figcaption>new pickup post</figcaption>
-            </figure>
-            <figure class="app-screen-card">
-                <img src="assets/images/screenshots/hos-home-view.png" alt="host overview" class="app-screen-img" loading="lazy">
-                <figcaption>host activity overview</figcaption>
-            </figure>
-            <figure class="app-screen-card">
-                <img src="assets/images/screenshots/onboarding-view.png" alt="onboarding" class="app-screen-img" loading="lazy">
-                <figcaption>role based onboarding</figcaption>
-            </figure>
-            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/collector-map-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>real time pickup map</figcaption></figure>
+            <figure class="app-screen-card"><img src="assets/images/screenshots/collector-map-view.png" alt="real-time pickup map" class="app-screen-img" loading="eager"><figcaption>real-time pickup map</figcaption></figure>
+            <figure class="app-screen-card"><img src="assets/images/screenshots/collection-view.png" alt="pickup detail" class="app-screen-img" loading="eager"><figcaption>pickup detail + claim</figcaption></figure>
+            <figure class="app-screen-card"><img src="assets/images/screenshots/collections-list-view.png" alt="nearby pickups" class="app-screen-img" loading="lazy"><figcaption>nearby pickups list</figcaption></figure>
+            <figure class="app-screen-card"><img src="assets/images/screenshots/colleciton-view1.png" alt="job status" class="app-screen-img" loading="lazy"><figcaption>job status + route</figcaption></figure>
+            <figure class="app-screen-card"><img src="assets/images/screenshots/host-home-view-map.png" alt="host map" class="app-screen-img" loading="lazy"><figcaption>host home map</figcaption></figure>
+            <figure class="app-screen-card"><img src="assets/images/screenshots/host-post-view.png" alt="post form" class="app-screen-img" loading="lazy"><figcaption>new pickup post</figcaption></figure>
+            <figure class="app-screen-card"><img src="assets/images/screenshots/hos-home-view.png" alt="host overview" class="app-screen-img" loading="lazy"><figcaption>host activity overview</figcaption></figure>
+            <figure class="app-screen-card"><img src="assets/images/screenshots/onboarding-view.png" alt="onboarding" class="app-screen-img" loading="lazy"><figcaption>role-based onboarding</figcaption></figure>
+            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/collector-map-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>real-time pickup map</figcaption></figure>
             <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/collection-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>pickup detail + claim</figcaption></figure>
             <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/collections-list-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>nearby pickups list</figcaption></figure>
             <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/colleciton-view1.png" alt="" class="app-screen-img" loading="lazy"><figcaption>job status + route</figcaption></figure>
             <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/host-home-view-map.png" alt="" class="app-screen-img" loading="lazy"><figcaption>host home map</figcaption></figure>
             <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/host-post-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>new pickup post</figcaption></figure>
             <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/hos-home-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>host activity overview</figcaption></figure>
-            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/onboarding-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>role based onboarding</figcaption></figure>
+            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/onboarding-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>role-based onboarding</figcaption></figure>
         </div>
     </div>
-
 </section>
 
-<section class="funding-section" id="get-involved">
-    <div class="section-container">
+<section class="support-section" id="support">
+    <div class="section-wrap">
+        <div class="section-header fade-in-up">
+            <div class="section-label">partner with bottlr</div>
+            <h2 class="section-title">starting c2c, onboarding first businesses now.</h2>
+            <p class="section-desc">bottlr is rolling out with a collector-first network, and we're onboarding our first host businesses right now. If you run a spot with regular bottles, we'd love to pilot with you.</p>
+        </div>
 
-        <div class="funding-hero-block fade-in-up">
-            <div class="section-label">funding page</div>
-            <h2>help us make this real.</h2>
-            <p>bottlr launched at SF Hacks 2026. Now we're taking it to the App Store, and we're looking for funding partners, university supporters, and real users to help us get there.</p>
-            <div class="funding-cta-row">
-                <a href="mailto:contact@bottlr.tech" class="btn-green">get in touch</a>
-                <a href="#beta" class="btn-outline-blue">sign up for beta</a>
+        <div class="support-grid">
+            <div class="support-card fade-in-up" style="--delay:0.05s">
+                <div class="support-icon">🏢</div>
+                <h3>be an early host business</h3>
+                <p>Join as one of our first restaurants, offices, or shops. You help shape the workflow and get priority support as we scale.</p>
+                <a href="mailto:hello@bottlr.tech?subject=Early%20Business%20Pilot" class="support-link">apply for pilot -></a>
+            </div>
+            <div class="support-card fade-in-up" style="--delay:0.12s">
+                <div class="support-icon">🤝</div>
+                <h3>community partner</h3>
+                <p>Nonprofits, community orgs, and sustainability groups - if you work with collectors, let's build local pickup infrastructure together.</p>
+                <a href="mailto:hello@bottlr.tech?subject=Community%20Partnership" class="support-link">start a partnership -></a>
+            </div>
+            <div class="support-card fade-in-up" style="--delay:0.2s">
+                <div class="support-icon">🎓</div>
+                <h3>grants and research support</h3>
+                <p>We're actively pursuing grant and university support to scale responsibly. If you're connected to funding opportunities, we'd love to connect.</p>
+                <a href="mailto:hello@bottlr.tech?subject=Grant%20or%20Research%20Support" class="support-link">reach out -></a>
             </div>
         </div>
 
-        <div class="opp-grid">
-            <div class="opp-card fade-in-up" style="--delay:0.05s">
-                <span class="opp-pill research">Research &amp; Innovation</span>
-                <h3>university r&amp;i funding</h3>
-                <p>We're applying for Research &amp; Innovation grants to fund infrastructure, AI route optimization, and continued development through our App Store launch.</p>
-                <a href="mailto:contact@bottlr.tech" class="opp-link">reach out</a>
-            </div>
-            <div class="opp-card fade-in-up" style="--delay:0.12s">
-                <span class="opp-pill advancement">University Advancement</span>
-                <h3>giving day support</h3>
-                <p>With Giving Day coming up, directed donations go straight into the platform. University advancement dollars support a student built, community impact startup.</p>
-                <a href="mailto:contact@bottlr.tech" class="opp-link">learn more</a>
-            </div>
-            <div class="opp-card fade-in-up" style="--delay:0.2s">
-                <span class="opp-pill beta-tag">Beta Access</span>
-                <h3>be first on the app</h3>
-                <p>We need real collectors and hosts to test the live app before public launch. Join TestFlight, use the product, and help shape it before it ships.</p>
-                <a href="#beta" class="opp-link">apply for beta</a>
-            </div>
-        </div>
-
-        <div class="beta-strip fade-in-up" id="beta">
+        <div class="contact-strip fade-in-up" style="--delay:0.1s">
             <div>
-                <h3>join the beta</h3>
-                <p>Be among the first to use bottlr before it hits the App Store.</p>
+                <h3>let's talk</h3>
+                <p>Whether you're a business, partner, or supporter - drop your email and we'll reach out directly.</p>
             </div>
-            <form class="beta-form" onsubmit="handleBeta(event)">
-                <input type="email" class="beta-input" id="betaEmail" placeholder="your@email.com" required>
-                <button type="submit" class="beta-btn" id="betaBtn">request access</button>
+            <form class="contact-form" onsubmit="handleContact(event)">
+                <input type="email" class="contact-input" id="contactEmail" placeholder="your@email.com" required>
+                <button type="submit" class="contact-btn" id="contactBtn">send it</button>
             </form>
         </div>
-
     </div>
 </section>
 
 <section class="impact-section">
-    <div class="section-container">
+    <div class="section-wrap">
         <div class="section-header fade-in-up">
             <div class="section-label">why it matters</div>
-            <h2 class="section-title">built for real pickup workflows</h2>
-            <p class="section-desc">Every product decision exists to make the experience faster, fairer, and more transparent for the people doing the work.</p>
+            <h2 class="section-title">built for the people doing the work</h2>
+            <p class="section-desc">Every feature in bottlr exists to make the pickup experience faster, fairer, and more transparent for collectors and hosts alike.</p>
         </div>
         <div class="impact-grid">
             <div class="impact-stat fade-in-up" style="--delay:0.05s">
                 <div class="impact-number">live</div>
                 <div class="impact-label">job availability</div>
-                <p>Collectors discover and claim active jobs in real time, no stale listings.</p>
+                <p>Real-time job discovery - no stale listings, no wasted trips.</p>
             </div>
             <div class="impact-stat fade-in-up" style="--delay:0.1s">
-                <div class="impact-number">fast</div>
-                <div class="impact-label">claim flow</div>
-                <p>Low friction claiming and completion means more pickups, more earnings.</p>
+                <div class="impact-number">100%</div>
+                <div class="impact-label">CRV to collectors</div>
+                <p>We make money through partnerships, not from the people doing the collecting.</p>
             </div>
             <div class="impact-stat fade-in-up" style="--delay:0.15s">
                 <div class="impact-number">clear</div>
                 <div class="impact-label">earnings view</div>
-                <p>Completed pickups and earnings in one place, no guessing, no surprises.</p>
+                <p>Every pickup, every dollar - visible in one transparent dashboard.</p>
             </div>
             <div class="impact-stat fade-in-up" style="--delay:0.2s">
-                <div class="impact-number">trusted</div>
-                <div class="impact-label">verification</div>
-                <p>Photo backed completion and impact metrics build confidence on both sides.</p>
+                <div class="impact-number">zero</div>
+                <div class="impact-label">wasted bottles</div>
+                <p>Every host posting is a bottle that would have been thrown away - now it's not.</p>
             </div>
         </div>
     </div>
@@ -836,35 +797,35 @@
                 <img src="assets/images/brand/wordmark.png" alt="bottlr">
                 bottlr
             </a>
-            <p>Real time pickup coordination for collectors and hosts. Building a fairer system for California's bottle workers, one pickup at a time.</p>
+            <p>Real-time bottle pickup coordination for collectors and hosts. Free for collectors. Always.</p>
         </div>
         <div class="footer-col">
             <h4>product</h4>
             <ul class="footer-links">
-                <li><a href="#how">how it works</a></li>
-                <li><a href="#demo">the app</a></li>
-                <li><a href="#get-involved">funding page</a></li>
-                <li><a href="#beta">join beta</a></li>
+                <li><a href="#collectors">for collectors</a></li>
+                <li><a href="#hosts">for businesses</a></li>
+                <li><a href="#demo">see the app</a></li>
+                <li><a href="#support">partner with us</a></li>
             </ul>
         </div>
         <div class="footer-col">
             <h4>company</h4>
             <ul class="footer-links">
                 <li><a href="about.html">about us</a></li>
-                <li><a href="mailto:contact@bottlr.tech">contact</a></li>
+                <li><a href="mailto:hello@bottlr.tech">contact</a></li>
             </ul>
         </div>
         <div class="footer-col">
             <h4>legal</h4>
             <ul class="footer-links">
-                <li><a href="privacy.html">privacy</a></li>
-                <li><a href="terms.html">terms</a></li>
+                <li><a href="privacy.html">privacy policy</a></li>
+                <li><a href="terms.html">terms of service</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
         <span>© 2026 bottlr. all rights reserved.</span>
-        <div class="footer-badge">app store coming soon</div>
+        <a href="https://apps.apple.com" class="footer-appstore-badge">🍎 available on the app store</a>
     </div>
 </footer>
 
@@ -894,19 +855,24 @@
 
     const io = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
-            if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                io.unobserve(e.target);
+            }
         });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in-up').forEach((el) => io.observe(el));
 
-    function handleBeta(e) {
+    function handleContact(e) {
         e.preventDefault();
-        const btn = document.getElementById('betaBtn');
-        btn.textContent = "you are on the list";
+        const btn = document.getElementById('contactBtn');
+        const emailInput = document.getElementById('contactEmail');
+        btn.textContent = "✓ we'll be in touch!";
         btn.style.background = '#d2f1db';
         btn.style.color = '#34A853';
         btn.disabled = true;
-        console.log('Beta signup:', document.getElementById('betaEmail').value);
+        console.log('Contact lead:', emailInput.value);
+        emailInput.value = '';
     }
 </script>
 </body>
