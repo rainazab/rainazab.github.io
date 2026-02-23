@@ -64,8 +64,8 @@
             box-shadow: 0 8px 22px rgba(11,18,32,0.08);
         }
         .header-inner {
-            max-width: 1200px; margin: 0 auto;
-            padding: 0.875rem var(--container);
+            max-width: 1400px; margin: 0 auto;
+            padding: 0.875rem clamp(0.65rem, 2.2vw, 1.1rem);
             display: flex; align-items: center; justify-content: space-between;
         }
         .logo {
@@ -134,24 +134,13 @@
         .hero {
             min-height: 100vh; min-height: 100svh;
             display: flex; align-items: center;
-            background: var(--baby-blues); padding-top: 60px; overflow: hidden;
+            background: #b8dcf7; padding-top: 60px; overflow: hidden;
         }
         .hero-container {
             max-width: 1200px; margin: 0 auto;
             padding: clamp(3rem, 8vw, 5rem) var(--container);
             display: grid; grid-template-columns: 1fr;
             gap: 3rem; align-items: center; position: relative; z-index: 1;
-        }
-
-        .app-live-badge {
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            width: fit-content;
-        }
-        .app-live-badge img {
-            display: block;
-            width: clamp(180px, 36vw, 230px);
-            height: auto;
         }
 
         h1 {
@@ -171,26 +160,32 @@
         .hero-cta-row { display: flex; gap: 0.875rem; flex-wrap: wrap; margin-bottom: 2.5rem; align-items: center; }
 
         .btn-appstore {
-            display: inline-flex; align-items: center; gap: 0.6rem;
-            background: var(--white); color: var(--primary-deep);
-            padding: 0.875rem 1.6rem; border-radius: 10px;
-            border: 2px solid var(--white);
-            font-weight: 700; font-size: 0.88rem; text-transform: lowercase;
-            text-decoration: none; box-shadow: 5px 5px 0 rgba(255,255,255,0.3);
-            transition: all 0.15s ease; white-space: nowrap;
+            display: inline-block;
+            text-decoration: none;
+            transition: transform 0.15s ease;
         }
-        .btn-appstore:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 rgba(255,255,255,0.3); }
+        .btn-appstore:hover { transform: translate(2px,2px); }
+        .btn-appstore img {
+            display: block;
+            width: clamp(150px, 26vw, 185px);
+            height: auto;
+        }
 
         .btn-business {
-            display: inline-block;
-            background: rgba(255,255,255,0.15); color: var(--white);
-            padding: 0.875rem 1.6rem; border-radius: 10px;
-            border: 2px solid rgba(255,255,255,0.5);
-            font-weight: 600; font-size: 0.88rem; text-transform: lowercase;
-            text-decoration: none; transition: background 0.2s, border-color 0.2s;
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            background: rgba(255,255,255,0.18); color: var(--white);
+            padding: 0.875rem 1.25rem; border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.65);
+            font-weight: 700; font-size: 0.86rem; text-transform: lowercase;
+            text-decoration: none; letter-spacing: 0.2px;
+            transition: background 0.2s, border-color 0.2s, transform 0.15s ease;
             white-space: nowrap;
         }
-        .btn-business:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.8); }
+        .btn-business:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.95);
+            transform: translate(2px,2px);
+        }
 
         .free-note {
             font-size: 0.78rem; color: rgba(255,255,255,0.75);
@@ -212,8 +207,10 @@
 
         .phone-mockup { display: none; position: relative; max-width: 320px; margin: 0 auto; }
         .phone-demo-img {
-            width: 100%; border-radius: 30px;
-            box-shadow: 0 30px 60px rgba(11,18,32,0.22);
+            width: 100%;
+            border-radius: 0;
+            box-shadow: none;
+            filter: drop-shadow(0 22px 36px rgba(11,18,32,0.2));
             animation: float-phone 7s ease-in-out infinite;
         }
         @keyframes float-phone { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
@@ -252,9 +249,44 @@
         .point { display: flex; gap: 1.25rem; align-items: flex-start; }
         .point-icon {
             width: 44px; height: 44px; border-radius: 10px;
-            background: var(--baby-green); border: 2px solid rgba(52,168,83,0.3);
+            background: linear-gradient(180deg, #eef9f1 0%, #dff4e6 100%);
+            border: 2px solid rgba(52,168,83,0.35);
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; flex-shrink: 0;
+            flex-shrink: 0; position: relative; overflow: hidden;
+        }
+        .point-icon::before, .point-icon::after { content: ''; position: absolute; }
+        .point-icon.icon-map::before {
+            width: 20px; height: 20px; border-radius: 50%;
+            border: 2px solid var(--google-green); top: 9px; left: 9px;
+        }
+        .point-icon.icon-map::after {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--google-green); top: 16px; left: 16px;
+        }
+        .point-icon.icon-claim::before {
+            width: 12px; height: 12px; top: 12px; left: 14px;
+            border-top: 3px solid var(--google-green);
+            border-right: 3px solid var(--google-green);
+            transform: rotate(45deg);
+        }
+        .point-icon.icon-claim::after {
+            width: 16px; height: 3px; border-radius: 3px;
+            background: var(--google-green); top: 20px; left: 10px;
+        }
+        .point-icon.icon-money::before {
+            content: '$';
+            font-family: var(--font-display); font-size: 1.1rem; line-height: 1;
+            color: var(--google-green); top: 12px; left: 15px;
+        }
+        .point-icon.icon-impact::before {
+            width: 18px; height: 14px; top: 14px; left: 10px;
+            border-left: 3px solid var(--google-green);
+            border-bottom: 3px solid var(--google-green);
+        }
+        .point-icon.icon-impact::after {
+            width: 3px; height: 10px; top: 15px; left: 15px;
+            background: var(--google-green);
+            box-shadow: 6px -2px 0 var(--google-green), 12px 3px 0 var(--google-green);
         }
         .point-text h3 {
             font-family: var(--font-display); font-size: 1rem;
@@ -275,16 +307,16 @@
         }
         .collector-cta-block p { color: var(--gray); font-size: 0.95rem; margin-bottom: 1.75rem; line-height: 1.65; }
         .btn-download {
-            display: inline-flex; align-items: center; gap: 0.6rem;
-            background: var(--google-green); color: var(--white);
-            padding: 1rem 2rem; border-radius: 10px;
-            border: 2.5px solid var(--white); font-weight: 700;
-            font-size: 0.9rem; text-transform: lowercase; text-decoration: none;
-            box-shadow: 5px 5px 0 rgba(52,168,83,0.2);
-            transition: all 0.15s ease;
+            display: inline-block;
+            text-decoration: none;
+            transition: transform 0.15s ease;
         }
-        .btn-download:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 rgba(52,168,83,0.2); }
-        .free-forever { margin-top: 1rem; font-size: 0.8rem; color: var(--google-green); font-weight: 600; }
+        .btn-download:hover { transform: translate(2px,2px); }
+        .btn-download img {
+            display: block;
+            width: clamp(155px, 28vw, 190px);
+            height: auto;
+        }
 
         .hosts-section {
             padding: var(--section-gap) var(--container);
@@ -475,14 +507,18 @@
             font-size: 0.82rem; color: var(--gray); text-align: center;
         }
         .footer-appstore-badge {
-            display: inline-flex; align-items: center; gap: 0.4rem;
-            background: var(--primary); border: 1px solid rgba(54,148,232,0.3);
-            color: var(--primary-deep); padding: 0.375rem 0.875rem;
-            border-radius: 999px; font-size: 0.78rem; font-weight: 600;
-            text-transform: lowercase; text-decoration: none;
-            transition: background 0.2s; width: fit-content; margin: 0 auto;
+            display: inline-block;
+            text-decoration: none;
+            transition: transform 0.15s ease;
+            width: fit-content;
+            margin: 0 auto;
         }
-        .footer-appstore-badge:hover { background: var(--baby-blues); }
+        .footer-appstore-badge:hover { transform: translate(1px,1px); }
+        .footer-appstore-badge img {
+            display: block;
+            width: clamp(135px, 22vw, 165px);
+            height: auto;
+        }
 
         .fade-in-up {
             opacity: 0; transform: translateY(28px);
@@ -556,9 +592,6 @@
 <section class="hero">
     <div class="hero-container">
         <div class="hero-content fade-in-up">
-            <a class="app-live-badge" href="https://apps.apple.com" aria-label="Download on the App Store">
-                <img src="assets/images/download-badges/Download_on_the_App_Store_Badge.png" alt="Download on the App Store">
-            </a>
             <h1>
                 the people's<br>
                 <span class="blue">bottle</span><br>
@@ -568,11 +601,10 @@
                 bottlr connects bottle collectors with restaurants, offices, and events in real time. More earnings for collectors. Zero waste for hosts.
             </p>
             <div class="hero-cta-row">
-                <a href="https://apps.apple.com" class="btn-appstore">
-                    <svg width="18" height="22" viewBox="0 0 814 1000" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-42.3-150.3-109.2c-51.7-75.5-92.5-196.7-92.5-312C27.8 150.7 138.3 51.9 248.2 51.9c65.1 0 117.6 42.7 158.7 42.7 39.6 0 101.1-45.3 168.3-45.3 27.9 0 108.2 2.6 168.3 77.6zm-58-130.8c27.2-29.1 48.8-71.4 48.8-113.8 0-5.8-.6-11.7-1.9-16.2-45.3 1.9-99.3 26.5-132 57.8C619.5 159.9 594 205.9 594 248.3c0 4.5.6 9 1.3 12.9 2.6.6 6.5 1.3 10.4 1.3 40.2 0 92.2-26.5 124.4-52.1z"/></svg>
-                    download free
+                <a href="https://apps.apple.com" class="btn-appstore" aria-label="Download on the App Store">
+                    <img src="assets/images/download-badges/Download_on_the_App_Store_Badge.png" alt="Download on the App Store">
                 </a>
-                <a href="#hosts" class="btn-business">i'm a business -></a>
+                <a href="#hosts" class="btn-business">i'm a business <span aria-hidden="true">→</span></a>
             </div>
             <p class="free-note">always free for collectors - 100% of CRV goes to you</p>
             <div class="hero-stats" style="margin-top:2rem;">
@@ -606,28 +638,28 @@
         <div class="two-col">
             <div class="collectors-points">
                 <div class="point fade-in-up" style="--delay:0.05s">
-                    <div class="point-icon">🗺️</div>
+                    <div class="point-icon icon-map" aria-hidden="true"></div>
                     <div class="point-text">
                         <h3>see live jobs on a map</h3>
                         <p>Restaurants and hosts post pickup jobs with location, count, and timing. Claim the ones near you before anyone else does.</p>
                     </div>
                 </div>
                 <div class="point fade-in-up" style="--delay:0.1s">
-                    <div class="point-icon">⚡</div>
+                    <div class="point-icon icon-claim" aria-hidden="true"></div>
                     <div class="point-text">
                         <h3>one tap to claim</h3>
                         <p>No phone calls, no showing up and hoping. Claim a job instantly and get the address, bottle count, and best route.</p>
                     </div>
                 </div>
                 <div class="point fade-in-up" style="--delay:0.15s">
-                    <div class="point-icon">💰</div>
+                    <div class="point-icon icon-money" aria-hidden="true"></div>
                     <div class="point-text">
                         <h3>100% of CRV is yours</h3>
                         <p>We never touch your earnings. Every cent of CRV redemption goes directly to you - that's the whole point.</p>
                     </div>
                 </div>
                 <div class="point fade-in-up" style="--delay:0.2s">
-                    <div class="point-icon">📊</div>
+                    <div class="point-icon icon-impact" aria-hidden="true"></div>
                     <div class="point-text">
                         <h3>track your impact</h3>
                         <p>See your completed pickups, bottles diverted, CO2 saved, and earnings history all in one dashboard.</p>
@@ -637,11 +669,9 @@
             <div class="collector-cta-block fade-in-up" style="--delay:0.1s">
                 <h3>ready to find more pickups?</h3>
                 <p>Download bottlr free and start claiming jobs near you today. Available on iPhone.</p>
-                <a href="https://apps.apple.com" class="btn-download">
-                    <svg width="16" height="20" viewBox="0 0 814 1000" fill="currentColor"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-42.3-150.3-109.2c-51.7-75.5-92.5-196.7-92.5-312C27.8 150.7 138.3 51.9 248.2 51.9c65.1 0 117.6 42.7 158.7 42.7 39.6 0 101.1-45.3 168.3-45.3 27.9 0 108.2 2.6 168.3 77.6zm-58-130.8c27.2-29.1 48.8-71.4 48.8-113.8 0-5.8-.6-11.7-1.9-16.2-45.3 1.9-99.3 26.5-132 57.8C619.5 159.9 594 205.9 594 248.3c0 4.5.6 9 1.3 12.9 2.6.6 6.5 1.3 10.4 1.3 40.2 0 92.2-26.5 124.4-52.1z"/></svg>
-                    download on the app store
+                <a href="https://apps.apple.com" class="btn-download" aria-label="Download on the App Store">
+                    <img src="assets/images/download-badges/Download_on_the_App_Store_Badge.png" alt="Download on the App Store">
                 </a>
-                <p class="free-forever">✓ free forever for collectors</p>
             </div>
         </div>
     </div>
@@ -825,7 +855,9 @@
     </div>
     <div class="footer-bottom">
         <span>© 2026 bottlr. all rights reserved.</span>
-        <a href="https://apps.apple.com" class="footer-appstore-badge">🍎 available on the app store</a>
+        <a href="https://apps.apple.com" class="footer-appstore-badge" aria-label="Download on the App Store">
+            <img src="assets/images/download-badges/Download_on_the_App_Store_Badge.png" alt="Download on the App Store">
+        </a>
     </div>
 </footer>
 
