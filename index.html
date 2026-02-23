@@ -4,512 +4,942 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>bottlr - The People's Bottle Network</title>
-    <meta name="description" content="bottlr is a real-time bottle pickup coordination network for collectors and hosts.">
+    <meta name="description" content="bottlr connects bottle collectors with hosts in real time. Join our beta - launching on the App Store soon.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="bottlr - The People's Bottle Network">
-    <meta property="og:description" content="Real-time bottle pickup coordination for collectors and hosts.">
+    <meta property="og:description" content="Real-time bottle pickup coordination. Launching on iOS soon.">
     <meta property="og:url" content="https://bottlr.tech/">
     <meta property="og:image" content="https://bottlr.tech/preview.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="bottlr - The People's Bottle Network">
-    <meta name="twitter:description" content="Real-time bottle pickup coordination for collectors and hosts.">
+    <meta name="twitter:description" content="Real-time bottle pickup coordination. Launching on iOS soon.">
     <meta name="twitter:image" content="https://bottlr.tech/preview.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/brand/app-icon.png">
     <link rel="apple-touch-icon" href="assets/images/brand/app-icon.png">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --baby-blues: #c7e7fd;
+            --primary: #D5EEFF;
+            --primary-strong: #66C2FF;
+            --primary-deep: #3694E8;
+            --white: #FFFFFF;
+            --soft: #F7FBFF;
+            --gray: #5B6B7C;
+            --google-green: #34A853;
+            --baby-green: #d2f1db;
+            --font-display: 'Archivo Black', sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+            --container: clamp(1rem, 5vw, 2rem);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--soft);
+            color: var(--primary-deep);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 2.5px;
+            background: var(--primary-strong);
+            transform-origin: left; transform: scaleX(0);
+            transition: transform 0.1s linear; z-index: 10000; width: 100%;
+        }
+
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.92);
+            border-bottom: 1px solid rgba(54,148,232,0.18);
+            backdrop-filter: saturate(160%) blur(10px);
+            -webkit-backdrop-filter: saturate(160%) blur(10px);
+            transition: background 0.24s var(--ease), box-shadow 0.24s var(--ease);
+        }
+        header.scrolled {
+            background: rgba(255,255,255,0.98);
+            box-shadow: 0 8px 22px rgba(11,18,32,0.08);
+        }
+        .header-inner {
+            max-width: 1200px; margin: 0 auto;
+            padding: 0.875rem var(--container);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem; color: var(--google-green);
+            text-decoration: none; text-transform: lowercase;
+            display: flex; align-items: center; gap: 0.5rem;
+            position: relative; z-index: 1001;
+        }
+        .logo-img { height: 38px; width: auto; display: block; }
+
+        nav.desktop-nav { display: none; }
+        .desktop-nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
+        .desktop-nav a {
+            color: var(--primary-strong); text-decoration: none;
+            font-weight: 600; text-transform: lowercase; font-size: 0.82rem;
+            letter-spacing: 0.4px; border-bottom: 2px solid transparent;
+            transition: border-color 0.2s var(--ease); padding: 0.4rem 0;
+        }
+        .desktop-nav a:hover { border-bottom-color: var(--primary-strong); }
+        .btn-nav {
+            background: linear-gradient(90deg, var(--primary-strong) 0%, var(--google-green) 100%);
+            color: var(--white) !important; padding: 0.7rem 1.3rem !important;
+            border: 2px solid var(--white); border-radius: 6px;
+            font-weight: 700 !important; font-size: 0.8rem !important;
+            box-shadow: 4px 4px 0 rgba(54,148,232,0.22);
+            transition: all 0.15s ease !important; border-bottom: 2px solid var(--white) !important;
+        }
+        .btn-nav:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 rgba(54,148,232,0.22); }
+
+        .hamburger {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            width: 44px; height: 44px; background: none; border: none;
+            cursor: pointer; z-index: 1001; gap: 5px;
+        }
+        .hamburger span {
+            display: block; width: 22px; height: 2px;
+            background: var(--primary-strong); border-radius: 2px;
+            transition: all 0.25s ease;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            position: fixed; top: 0; right: 0; bottom: 0;
+            width: min(85vw, 300px);
+            background: var(--white);
+            border-left: 3px solid var(--primary-strong);
+            transform: translateX(100%);
+            transition: transform 0.3s var(--ease);
+            z-index: 999; padding-top: 72px;
+        }
+        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu a {
+            display: block; padding: 1.2rem 1.75rem;
+            color: var(--primary-deep); text-decoration: none;
+            font-weight: 700; font-size: 1.05rem; text-transform: lowercase;
+            border-bottom: 1px solid rgba(54,148,232,0.15);
+            transition: background 0.2s, padding-left 0.2s;
+        }
+        .mobile-menu a:hover { background: var(--primary); padding-left: 2.25rem; }
+        .mobile-menu a.cta { background: var(--google-green); color: var(--white); }
+        .menu-overlay {
+            position: fixed; inset: 0; background: rgba(102,194,255,0.35);
+            backdrop-filter: blur(4px); opacity: 0; pointer-events: none;
+            transition: opacity 0.3s; z-index: 998;
+        }
+        .menu-overlay.open { opacity: 1; pointer-events: all; }
+
+        .hero {
+            min-height: 100vh; min-height: 100svh;
+            display: flex; align-items: center;
+            background: var(--baby-blues);
+            padding-top: 60px; overflow: hidden; position: relative;
+        }
+        .hero-container {
+            max-width: 1200px; margin: 0 auto;
+            padding: clamp(3rem, 8vw, 5rem) var(--container);
+            display: grid; grid-template-columns: 1fr;
+            gap: 3rem; align-items: center; position: relative; z-index: 1;
+        }
+
+        .live-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(52,168,83,0.12); border: 1.5px solid rgba(52,168,83,0.4);
+            color: var(--google-green); padding: 0.4rem 1rem; border-radius: 100px;
+            font-size: 0.76rem; font-weight: 700; text-transform: lowercase;
+            letter-spacing: 0.3px; margin-bottom: 1.5rem; width: fit-content;
+        }
+        .live-dot {
+            width: 7px; height: 7px; border-radius: 50%; background: var(--google-green);
+            animation: blink 1.8s ease-in-out infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.6rem, 10vw, 4.5rem);
+            line-height: 0.97; text-transform: lowercase;
+            letter-spacing: -2px; color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+        h1 .blue { color: var(--primary-strong); }
+        h1 .green { color: var(--google-green); }
+
+        .hero-sub {
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            line-height: 1.65; color: var(--white);
+            opacity: 0.9; margin-bottom: 2rem; max-width: 540px;
+        }
+
+        .hero-cta-row { display: flex; gap: 0.875rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-strong) 0%, var(--google-green) 100%);
+            color: var(--white); padding: 1rem 2rem;
+            font-weight: 700; font-size: 0.88rem; text-transform: lowercase;
+            letter-spacing: 0.4px; border: 2.5px solid var(--white);
+            border-radius: 8px; text-decoration: none;
+            box-shadow: 5px 5px 0 rgba(255,255,255,0.3);
+            transition: all 0.15s ease;
+        }
+        .btn-primary:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 rgba(255,255,255,0.3); }
+
+        .btn-ghost {
+            display: inline-block;
+            background: rgba(255,255,255,0.15); color: var(--white);
+            padding: 1rem 1.75rem; font-weight: 600; font-size: 0.88rem;
+            text-transform: lowercase; letter-spacing: 0.4px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 8px; text-decoration: none;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .btn-ghost:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.8); }
+
+        .hero-stats {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 1.25rem; padding: 1.5rem 0;
+            border-top: 2px solid rgba(255,255,255,0.3);
+        }
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem,6vw,2.8rem); line-height: 1;
+            color: var(--primary-strong); margin-bottom: 0.35rem;
+        }
+        .stat-label { font-size: 0.72rem; font-weight: 600; text-transform: lowercase; color: var(--white); opacity: 0.8; }
+
+        .phone-mockup { display: none; position: relative; max-width: 340px; margin: 0 auto; }
+        .phone-demo-img {
+            width: 100%; border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(11,18,32,0.2);
+            animation: float-phone 7s ease-in-out infinite;
+        }
+        @keyframes float-phone { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+
+        .section-container { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-label {
+            display: inline-block; color: var(--primary-strong);
+            text-transform: uppercase; font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 1.5px; margin-bottom: 0.75rem;
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.9rem, 6vw, 3rem);
+            text-transform: lowercase; letter-spacing: -1px; line-height: 1.05;
+            color: var(--google-green); margin-bottom: 1rem;
+        }
+        .section-desc {
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            line-height: 1.7; color: var(--gray);
+            max-width: 580px; margin: 0 auto;
+        }
+
+        .problem-section {
+            padding: clamp(3.5rem,8vw,6rem) var(--container);
+            background: var(--white); position: relative;
+        }
+        .problem-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 5px; background: var(--primary-strong);
+        }
+        .problem-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-top: 3rem; }
+        .problem-card {
+            border: 2px solid var(--google-green); border-radius: 12px;
+            padding: 2rem 1.5rem; text-align: center;
+            transition: all 0.3s var(--ease); background: var(--white);
+        }
+        .problem-card:hover { background: var(--baby-green); transform: translateY(-4px); }
+        .problem-number {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 8vw, 4.5rem);
+            color: var(--google-green); line-height: 1; margin-bottom: 0.875rem;
+        }
+        .problem-card h3 {
+            font-family: var(--font-display); font-size: 1.35rem;
+            text-transform: lowercase; letter-spacing: -0.5px;
+            margin-bottom: 0.625rem; color: var(--primary-deep);
+        }
+        .problem-card p { font-size: 0.93rem; line-height: 1.68; color: var(--gray); }
+
+        .how-section {
+            padding: clamp(3.5rem,8vw,6rem) var(--container);
+            background: var(--primary); position: relative;
+        }
+        .how-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 5px; background: var(--primary-strong);
+        }
+        .how-section .section-title { color: var(--primary-strong); }
+        .how-section .section-desc { color: var(--primary-deep); }
+
+        .steps-flow {
+            display: flex; flex-direction: column;
+            gap: 1.25rem; align-items: center; margin-top: 3rem;
+        }
+        .step-card {
+            background: var(--white); border: 2px solid rgba(54,148,232,0.3);
+            border-radius: 14px; padding: 1.75rem 1.5rem; width: 100%;
+            max-width: 420px; text-align: center;
+            transition: all 0.3s var(--ease);
+        }
+        .step-card:hover { border-color: var(--primary-deep); transform: translateY(-4px); background: #e8f3ff; }
+        .step-number { font-family: var(--font-display); font-size: 1.4rem; color: var(--primary-strong); margin-bottom: 0.6rem; }
+        .step-card h3 {
+            font-family: var(--font-display); font-size: 1.2rem;
+            text-transform: lowercase; letter-spacing: -0.4px;
+            margin-bottom: 0.5rem; color: var(--primary-deep);
+        }
+        .step-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.65; }
+        .flow-arrow { font-size: 1.75rem; color: var(--primary-strong); transform: rotate(90deg); opacity: 0.45; }
+
+        .gallery-section { padding: clamp(3.5rem,8vw,6rem) 0; background: var(--soft); overflow: hidden; }
+        .gallery-header { padding: 0 var(--container); margin-bottom: 2.5rem; text-align: center; }
+        .demo-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
+        .demo-tag {
+            background: var(--soft); color: var(--google-green);
+            border: 1px solid rgba(52,168,83,0.3); border-radius: 999px;
+            padding: 0.3rem 0.75rem; font-size: 0.77rem; font-weight: 700; text-transform: lowercase;
+        }
+
+        .app-gallery-marquee {
+            overflow: hidden; margin-bottom: 3rem;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        }
+        .app-gallery-track {
+            display: flex; width: max-content; gap: 1rem; padding: 0.5rem 0;
+            animation: marquee 44s linear infinite;
+        }
+        .app-gallery-track:hover { animation-play-state: paused; }
+        @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+        .app-screen-card { flex: 0 0 clamp(210px, 70vw, 260px); text-align: center; transition: transform 0.25s var(--ease); }
+        .app-screen-card:hover { transform: translateY(-5px); }
+        .app-screen-img { width: 100%; border-radius: 26px; display: block; }
+        .app-screen-card figcaption {
+            margin-top: 0.75rem; font-size: 0.78rem; font-weight: 700;
+            color: var(--google-green); text-transform: lowercase;
+            background: rgba(52,168,83,0.08); border: 1px solid rgba(52,168,83,0.22);
+            border-radius: 999px; padding: 0.3rem 0.65rem; display: inline-block;
+        }
+
+        .feature-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; padding: 0 var(--container); }
+        .feature-card {
+            background: var(--white); border: 2px solid var(--google-green);
+            border-radius: 12px; padding: 1.25rem 1.5rem; transition: all 0.3s var(--ease);
+        }
+        .feature-card:hover { background: var(--baby-green); transform: translateY(-3px); }
+        .feature-card h3 { font-size: 1rem; font-weight: 700; color: var(--google-green); margin-bottom: 0.35rem; text-transform: lowercase; }
+        .feature-card p { font-size: 0.875rem; color: var(--gray); line-height: 1.6; }
+
+        .funding-section {
+            padding: clamp(3.5rem,8vw,6rem) var(--container);
+            background: var(--white); position: relative;
+        }
+        .funding-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-strong) 0%, var(--google-green) 100%);
+        }
+
+        .funding-hero-block {
+            background: var(--baby-blues); border-radius: 16px;
+            padding: clamp(2rem,5vw,3.5rem); margin-bottom: 2.5rem;
+        }
+        .funding-hero-block h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 6vw, 3rem);
+            text-transform: lowercase; letter-spacing: -1.5px; line-height: 1.05;
+            color: var(--primary-deep); margin-bottom: 1rem;
+        }
+        .funding-hero-block p {
+            font-size: 1.05rem; line-height: 1.7; color: var(--primary-deep);
+            opacity: 0.85; max-width: 580px; margin-bottom: 2rem;
+        }
+        .funding-cta-row { display: flex; gap: 0.875rem; flex-wrap: wrap; }
+
+        .btn-green {
+            display: inline-block; background: var(--google-green); color: var(--white);
+            padding: 0.9rem 1.75rem; border-radius: 8px; border: 2.5px solid var(--white);
+            font-weight: 700; font-size: 0.88rem; text-transform: lowercase;
+            box-shadow: 4px 4px 0 rgba(52,168,83,0.22); text-decoration: none;
+            transition: all 0.15s ease;
+        }
+        .btn-green:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 rgba(52,168,83,0.22); }
+
+        .btn-outline-blue {
+            display: inline-block; background: transparent; color: var(--primary-deep);
+            padding: 0.9rem 1.75rem; border-radius: 8px;
+            border: 2px solid var(--primary-strong);
+            font-weight: 700; font-size: 0.88rem; text-transform: lowercase;
+            text-decoration: none; transition: background 0.2s;
+        }
+        .btn-outline-blue:hover { background: var(--primary); }
+
+        .opp-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2.5rem; }
+        .opp-card {
+            border: 2px solid var(--primary-strong); border-radius: 12px;
+            padding: 1.75rem; transition: all 0.3s var(--ease); background: var(--soft);
+        }
+        .opp-card:hover { border-color: var(--google-green); transform: translateY(-3px); background: var(--baby-blues); }
+        .opp-pill {
+            display: inline-block; border-radius: 999px;
+            padding: 0.28rem 0.8rem; font-size: 0.72rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 1rem;
+        }
+        .opp-pill.research { background: rgba(251,191,36,0.15); color: #b45309; }
+        .opp-pill.advancement { background: rgba(52,168,83,0.12); color: var(--google-green); }
+        .opp-pill.beta-tag { background: rgba(102,194,255,0.18); color: var(--primary-deep); }
+
+        .opp-card h3 {
+            font-family: var(--font-display); font-size: 1.15rem;
+            text-transform: lowercase; letter-spacing: -0.4px;
+            color: var(--primary-deep); margin-bottom: 0.625rem;
+        }
+        .opp-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.65; margin-bottom: 1rem; }
+        .opp-link {
+            font-size: 0.85rem; font-weight: 700; color: var(--primary-strong);
+            text-decoration: none; text-transform: lowercase;
+            border-bottom: 2px solid transparent; transition: border-color 0.2s;
+        }
+        .opp-link:hover { border-bottom-color: var(--primary-strong); }
+
+        .beta-strip {
+            background: linear-gradient(90deg, var(--primary-strong) 0%, var(--google-green) 100%);
+            border-radius: 14px; padding: 2.5rem;
+            display: flex; flex-direction: column; gap: 1.5rem;
+        }
+        .beta-strip h3 {
+            font-family: var(--font-display); font-size: 1.6rem;
+            text-transform: lowercase; letter-spacing: -0.5px;
+            color: var(--white); margin-bottom: 0.35rem;
+        }
+        .beta-strip p { color: rgba(255,255,255,0.85); font-size: 0.95rem; }
+        .beta-form { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .beta-input {
+            flex: 1; min-width: 220px; padding: 0.875rem 1.25rem;
+            border: 2.5px solid rgba(255,255,255,0.5); border-radius: 8px;
+            background: rgba(255,255,255,0.18); color: var(--white);
+            font-size: 0.9rem; font-family: var(--font-body); outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .beta-input::placeholder { color: rgba(255,255,255,0.6); }
+        .beta-input:focus { border-color: var(--white); background: rgba(255,255,255,0.25); }
+        .beta-btn {
+            background: var(--white); color: var(--google-green);
+            padding: 0.875rem 1.5rem; border: none; border-radius: 8px;
+            font-weight: 700; font-size: 0.88rem; text-transform: lowercase;
+            cursor: pointer; font-family: var(--font-body); white-space: nowrap;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+        .beta-btn:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 rgba(0,0,0,0.1); }
+
+        .impact-section {
+            padding: clamp(3.5rem,8vw,6rem) var(--container);
+            background: var(--baby-blues); position: relative;
+        }
+        .impact-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 5px; background: var(--google-green);
+        }
+        .impact-section .section-title { color: var(--primary-deep); }
+        .impact-section .section-desc { color: var(--primary-deep); opacity: 0.8; }
+
+        .impact-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-top: 3rem; }
+        .impact-stat {
+            background: rgba(255,255,255,0.65); backdrop-filter: blur(8px);
+            border: 2px solid rgba(54,148,232,0.3); border-radius: 12px;
+            padding: 2rem 1.5rem; text-align: center;
+            transition: all 0.3s var(--ease);
+        }
+        .impact-stat:hover { background: var(--white); transform: translateY(-4px); border-color: var(--google-green); }
+        .impact-number {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem,8vw,3.5rem); line-height: 1;
+            color: var(--primary-strong); margin-bottom: 0.5rem;
+        }
+        .impact-label {
+            text-transform: lowercase; font-size: 0.82rem; font-weight: 700;
+            letter-spacing: 0.5px; color: var(--primary-deep); margin-bottom: 0.75rem;
+        }
+        .impact-stat p { font-size: 0.88rem; color: var(--gray); line-height: 1.6; }
+
+        footer {
+            background: var(--soft);
+            border-top: 4px solid var(--primary-strong);
+            padding: clamp(2.5rem,6vw,4rem) var(--container) 2rem;
+        }
+        .footer-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr;
+            gap: 2.5rem; margin-bottom: 2.5rem;
+        }
+        .footer-logo {
+            font-family: var(--font-display); font-size: 1.5rem;
+            color: var(--google-green); text-decoration: none; text-transform: lowercase;
+            display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.875rem;
+        }
+        .footer-logo img { height: 40px; }
+        .footer-brand p { font-size: 0.9rem; line-height: 1.7; color: var(--gray); }
+        .footer-col h4 {
+            font-family: var(--font-display); text-transform: lowercase; font-size: 0.95rem;
+            color: var(--primary-strong); margin-bottom: 1rem;
+        }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
+        .footer-links a {
+            color: var(--primary-deep); text-decoration: none; font-size: 0.9rem;
+            font-weight: 500; text-transform: lowercase; display: inline-block;
+            border-bottom: 2px solid transparent; transition: all 0.2s;
+        }
+        .footer-links a:hover { color: var(--google-green); border-bottom-color: var(--primary-strong); }
+
+        .footer-bottom {
+            max-width: 1200px; margin: 0 auto;
+            padding-top: 1.5rem; border-top: 1px solid rgba(54,148,232,0.18);
+            display: flex; flex-direction: column; gap: 0.75rem;
+            font-size: 0.82rem; color: var(--gray); text-align: center;
+        }
+        .footer-badge {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: var(--primary); border: 1px solid rgba(54,148,232,0.3);
+            color: var(--primary-deep); padding: 0.35rem 0.875rem;
+            border-radius: 999px; font-size: 0.78rem; font-weight: 600;
+            text-transform: lowercase; width: fit-content; margin: 0 auto;
+        }
+
+        .fade-in-up {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+            transition-delay: var(--delay, 0s);
+        }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+        @media (min-width: 640px) {
+            .problem-grid { grid-template-columns: repeat(2, 1fr); }
+            .opp-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+            .impact-grid { grid-template-columns: repeat(2, 1fr); }
+            .beta-strip { flex-direction: row; align-items: center; justify-content: space-between; }
+        }
+        @media (min-width: 768px) {
+            .steps-flow { flex-direction: row; align-items: center; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+            .flow-arrow { transform: rotate(0deg); }
+            .step-card { max-width: 240px; }
+            .footer-inner { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .hamburger { display: none; }
+            nav.desktop-nav { display: block; }
+            .hero-container { grid-template-columns: 1fr 1fr; }
+            .phone-mockup { display: block; }
+            .problem-grid { grid-template-columns: repeat(3, 1fr); }
+            .opp-grid { grid-template-columns: repeat(3, 1fr); }
+            .feature-grid { grid-template-columns: repeat(3, 1fr); }
+            .impact-grid { grid-template-columns: repeat(4, 1fr); }
+            .footer-inner { grid-template-columns: 2fr 1fr 1fr 1fr; }
+            .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+            .footer-badge { margin: 0; }
+        }
+        @media (max-width: 520px) {
+            .hero-stats { grid-template-columns: 1fr; }
+            .hero-cta-row { flex-direction: column; }
+            .btn-primary, .btn-ghost { text-align: center; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
-    
-    <!-- Header -->
-    <header>
-        <div class="header-content">
-            <a href="index.html" class="logo">
-                <img src="assets/images/brand/wordmark.png" alt="bottlr logo" class="logo-img">
-                <span class="logo-text">bottlr</span>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header id="header">
+    <div class="header-inner">
+        <a href="#" class="logo">
+            <img src="assets/images/brand/wordmark.png" alt="bottlr" class="logo-img">
+            bottlr
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="#problem">problem</a></li>
+                <li><a href="#how">how it works</a></li>
+                <li><a href="#demo">the app</a></li>
+                <li><a href="#get-involved">get involved</a></li>
+                <li><a href="#get-involved" class="btn-nav">join the beta</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+    <a href="#problem">problem</a>
+    <a href="#how">how it works</a>
+    <a href="#demo">the app</a>
+    <a href="#get-involved">get involved</a>
+    <a href="#get-involved" class="cta">join the beta -></a>
+</nav>
+
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-content fade-in-up">
+            <div class="live-badge">
+                <span class="live-dot"></span>
+                coming to the app store
+            </div>
+            <h1>
+                the people's<br>
+                <span class="blue">bottle</span><br>
+                <span class="green">network</span>
+            </h1>
+            <p class="hero-sub">
+                bottlr connects collectors with hosts in real time - clear jobs, live maps, transparent earnings. We're fixing a broken system, one pickup at a time.
+            </p>
+            <div class="hero-cta-row">
+                <a href="#get-involved" class="btn-primary">join the beta -></a>
+                <a href="#demo" class="btn-ghost">see the app</a>
+            </div>
+            <div class="hero-stats">
+                <div>
+                    <div class="stat-number">$1.5B</div>
+                    <div class="stat-label">CA bottle industry</div>
+                </div>
+                <div>
+                    <div class="stat-number">40%</div>
+                    <div class="stat-label">bottles never redeemed</div>
+                </div>
+                <div>
+                    <div class="stat-number">live</div>
+                    <div class="stat-label">real-time job claiming</div>
+                </div>
+            </div>
+        </div>
+        <div class="phone-mockup fade-in-up" style="--delay:0.15s">
+            <img src="assets/images/hero/live-map-demo.png" alt="bottlr live map" class="phone-demo-img">
+        </div>
+    </div>
+</section>
+
+<section class="problem-section" id="problem">
+    <div class="section-container">
+        <div class="section-header fade-in-up">
+            <div class="section-label">the problem</div>
+            <h2 class="section-title">the system is broken</h2>
+            <p class="section-desc">California's bottle redemption industry exploits the workers who make it run - while hundreds of millions in value gets thrown away every year.</p>
+        </div>
+        <div class="problem-grid">
+            <div class="problem-card fade-in-up" style="--delay:0.05s">
+                <div class="problem-number">$15</div>
+                <h3>poverty wages</h3>
+                <p>Collectors walk 5+ miles daily through trash for $15 in 6 hours. No benefits, no stability, no way forward.</p>
+            </div>
+            <div class="problem-card fade-in-up" style="--delay:0.12s">
+                <div class="problem-number">$600M</div>
+                <h3>wasted value</h3>
+                <p>40% of bottles are never redeemed. Restaurants dump hundreds weekly while collectors search empty-handed.</p>
+            </div>
+            <div class="problem-card fade-in-up" style="--delay:0.2s">
+                <div class="problem-number">zero</div>
+                <h3>worker power</h3>
+                <p>No voice, no organization, no bargaining power. An invisible workforce left behind by a system not built for them.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="how-section" id="how">
+    <div class="section-container">
+        <div class="section-header fade-in-up">
+            <div class="section-label">the solution</div>
+            <h2 class="section-title">four steps. one pickup.</h2>
+            <p class="section-desc">The entire flow - from posting a job to completing a pickup - lives inside the app.</p>
+        </div>
+        <div class="steps-flow">
+            <div class="step-card fade-in-up" style="--delay:0.05s">
+                <div class="step-number">01</div>
+                <h3>hosts post pickups</h3>
+                <p>Add location, bottle count, and timing - in under a minute.</p>
+            </div>
+            <div class="flow-arrow fade-in-up" style="--delay:0.1s">-></div>
+            <div class="step-card fade-in-up" style="--delay:0.15s">
+                <div class="step-number">02</div>
+                <h3>collectors claim jobs</h3>
+                <p>Live map shows nearby jobs. One tap to claim before someone else does.</p>
+            </div>
+            <div class="flow-arrow fade-in-up" style="--delay:0.2s">-></div>
+            <div class="step-card fade-in-up" style="--delay:0.25s">
+                <div class="step-number">03</div>
+                <h3>complete the pickup</h3>
+                <p>Photo verification confirms the handoff - builds trust, creates records.</p>
+            </div>
+            <div class="flow-arrow fade-in-up" style="--delay:0.3s">-></div>
+            <div class="step-card fade-in-up" style="--delay:0.35s">
+                <div class="step-number">04</div>
+                <h3>earnings update live</h3>
+                <p>Jobs, earnings, and impact - all visible in one transparent dashboard.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="gallery-section" id="demo">
+    <div class="gallery-header fade-in-up">
+        <div class="section-label">the app</div>
+        <h2 class="section-title">built for iphone</h2>
+        <p class="section-desc">Real screens from our iOS simulator - see both sides of every pickup.</p>
+        <div class="demo-tags">
+            <span class="demo-tag">collector view</span>
+            <span class="demo-tag">host view</span>
+            <span class="demo-tag">live map</span>
+            <span class="demo-tag">onboarding</span>
+        </div>
+    </div>
+
+    <div class="app-gallery-marquee fade-in-up" style="--delay:0.1s">
+        <div class="app-gallery-track">
+            <figure class="app-screen-card">
+                <img src="assets/images/screenshots/collector-map-view.png" alt="real-time pickup map" class="app-screen-img" loading="eager">
+                <figcaption>real-time pickup map</figcaption>
+            </figure>
+            <figure class="app-screen-card">
+                <img src="assets/images/screenshots/collection-view.png" alt="pickup detail" class="app-screen-img" loading="eager">
+                <figcaption>pickup detail + claim</figcaption>
+            </figure>
+            <figure class="app-screen-card">
+                <img src="assets/images/screenshots/collections-list-view.png" alt="nearby pickups" class="app-screen-img" loading="lazy">
+                <figcaption>nearby pickups list</figcaption>
+            </figure>
+            <figure class="app-screen-card">
+                <img src="assets/images/screenshots/colleciton-view1.png" alt="job status" class="app-screen-img" loading="lazy">
+                <figcaption>job status + route</figcaption>
+            </figure>
+            <figure class="app-screen-card">
+                <img src="assets/images/screenshots/host-home-view-map.png" alt="host map" class="app-screen-img" loading="lazy">
+                <figcaption>host home map</figcaption>
+            </figure>
+            <figure class="app-screen-card">
+                <img src="assets/images/screenshots/host-post-view.png" alt="post form" class="app-screen-img" loading="lazy">
+                <figcaption>new pickup post</figcaption>
+            </figure>
+            <figure class="app-screen-card">
+                <img src="assets/images/screenshots/hos-home-view.png" alt="host overview" class="app-screen-img" loading="lazy">
+                <figcaption>host activity overview</figcaption>
+            </figure>
+            <figure class="app-screen-card">
+                <img src="assets/images/screenshots/onboarding-view.png" alt="onboarding" class="app-screen-img" loading="lazy">
+                <figcaption>role-based onboarding</figcaption>
+            </figure>
+            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/collector-map-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>real-time pickup map</figcaption></figure>
+            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/collection-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>pickup detail + claim</figcaption></figure>
+            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/collections-list-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>nearby pickups list</figcaption></figure>
+            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/colleciton-view1.png" alt="" class="app-screen-img" loading="lazy"><figcaption>job status + route</figcaption></figure>
+            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/host-home-view-map.png" alt="" class="app-screen-img" loading="lazy"><figcaption>host home map</figcaption></figure>
+            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/host-post-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>new pickup post</figcaption></figure>
+            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/hos-home-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>host activity overview</figcaption></figure>
+            <figure class="app-screen-card" aria-hidden="true"><img src="assets/images/screenshots/onboarding-view.png" alt="" class="app-screen-img" loading="lazy"><figcaption>role-based onboarding</figcaption></figure>
+        </div>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card fade-in-up" style="--delay:0.05s">
+            <h3>instant job claiming</h3>
+            <p>Collectors see and claim available jobs in real time from the live map - no refresh, no delay.</p>
+        </div>
+        <div class="feature-card fade-in-up" style="--delay:0.1s">
+            <h3>live earnings dashboard</h3>
+            <p>Completed jobs, bottle totals, and earnings all visible in one transparent view.</p>
+        </div>
+        <div class="feature-card fade-in-up" style="--delay:0.15s">
+            <h3>route optimization</h3>
+            <p>Nearby jobs surface first so collectors maximize value per trip.</p>
+        </div>
+        <div class="feature-card fade-in-up" style="--delay:0.2s">
+            <h3>photo verification</h3>
+            <p>Photo-backed completion builds trust between hosts and collectors and keeps records clean.</p>
+        </div>
+        <div class="feature-card fade-in-up" style="--delay:0.25s">
+            <h3>role-based onboarding</h3>
+            <p>Tailored sign-in for collectors and hosts - so each user sees only what they need.</p>
+        </div>
+        <div class="feature-card fade-in-up" style="--delay:0.3s">
+            <h3>impact tracking</h3>
+            <p>Bottles diverted, CO2 saved, and community activity tracked and shown in-app.</p>
+        </div>
+    </div>
+</section>
+
+<section class="funding-section" id="get-involved">
+    <div class="section-container">
+
+        <div class="funding-hero-block fade-in-up">
+            <div class="section-label">get involved</div>
+            <h2>help us make this real.</h2>
+            <p>bottlr launched at SF Hacks 2026. Now we're taking it to the App Store - and we're looking for funding partners, university supporters, and real users to help us get there.</p>
+            <div class="funding-cta-row">
+                <a href="mailto:contact@bottlr.tech" class="btn-green">get in touch -></a>
+                <a href="#beta" class="btn-outline-blue">sign up for beta</a>
+            </div>
+        </div>
+
+        <div class="opp-grid">
+            <div class="opp-card fade-in-up" style="--delay:0.05s">
+                <span class="opp-pill research">Research &amp; Innovation</span>
+                <h3>university r&amp;i funding</h3>
+                <p>We're applying for Research &amp; Innovation grants to fund infrastructure, AI route optimization, and continued development through our App Store launch.</p>
+                <a href="mailto:contact@bottlr.tech" class="opp-link">reach out -></a>
+            </div>
+            <div class="opp-card fade-in-up" style="--delay:0.12s">
+                <span class="opp-pill advancement">University Advancement</span>
+                <h3>giving day support</h3>
+                <p>With Giving Day coming up, directed donations go straight into the platform. University advancement dollars support a student-built, community-impact startup.</p>
+                <a href="mailto:contact@bottlr.tech" class="opp-link">learn more -></a>
+            </div>
+            <div class="opp-card fade-in-up" style="--delay:0.2s">
+                <span class="opp-pill beta-tag">Beta Access</span>
+                <h3>be first on the app</h3>
+                <p>We need real collectors and hosts to test the live app before public launch. Join TestFlight, use the product, and help shape it before it ships.</p>
+                <a href="#beta" class="opp-link">apply for beta -></a>
+            </div>
+        </div>
+
+        <div class="beta-strip fade-in-up" id="beta">
+            <div>
+                <h3>join the beta</h3>
+                <p>Be among the first to use bottlr before it hits the App Store.</p>
+            </div>
+            <form class="beta-form" onsubmit="handleBeta(event)">
+                <input type="email" class="beta-input" id="betaEmail" placeholder="your@email.com" required>
+                <button type="submit" class="beta-btn" id="betaBtn">request access</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<section class="impact-section">
+    <div class="section-container">
+        <div class="section-header fade-in-up">
+            <div class="section-label">why it matters</div>
+            <h2 class="section-title">built for real pickup workflows</h2>
+            <p class="section-desc">Every product decision exists to make the experience faster, fairer, and more transparent for the people doing the work.</p>
+        </div>
+        <div class="impact-grid">
+            <div class="impact-stat fade-in-up" style="--delay:0.05s">
+                <div class="impact-number">live</div>
+                <div class="impact-label">job availability</div>
+                <p>Collectors discover and claim active jobs in real time - no stale listings.</p>
+            </div>
+            <div class="impact-stat fade-in-up" style="--delay:0.1s">
+                <div class="impact-number">fast</div>
+                <div class="impact-label">claim flow</div>
+                <p>Low-friction claiming and completion means more pickups, more earnings.</p>
+            </div>
+            <div class="impact-stat fade-in-up" style="--delay:0.15s">
+                <div class="impact-number">clear</div>
+                <div class="impact-label">earnings view</div>
+                <p>Completed pickups and earnings in one place - no guessing, no surprises.</p>
+            </div>
+            <div class="impact-stat fade-in-up" style="--delay:0.2s">
+                <div class="impact-number">trusted</div>
+                <div class="impact-label">verification</div>
+                <p>Photo-backed completion and impact metrics build confidence on both sides.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="#" class="footer-logo">
+                <img src="assets/images/brand/wordmark.png" alt="bottlr">
+                bottlr
             </a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-            <nav class="desktop-nav">
-                <ul>
-                    <li><a href="#problem">Problem</a></li>
-                    <li><a href="#solution">Solution</a></li>
-                    <li><a href="#live-demo">Demo</a></li>
-                    <li><a href="#tech">Tech Stack</a></li>
-                    <li><a href="#team">Team</a></li>
-                </ul>
-            </nav>
+            <p>Real-time pickup coordination for collectors and hosts. Building a fairer system for California's bottle workers, one pickup at a time.</p>
         </div>
-    </header>
-
-    <!-- Mobile Menu Overlay -->
-    <div class="menu-overlay" id="menuOverlay"></div>
-    <nav class="mobile-menu" id="mobileMenu">
-        <ul>
-            <li style="--i: 0"><a href="#problem">Problem</a></li>
-            <li style="--i: 1"><a href="#solution">Solution</a></li>
-            <li style="--i: 2"><a href="#live-demo">Demo</a></li>
-            <li style="--i: 3"><a href="#tech">Tech Stack</a></li>
-            <li style="--i: 4"><a href="#team">Team</a></li>
-        </ul>
-    </nav>
-
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content fade-in">
-                <div class="hackathon-badges">
-                    <div class="badge">SF Hacks 2026</div>
-                    <div class="badge badge-secondary">48 Hour Build</div>
-                </div>
-                
-                <h1>
-                    A Real-Time<br>
-                    Bottle Pickup<br>
-                    <span class="highlight">Network</span>
-                </h1>
-
-                <p class="hero-subtitle">
-                    Workers claim jobs instantly. Routes update live. Earnings are transparent.
-                    Built for collectors and hosts with mobile-first workflows.
-                </p>
-
-                <div class="hero-stats">
-                    <div class="stat">
-                        <div class="stat-number">Live</div>
-                        <div class="stat-label">Job Claim Flow</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">4</div>
-                        <div class="stat-label">Core Product Steps</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">1</div>
-                        <div class="stat-label">Unified Dashboard</div>
-                    </div>
-                </div>
-
-                
-
-                <div class="quick-links">
-                    <a href="https://shipyardhq.tech/projects/e9af272d-1dfe-4da8-ba7b-196fc92f9f7a" class="quick-link">Shipyard →</a>
-                    <a href="https://github.com/rainazab/SFH26" class="quick-link">GitHub →</a>
-                </div>
-            </div>
-
-            <!-- iPhone Demo Image -->
-            <div class="phone-mockup fade-in">
-                <img src="assets/images/hero/live-map-demo.png" alt="bottlr app live map demo" class="phone-demo-img">
-            </div>
+        <div class="footer-col">
+            <h4>product</h4>
+            <ul class="footer-links">
+                <li><a href="#how">how it works</a></li>
+                <li><a href="#demo">the app</a></li>
+                <li><a href="#get-involved">get involved</a></li>
+                <li><a href="#beta">join beta</a></li>
+            </ul>
         </div>
-    </section>
-
-    <!-- Problem Section -->
-    <section class="problem-section" id="problem">
-        <div class="section-container">
-            <div class="section-header fade-in-up">
-                <h2 class="section-title">The System is Broken</h2>
-                <p class="section-description">
-                    California's $1.5 billion bottle redemption industry exploits workers, 
-                    wastes resources, and fails communities.
-                </p>
-            </div>
-
-            <div class="problem-grid">
-                <div class="problem-card fade-in-up" style="--delay: 0.1s">
-                    <div class="problem-number">$15</div>
-                    <h3>Poverty Wages</h3>
-                    <p>
-                        Collectors walk 5+ miles daily through trash for just $15 in 6 hours. 
-                        No benefits. No dignity. No future.
-                    </p>
-                </div>
-
-                <div class="problem-card fade-in-up" style="--delay: 0.2s">
-                    <div class="problem-number">$600M</div>
-                    <h3>Wasted Value</h3>
-                    <p>
-                        40% of bottles never get redeemed. Restaurants dump hundreds weekly 
-                        while collectors search empty-handed.
-                    </p>
-                </div>
-
-                <div class="problem-card fade-in-up" style="--delay: 0.3s">
-                    <div class="problem-number">ZERO</div>
-                    <h3>Power</h3>
-                    <p>
-                        Collectors have no voice, no organization, no bargaining power. 
-                        An invisible workforce exploited by a broken system.
-                    </p>
-                </div>
-            </div>
+        <div class="footer-col">
+            <h4>company</h4>
+            <ul class="footer-links">
+                <li><a href="about.html">about us</a></li>
+                <li><a href="mailto:contact@bottlr.tech">contact</a></li>
+            </ul>
         </div>
-    </section>
-
-    <!-- How It Works - Demo Flow -->
-    <section class="demo-flow" id="solution">
-        <div class="section-container">
-            <div class="section-header fade-in-up">
-                <h2 class="section-title">Four Steps From Post to Pickup</h2>
-                <p class="section-description">
-                    Product flow mirrors the app: posting, claiming, pickup completion, and status tracking.
-                </p>
-            </div>
-
-            <div class="steps-flow">
-                <div class="step-card glass fade-in-up" style="--delay: 0.1s">
-                    <div class="step-number">01</div>
-                    <h3>Customers Post Pickups</h3>
-                    <p>Hosts create pickup jobs with location, count, and timing.</p>
-                </div>
-
-                <div class="flow-arrow fade-in-up" style="--delay: 0.2s">→</div>
-
-                <div class="step-card glass fade-in-up" style="--delay: 0.3s">
-                    <div class="step-number">02</div>
-                    <h3>Collectors Claim Nearby Jobs</h3>
-                    <p>Available jobs update live so collectors can claim quickly from the map.</p>
-                </div>
-
-                <div class="flow-arrow fade-in-up" style="--delay: 0.4s">→</div>
-
-                <div class="step-card glass fade-in-up" style="--delay: 0.5s">
-                    <div class="step-number">03</div>
-                    <h3>Complete Pickup</h3>
-                    <p>Collectors complete handoff and submit verification inside the app.</p>
-                </div>
-
-                <div class="flow-arrow fade-in-up" style="--delay: 0.5s">→</div>
-
-                <div class="step-card glass fade-in-up" style="--delay: 0.5s">
-                    <div class="step-number">04</div>
-                    <h3>Status Updates Instantly</h3>
-                    <p>Dashboard updates with completed jobs, pickup status, and activity metrics.</p>
-                </div>
-            </div>
+        <div class="footer-col">
+            <h4>legal</h4>
+            <ul class="footer-links">
+                <li><a href="privacy.html">privacy</a></li>
+                <li><a href="terms.html">terms</a></li>
+            </ul>
         </div>
-    </section>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 bottlr. all rights reserved.</span>
+        <div class="footer-badge">app store - coming soon</div>
+    </div>
+</footer>
 
-    <!-- Demo Section -->
-    <section class="demo-section" id="live-demo">
-        <div class="section-container">
-            <div class="section-header fade-in-up">
-                <h2 class="section-title">Demo</h2>
-                <p class="section-description">
-                    Explore real in-app views from our iPhone simulator and jump into the project links.
-                </p>
-            </div>
+<script>
+    window.addEventListener('scroll', () => {
+        const h = document.documentElement;
+        document.getElementById('scrollProgress').style.transform =
+            `scaleX(${h.scrollTop / (h.scrollHeight - h.clientHeight)})`;
+        document.getElementById('header').classList.toggle('scrolled', h.scrollTop > 20);
+    }, { passive: true });
 
-            <div class="demo-tags fade-in-up" style="--delay: 0.05s">
-                <span class="demo-tag">collector POV</span>
-                <span class="demo-tag">host POV</span>
-                <span class="demo-tag">onboarding</span>
-            </div>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    function closeMenu() {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        menuOverlay.classList.remove('open');
+    }
+    hamburger.addEventListener('click', () => {
+        const open = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        menuOverlay.classList.toggle('open', open);
+    });
+    menuOverlay.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
 
-            <div class="app-gallery-marquee fade-in-up" style="--delay: 0.1s">
-                <div class="app-gallery-track">
-                    <div class="app-gallery-group">
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/collector-map-view.png" alt="bottlr collector simulator map view" class="app-screen-img" loading="eager" decoding="async">
-                            <figcaption>real-time pickup map</figcaption>
-                        </figure>
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in-up').forEach((el) => io.observe(el));
 
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/collection-view.png" alt="bottlr collector simulator collection detail view" class="app-screen-img" loading="eager" decoding="async">
-                            <figcaption>pickup detail + claim action</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/collections-list-view.png" alt="bottlr collector simulator collections list view" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>nearby pickups list</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/colleciton-view1.png" alt="bottlr collector simulator collection screen" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>job status + route context</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/host-home-view-map.png" alt="bottlr host simulator home map view" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>host home dashboard map</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/host-post-view.png" alt="bottlr host simulator post view" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>new pickup post form</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/hos-home-view.png" alt="bottlr host simulator home view" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>host activity overview</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/onboarding-view.png" alt="bottlr simulator onboarding view" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>role-based onboarding</figcaption>
-                        </figure>
-                    </div>
-
-                    <div class="app-gallery-group" aria-hidden="true">
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/collector-map-view.png" alt="" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>real-time pickup map</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/collection-view.png" alt="" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>pickup detail + claim action</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/collections-list-view.png" alt="" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>nearby pickups list</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/colleciton-view1.png" alt="" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>job status + route context</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/host-home-view-map.png" alt="" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>host home dashboard map</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/host-post-view.png" alt="" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>new pickup post form</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/hos-home-view.png" alt="" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>host activity overview</figcaption>
-                        </figure>
-
-                        <figure class="app-screen-card">
-                            <img src="assets/images/screenshots/onboarding-view.png" alt="" class="app-screen-img" loading="lazy" decoding="async">
-                            <figcaption>role-based onboarding</figcaption>
-                        </figure>
-                    </div>
-                </div>
-            </div>
-
-            <div class="demo-grid">
-                <div class="demo-card fade-in-up" style="--delay: 0.25s">
-                    <h3>Instant Job Claiming</h3>
-                    <p>Collectors claim available pickup jobs in real time from the live map.</p>
-                </div>
-
-                <div class="demo-card fade-in-up" style="--delay: 0.3s">
-                    <h3>Live Activity Dashboard</h3>
-                    <p>Track completed jobs, bottle totals, and app activity in one view.</p>
-                </div>
-
-                <div class="demo-card fade-in-up" style="--delay: 0.35s">
-                    <h3>Route Optimization</h3>
-                    <p>Nearby jobs are prioritized so collectors can complete more pickups efficiently.</p>
-                </div>
-
-                <div class="demo-card fade-in-up" style="--delay: 0.4s">
-                    <h3>User Authentication</h3>
-                    <p>Role-based onboarding for collectors and hosts with secure sign-in flows.</p>
-                </div>
-
-                <div class="demo-card fade-in-up" style="--delay: 0.45s">
-                    <h3>Pickup Verification</h3>
-                    <p>Photo-supported completion flow improves trust and transparent handoff records.</p>
-                </div>
-
-                <div class="demo-card fade-in-up" style="--delay: 0.5s">
-                    <h3>Impact Metrics</h3>
-                    <p>Bottles diverted, CO₂ saved, and user activity are tracked in-app.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tech Stack -->
-    <section class="tech-stack" id="tech">
-        <div class="section-container">
-            <div class="section-header fade-in-up">
-
-                <h2 class="section-title">Built With Modern Tools</h2>
-                <p class="section-description">
-                    Production-ready stack designed for scale.
-                </p>
-            </div>
-
-            <div class="tech-grid">
-                <div class="tech-category fade-in-up" style="--delay: 0.1s">
-                    <h3>Frontend</h3>
-                    <div class="tech-items">
-                        <div class="tech-item">SwiftUI</div>
-                        <div class="tech-item">MapKit</div>
-                        <div class="tech-item">Core Location</div>
-                        <div class="tech-item">MVVM Architecture</div>
-                    </div>
-                </div>
-
-                <div class="tech-category fade-in-up" style="--delay: 0.2s">
-                    <h3>Backend</h3>
-                    <div class="tech-items">
-                        <div class="tech-item">Firebase Authentication</div>
-                        <div class="tech-item">Firebase Firestore</div>
-                        <div class="tech-item">Cloud Functions</div>
-                        <div class="tech-item">Firebase Storage</div>
-                    </div>
-                </div>
-
-                <div class="tech-category fade-in-up" style="--delay: 0.3s">
-                    <h3>APIs</h3>
-                    <div class="tech-items">
-                        <div class="tech-item">Gemini Vision API</div>
-                        <div class="tech-item">Google Maps API</div>
-                        <div class="tech-item">Stripe Connect</div>
-                        <div class="tech-item">Cloud Messaging</div>
-                    </div>
-                </div>
-
-                <div class="tech-category fade-in-up" style="--delay: 0.4s">
-                    <h3>Tools</h3>
-                    <div class="tech-items">
-                        <div class="tech-item">Xcode 15</div>
-                        <div class="tech-item">Git/GitHub</div>
-                        <div class="tech-item">TestFlight</div>
-                        <div class="tech-item">Service-Oriented Swift Architecture</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section class="team-section" id="team">
-        <div class="section-container">
-            <div class="section-header fade-in-up">
-                <h2 class="section-title">Meet the Team</h2>
-            </div>
-
-            <div class="team-grid">
-                <div class="team-card fade-in-up" style="--delay: 0.1s">
-                    <img src="assets/images/team/raina.jpg" alt="Raina Zab" class="team-photo">
-                    <h3 class="team-name">Raina Zab</h3>
-                    <p class="team-description">1st year CS major</p>
-                    <a class="team-link" href="https://www.linkedin.com/in/rainazab/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                </div>
-
-                <div class="team-card fade-in-up" style="--delay: 0.2s">
-                    <img src="assets/images/team/fernanda.jpg" alt="Fernanda Palacios" class="team-photo">
-                    <h3 class="team-name">Fernanda Palacios</h3>
-                    <p class="team-description">5th year Engineering Technology major</p>
-                    <a class="team-link" href="https://www.linkedin.com/in/maria-fernanda-palacios/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                </div>
-
-                <div class="team-card fade-in-up" style="--delay: 0.3s">
-                    <img src="assets/images/team/matilda.jpg" alt="Matilda Verdejo" class="team-photo">
-                    <h3 class="team-name">Matilda Verdejo</h3>
-                    <p class="team-description">3rd year CS major</p>
-                    <a class="team-link" href="https://www.linkedin.com/in/matildaverdejo/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                </div>
-
-                <div class="team-card fade-in-up" style="--delay: 0.4s">
-                    <img src="assets/images/team/lupita.jpg" alt="Guadalupe Carrillo" class="team-photo">
-                    <h3 class="team-name">Guadalupe Carrillo</h3>
-                    <p class="team-description">4th year CS major</p>
-                    <a class="team-link" href="https://www.linkedin.com/in/guadalupe-carrillo-vega/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Impact Section -->
-    <section class="impact-section">
-        <div class="section-container">
-            <div class="section-header fade-in-up">
-                <h2 class="section-title">Built for Real Pickup Workflows</h2>
-            </div>
-
-            <div class="impact-grid">
-                <div class="impact-stat glass fade-in-up" style="--delay: 0.1s">
-                    <div class="impact-number">Live</div>
-                    <div class="impact-label">Job Availability</div>
-                    <p>Collectors can discover and claim active jobs in session.</p>
-                </div>
-
-                <div class="impact-stat glass fade-in-up" style="--delay: 0.2s">
-                    <div class="impact-number">Fast</div>
-                    <div class="impact-label">Claim Flow</div>
-                    <p>Low-friction claiming and completion reduce missed opportunities.</p>
-                </div>
-
-                <div class="impact-stat glass fade-in-up" style="--delay: 0.3s">
-                    <div class="impact-number">Clear</div>
-                    <div class="impact-label">Earnings View</div>
-                    <p>Completed pickups and earnings are visible in one dashboard.</p>
-                </div>
-
-                <div class="impact-stat glass fade-in-up" style="--delay: 0.4s">
-                    <div class="impact-number">Trusted</div>
-                    <div class="impact-label">Verification Loop</div>
-                    <p>Photo-backed completion and impact metrics improve host confidence.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="index.html" class="logo">
-                    <img src="assets/images/brand/wordmark.png" alt="bottlr logo" class="logo-img">
-                    <span class="logo-text">bottlr</span>
-                </a>
-                <p>
-                    Real-time pickup coordination for collectors and hosts.
-                    Built for clear jobs, clean handoffs, and transparent earnings.
-                </p>
-            </div>
-
-            <div class="footer-section">
-                <h4>Hackathon</h4>
-                <ul class="footer-links">
-                    <li><a href="https://shipyardhq.tech/projects/e9af272d-1dfe-4da8-ba7b-196fc92f9f7a" target="_blank">Shipyard</a></li>
-                    <li><a href="https://github.com/rainazab/SFH26" target="_blank">GitHub</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Platform</h4>
-                <ul class="footer-links">
-                    <li><a href="how-it-works.html">How It Works</a></li>
-                    <li><a href="for-collectors.html">For Collectors</a></li>
-                    <li><a href="for-hosts.html">For Hosts</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>About</h4>
-                <ul class="footer-links">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                    <li><a href="privacy.html">Privacy</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div>SF Hacks 2026 • Feb 13-15</div>
-        </div>
-    </footer>
-
-    <script src="menu.js"></script>
+    function handleBeta(e) {
+        e.preventDefault();
+        const btn = document.getElementById('betaBtn');
+        btn.textContent = "you are on the list";
+        btn.style.background = '#d2f1db';
+        btn.style.color = '#34A853';
+        btn.disabled = true;
+        console.log('Beta signup:', document.getElementById('betaEmail').value);
+    }
+</script>
 </body>
 </html>
