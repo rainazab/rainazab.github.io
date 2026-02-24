@@ -1,36 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Partners - bottlr</title>
-  <meta name="description" content="Partnerships and aligned support for bottlr launch cities.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Join waitlist - bottlr</title>
+  <meta name="description" content="Join bottlr early access before iOS launch.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css">
-  <link rel="stylesheet" href="styles/components.css">
-  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/base.css"><link rel="stylesheet" href="styles/components.css"><link rel="stylesheet" href="styles/layout.css">
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
 <header class="site-header" id="header"><div class="header-inner"><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button><nav class="desktop-nav"><ul><li><a href="earn-with-bottlr.html">earn</a></li><li><a href="business.html">business</a></li><li><a href="network.html">network</a></li><li><a href="cities.html">cities</a></li><li><a href="join-waitlist.html" class="chip-cta">join waitlist</a></li></ul></nav></div></header>
 <div class="menu-overlay" id="menuOverlay"></div><nav class="mobile-menu" id="mobileMenu"><a href="earn-with-bottlr.html">earn with bottlr</a><a href="business.html">for businesses</a><a href="network.html">the network</a><a href="cities.html">cities</a><a href="join-waitlist.html" class="cta-mobile">join waitlist</a></nav>
 <main class="page-main"><div class="container">
-  <section class="page-hero"><h1>partners</h1><p>we are onboarding early businesses, community groups, and aligned support as launch cities open.</p></section>
-  <section class="split">
-    <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">where partners help most</h3><p style="color:var(--muted);">pilot hosts, local operator introductions, community distribution, and city expansion support.</p></article>
-    <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">how support gets used</h3><p style="color:var(--muted);">collector onboarding, route operations, product reliability, and trust workflows.</p></article>
-  </section>
-  <section class="card" id="contact-form" style="margin-top:1rem;">
-    <h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">contact form</h3>
-    <p style="color:var(--muted);margin-top:.2rem;">partnership, grant, press, careers, or community inquiry.</p>
-    <form class="waitlist-form" onsubmit="handleFundingContact(event)" style="margin-top:.75rem;">
-      <input type="text" id="contactName" placeholder="name" required>
-      <input type="email" id="contactEmail" placeholder="email" required>
-      <textarea id="contactMessage" rows="4" placeholder="message" required></textarea>
-      <button type="submit" class="btn btn-primary" id="contactSubmit">send</button>
-      <div class="waitlist-status" id="contactStatus"></div>
+  <section class="page-hero"><h1>join early access</h1><p>be first in line as bottlr opens in launch cities.</p></section>
+  <section class="card">
+    <form class="waitlist-form" onsubmit="handleWaitlist(event)" style="margin-top:.2rem;">
+      <input type="text" id="waitlistName" placeholder="name" required>
+      <input type="email" id="waitlistEmail" placeholder="email" required>
+      <select id="waitlistRole" required>
+        <option value="">i am a...</option>
+        <option value="collector">collector</option>
+        <option value="host">host / business</option>
+        <option value="supporter">supporter</option>
+      </select>
+      <button class="btn btn-primary" type="submit" id="waitlistSubmit">join waitlist</button>
+      <div class="waitlist-status" id="waitlistStatus"></div>
     </form>
   </section>
 </div></main>

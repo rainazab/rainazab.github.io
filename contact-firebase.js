@@ -89,4 +89,68 @@
             if (submitBtn) submitBtn.disabled = false;
         }
     };
+
+    window.handleWaitlist = async function (e) {
+        e.preventDefault();
+        const nameInput = document.getElementById("waitlistName");
+        const emailInput = document.getElementById("waitlistEmail");
+        const roleInput = document.getElementById("waitlistRole");
+        const submitBtn = document.getElementById("waitlistSubmit");
+        const status = document.getElementById("waitlistStatus");
+
+        const payload = {
+            source: "waitlist",
+            name: nameInput ? nameInput.value.trim() : "",
+            email: emailInput ? emailInput.value.trim() : "",
+            role: roleInput ? roleInput.value : "",
+            page: window.location.pathname
+        };
+
+        if (!payload.email || !payload.role) return;
+        if (submitBtn) submitBtn.disabled = true;
+        if (status) status.textContent = "joining...";
+
+        try {
+            await saveSubmission(payload);
+            if (status) status.textContent = "You're in. We'll keep you posted.";
+            if (submitBtn) submitBtn.textContent = "joined";
+            if (nameInput) nameInput.value = "";
+            if (emailInput) emailInput.value = "";
+            if (roleInput) roleInput.value = "";
+        } catch (err) {
+            console.error("Waitlist submit failed:", err);
+            if (status) status.textContent = "Could not submit. Try again.";
+            if (submitBtn) submitBtn.disabled = false;
+        }
+    };
+
+    window.handleWaitlistInline = async function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const emailInput = form.querySelector('input[name="email"]');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const status = form.querySelector('[data-role="status"]');
+        const source = form.dataset.source || "index-inline";
+
+        const payload = {
+            source,
+            email: emailInput ? emailInput.value.trim() : "",
+            page: window.location.pathname
+        };
+
+        if (!payload.email) return;
+        if (submitBtn) submitBtn.disabled = true;
+        if (status) status.textContent = "joining...";
+
+        try {
+            await saveSubmission(payload);
+            if (status) status.textContent = "You're in. We'll keep you posted.";
+            if (submitBtn) submitBtn.textContent = "joined";
+            if (emailInput) emailInput.value = "";
+        } catch (err) {
+            console.error("Inline waitlist submit failed:", err);
+            if (status) status.textContent = "Could not submit. Try again.";
+            if (submitBtn) submitBtn.disabled = false;
+        }
+    };
 })();

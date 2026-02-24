@@ -1,0 +1,220 @@
+/* Index layout */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--hero);
+    padding-top: 64px;
+}
+
+.hero-grid {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(2.2rem, 8vw, 5rem) var(--container);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.hero h1 {
+    font-family: var(--font-display);
+    color: #fff;
+    font-size: clamp(2.1rem, 9vw, 4.3rem);
+    line-height: 0.95;
+    letter-spacing: -1px;
+    text-transform: lowercase;
+    margin: 0.65rem 0 1rem;
+}
+
+.hero h1 .blue {
+    color: var(--blue-soft);
+}
+
+.hero h1 .green {
+    color: var(--green);
+}
+
+.hero-sub {
+    max-width: 640px;
+    color: #fff;
+    font-size: clamp(1rem, 2.8vw, 1.18rem);
+}
+
+.hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 0.4rem;
+}
+
+.hero-stats {
+    margin-top: 1.2rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.25);
+    padding-top: 0.85rem;
+}
+
+.stat-number {
+    font-family: var(--font-display);
+    color: var(--blue-soft);
+    line-height: 1;
+    font-size: clamp(1.3rem, 5vw, 2.2rem);
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.74rem;
+    text-transform: lowercase;
+    font-weight: 600;
+}
+
+.phone-mockup img {
+    width: min(340px, 88vw);
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 22px 36px rgba(11, 18, 32, 0.2));
+}
+
+.section-title {
+    font-family: var(--font-display);
+    color: var(--ink);
+    font-size: clamp(1.6rem, 5vw, 2.55rem);
+    line-height: 1.05;
+    text-transform: lowercase;
+    margin-bottom: 0.65rem;
+}
+
+.section-lead {
+    color: var(--muted);
+    max-width: 760px;
+}
+
+.split {
+    margin-top: 1rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+.feature-list {
+    display: grid;
+    gap: 0.65rem;
+}
+
+.feature-item h3 {
+    font-family: var(--font-display);
+    font-size: 0.96rem;
+    text-transform: lowercase;
+    color: var(--blue);
+    margin-bottom: 0.2rem;
+}
+
+.feature-item p {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.gallery {
+    position: relative;
+    overflow: hidden;
+    margin-top: 1rem;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.gallery-track {
+    display: flex;
+    gap: 0.8rem;
+    width: max-content;
+    animation: marquee 38s linear infinite;
+}
+
+.gallery-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+.shot {
+    width: clamp(190px, 34vw, 255px);
+    transform: rotate(var(--tilt, 0deg));
+    transition: transform 0.2s ease;
+}
+
+.shot:hover {
+    transform: translateY(-6px) rotate(0deg);
+}
+
+.shot img {
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.stacked-metric-grid {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: 1fr;
+}
+
+.stacked-metric-grid .card h3 {
+    font-family: var(--font-display);
+    color: var(--blue);
+    font-size: 1.05rem;
+    text-transform: lowercase;
+}
+
+.stacked-metric-grid .card p {
+    color: var(--muted);
+}
+
+.page-main {
+    padding-top: 98px;
+    padding-bottom: 2.6rem;
+}
+
+.page-hero {
+    background: #dff1ff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.15rem;
+    margin-bottom: 0.9rem;
+}
+
+.page-hero h1 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    text-transform: lowercase;
+    line-height: 1.05;
+}
+
+.page-hero p {
+    color: var(--muted);
+    margin-top: 0.45rem;
+}
+
+@media (min-width: 860px) {
+    .split {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stacked-metric-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+}

@@ -1,0 +1,49 @@
+:root {
+    --ink: #0f172a;
+    --blue: #3694e8;
+    --blue-soft: #66c2ff;
+    --green: #34a853;
+    --bg: #f7fbff;
+    --panel: #ffffff;
+    --line: #d8eaf7;
+    --muted: #5b6b7c;
+    --hero: #b8dcf7;
+    --font-display: "Archivo Black", sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+    --container: clamp(1rem, 4vw, 2rem);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--container);
+}
+
+.section {
+    padding: clamp(3.25rem, 8vw, 6rem) var(--container);
+}

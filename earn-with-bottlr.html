@@ -1,39 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Partners - bottlr</title>
-  <meta name="description" content="Partnerships and aligned support for bottlr launch cities.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Earn with bottlr</title>
+  <meta name="description" content="Earn with bottlr through live pickup routes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css">
-  <link rel="stylesheet" href="styles/components.css">
-  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/base.css"><link rel="stylesheet" href="styles/components.css"><link rel="stylesheet" href="styles/layout.css">
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
 <header class="site-header" id="header"><div class="header-inner"><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button><nav class="desktop-nav"><ul><li><a href="earn-with-bottlr.html">earn</a></li><li><a href="business.html">business</a></li><li><a href="network.html">network</a></li><li><a href="cities.html">cities</a></li><li><a href="join-waitlist.html" class="chip-cta">join waitlist</a></li></ul></nav></div></header>
 <div class="menu-overlay" id="menuOverlay"></div><nav class="mobile-menu" id="mobileMenu"><a href="earn-with-bottlr.html">earn with bottlr</a><a href="business.html">for businesses</a><a href="network.html">the network</a><a href="cities.html">cities</a><a href="join-waitlist.html" class="cta-mobile">join waitlist</a></nav>
-<main class="page-main"><div class="container">
-  <section class="page-hero"><h1>partners</h1><p>we are onboarding early businesses, community groups, and aligned support as launch cities open.</p></section>
-  <section class="split">
-    <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">where partners help most</h3><p style="color:var(--muted);">pilot hosts, local operator introductions, community distribution, and city expansion support.</p></article>
-    <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">how support gets used</h3><p style="color:var(--muted);">collector onboarding, route operations, product reliability, and trust workflows.</p></article>
-  </section>
-  <section class="card" id="contact-form" style="margin-top:1rem;">
-    <h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">contact form</h3>
-    <p style="color:var(--muted);margin-top:.2rem;">partnership, grant, press, careers, or community inquiry.</p>
-    <form class="waitlist-form" onsubmit="handleFundingContact(event)" style="margin-top:.75rem;">
-      <input type="text" id="contactName" placeholder="name" required>
-      <input type="email" id="contactEmail" placeholder="email" required>
-      <textarea id="contactMessage" rows="4" placeholder="message" required></textarea>
-      <button type="submit" class="btn btn-primary" id="contactSubmit">send</button>
-      <div class="waitlist-status" id="contactStatus"></div>
-    </form>
-  </section>
-</div></main>
+<main class="page-main"><div class="container"><section class="page-hero"><h1>earn with bottlr</h1><p>live route visibility for collectors, with less guesswork and clearer pickup flow.</p></section><section class="split"><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">collector-first tools</h3><p style="color:var(--muted);">see nearby opportunities, claim faster, and keep activity visible.</p></article><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">join launch waitlist</h3><form class="waitlist-form" onsubmit="handleWaitlistInline(event)" data-source="earn-page"><input type="email" name="email" placeholder="collector email" required><button class="btn btn-primary" type="submit">join waitlist</button><div class="waitlist-status" data-role="status"></div></form></article></section></div></main>
 <footer class="footer"><div class="footer-inner"><div><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><p style="margin-top:.5rem;color:var(--muted);max-width:420px;">people-powered recycling logistics. launching city by city.</p></div><div><h4>product</h4><ul><li><a href="how-it-works.html">how it works</a></li><li><a href="earn-with-bottlr.html">earn with bottlr</a></li><li><a href="business.html">for businesses</a></li><li><a href="network.html">the network</a></li></ul></div><div><h4>company</h4><ul><li><a href="about.html">about</a></li><li><a href="cities.html">cities</a></li><li><a href="press.html">press</a></li><li><a href="funding.html">partners</a></li></ul></div><div><h4>resources</h4><ul><li><a href="join-waitlist.html">join waitlist</a></li><li><a href="community.html">community</a></li><li><a href="safety.html">safety</a></li><li><a href="privacy.html">privacy</a></li><li><a href="terms.html">terms</a></li></ul></div></div><div class="footer-bottom">© 2026 bottlr. all rights reserved.</div></footer>
 <script src="site.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
