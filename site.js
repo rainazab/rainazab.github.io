@@ -21,12 +21,14 @@
             hamburger.classList.remove("open");
             mobileMenu.classList.remove("open");
             menuOverlay.classList.remove("open");
+            document.body.style.overflow = "";
         }
 
         hamburger.addEventListener("click", () => {
             const open = mobileMenu.classList.toggle("open");
             hamburger.classList.toggle("open", open);
             menuOverlay.classList.toggle("open", open);
+            document.body.style.overflow = open ? "hidden" : "";
         });
         menuOverlay.addEventListener("click", closeMenu);
         mobileMenu.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));

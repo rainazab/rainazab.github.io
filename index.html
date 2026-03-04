@@ -72,7 +72,7 @@
         .mobile-menu a.cta-mobile { margin: 1.25rem 1.75rem 0; background: var(--green); color: var(--white); border-radius: 10px; border: none; text-align: center; font-weight: 700; padding: 1rem; border-bottom: none; }
 
         /* HERO */
-        .hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; background: var(--blue-pale); padding-top: 64px; overflow: hidden; position: relative; }
+        .hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; background: #b5daf5; padding-top: 64px; overflow: hidden; position: relative; }
         .hero-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5; pointer-events: none; }
         .hero-blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(102,194,255,0.6) 0%, transparent 70%); top: -100px; right: -100px; animation: blobFloat1 18s ease-in-out infinite; }
         .hero-blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(47,168,79,0.35) 0%, transparent 70%); bottom: -50px; left: 10%; animation: blobFloat2 22s ease-in-out infinite; }
@@ -289,7 +289,6 @@
     <div class="hero-blob hero-blob-3"></div>
     <div class="hero-container">
         <div class="fade-in-up">
-            <div class="live-pill"><span class="live-dot"></span> launching in san jose</div>
             <h1>turn bottles<br>into <span class="blue">real</span><br><span class="green">income</span></h1>
             <p class="hero-sub">bottlr connects collectors, hosts, and neighborhoods in real time. local pickup. real payouts. recycling at community scale.</p>
             <div class="hero-cta-row">
@@ -527,32 +526,6 @@
 </footer>
 
 <script>
-    const progress = document.getElementById('scrollProgress');
-    const hdr = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-        const h = document.documentElement;
-        progress.style.transform = `scaleX(${h.scrollTop / (h.scrollHeight - h.clientHeight)})`;
-        hdr.classList.toggle('scrolled', h.scrollTop > 20);
-    }, { passive: true });
-
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const menuOverlay = document.getElementById('menuOverlay');
-    const closeMenu = () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); menuOverlay.classList.remove('open'); document.body.style.overflow = ''; };
-    hamburger.addEventListener('click', () => {
-        const open = mobileMenu.classList.toggle('open');
-        hamburger.classList.toggle('open', open);
-        menuOverlay.classList.toggle('open', open);
-        document.body.style.overflow = open ? 'hidden' : '';
-    });
-    menuOverlay.addEventListener('click', closeMenu);
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.fade-in-up').forEach(el => io.observe(el));
-
     function handleWaitlistInline(e) {
         e.preventDefault();
         const form = e.target;
