@@ -1,19 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Cities - bottlr</title>
-  <meta name="description" content="Launch cities for bottlr.">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css"><link rel="stylesheet" href="styles/components.css"><link rel="stylesheet" href="styles/layout.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Cities — bottlr</title>
+  <meta name="description" content="bottlr launches city by city, building dense local networks before expanding.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/brand/app-icon.png">
+  <link rel="stylesheet" href="bottlr.css">
 </head>
-<body>
-<div class="scroll-progress" id="scrollProgress"></div>
-<header class="site-header" id="header"><div class="header-inner"><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button><nav class="desktop-nav"><ul><li><a href="earn-with-bottlr.html">earn</a></li><li><a href="business.html">business</a></li><li><a href="network.html">network</a></li><li><a href="cities.html">cities</a></li><li><a href="join-waitlist.html" class="chip-cta">join waitlist</a></li></ul></nav></div></header>
-<div class="menu-overlay" id="menuOverlay"></div><nav class="mobile-menu" id="mobileMenu"><a href="earn-with-bottlr.html">earn with bottlr</a><a href="business.html">for businesses</a><a href="network.html">the network</a><a href="cities.html">cities</a><a href="join-waitlist.html" class="cta-mobile">join waitlist</a></nav>
-<main class="page-main"><div class="container"><section class="page-hero"><h1>launch cities</h1><p>we are rolling out city by city with local partners and collector momentum.</p></section><section class="split"><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">san jose</h3><p style="color:var(--muted);">initial launch focus.</p></article><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">oakland</h3><p style="color:var(--muted);">early partner outreach.</p></article><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">san francisco</h3><p style="color:var(--muted);">community and pilot expansion.</p></article><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">your city</h3><p style="color:var(--muted);">request launch access through the partners form.</p></article></section></div></main>
-<footer class="footer"><div class="footer-inner"><div><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><p style="margin-top:.5rem;color:var(--muted);max-width:420px;">people-powered recycling logistics. launching city by city.</p></div><div><h4>product</h4><ul><li><a href="how-it-works.html">how it works</a></li><li><a href="earn-with-bottlr.html">earn with bottlr</a></li><li><a href="business.html">for businesses</a></li><li><a href="network.html">the network</a></li></ul></div><div><h4>company</h4><ul><li><a href="about.html">about</a></li><li><a href="cities.html">cities</a></li><li><a href="press.html">press</a></li><li><a href="funding.html">partners</a></li></ul></div><div><h4>resources</h4><ul><li><a href="join-waitlist.html">join waitlist</a></li><li><a href="community.html">community</a></li><li><a href="safety.html">safety</a></li><li><a href="privacy.html">privacy</a></li><li><a href="terms.html">terms</a></li></ul></div></div><div class="footer-bottom">© 2026 bottlr. all rights reserved.</div></footer>
-<script src="site.js"></script>
+<body><div class="scroll-progress" id="scrollProgress"></div>
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+    <button class="hamburger" id="hamburger" aria-label="menu"><span></span><span></span><span></span></button>
+    <nav class="desktop-nav"><ul>
+      <li><a href="earn-with-bottlr.html">earn</a></li>
+      <li><a href="business.html">business</a></li>
+      <li><a href="network.html">network</a></li>
+      <li><a href="cities.html">cities</a></li>
+      <li><a href="join-waitlist.html" class="btn-nav">join waitlist</a></li>
+    </ul></nav>
+  </div>
+</header>
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="earn-with-bottlr.html">earn with bottlr</a>
+  <a href="business.html">for businesses</a>
+  <a href="network.html">the network</a>
+  <a href="cities.html">cities</a>
+  <a href="join-waitlist.html" class="cta-mobile">join waitlist</a>
+</nav>
+<main class="page-main">
+  <div class="page-hero-band">
+    <div class="page-hero-inner">
+      <div class="page-label">cities</div>
+      <h1>local first.<br>always.<br><span style="color:var(--green)">city by city.</span></h1>
+      <p class="sub">We launch one city at a time, building dense reliable networks before moving to the next. Depth over breadth — every time.</p>
+    </div>
+  </div>
+
+  <section class="section section--tinted">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">launch map</div>
+        <h2 class="section-title">where we're building.</h2>
+        <p class="section-desc">Our rollout is deliberate. San Jose first — then the Bay Area, then beyond. Each city gets proper host onboarding, collector activation, and community groundwork before we call it live.</p>
+      </div>
+      <div class="grid-2 reveal" style="--delay:0.05s;">
+        <div class="city-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div class="city-name">san jose</div>
+            <div class="city-status" style="color:var(--green);"><span class="live-dot"></span> active launch</div>
+          </div>
+          <p class="city-desc">Our founding city and proving ground. Host partners onboarding now. Collector waitlist open. Routes activate on app launch day.</p>
+          <a href="join-waitlist.html" class="btn btn-green btn-sm" style="margin-top:0.5rem;">join san jose waitlist</a>
+        </div>
+        <div class="city-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div class="city-name">oakland</div>
+            <div class="city-status" style="color:var(--blue);">
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block;margin-right:4px;"></span>
+              coming next
+            </div>
+          </div>
+          <p class="city-desc">Early partner outreach underway. Strong collector density and a business community that's shown real interest. Second in line after San Jose proves out.</p>
+          <span class="tag" style="margin-top:0.5rem;display:inline-block;">notify me when live</span>
+        </div>
+        <div class="city-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div class="city-name">san francisco</div>
+            <div class="city-status" style="color:var(--gray);">
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--gray);display:inline-block;margin-right:4px;"></span>
+              in planning
+            </div>
+          </div>
+          <p class="city-desc">High bottle density, motivated collector base, and sustainability-focused business community. City-specific route planning in progress.</p>
+          <span class="tag" style="margin-top:0.5rem;display:inline-block;">notify me when live</span>
+        </div>
+        <div class="city-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div class="city-name">your city</div>
+            <div class="city-status" style="color:var(--gray);">
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--gray);display:inline-block;margin-right:4px;"></span>
+              request access
+            </div>
+          </div>
+          <p class="city-desc">If you have a strong collector community or a business ready to host, your city can move up the queue. Tell us what you've got and we'll evaluate fit.</p>
+          <a href="funding.html#contact-form" class="btn btn-outline btn-sm" style="margin-top:0.5rem;">request your city</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">why city by city</div>
+        <h2 class="section-title">density beats reach. always.</h2>
+        <p class="section-desc">A marketplace with 100 collectors in one city is worth more than 5 in 20 cities. Thick networks create reliability. Reliability creates retention. That's how this grows.</p>
+      </div>
+      <div class="grid-3 reveal" style="--delay:0.05s;">
+        <div class="card card--dark"><h3>host density matters</h3><p>When collectors see multiple jobs on a single route, their income per hour goes up and their loyalty to the platform goes up with it.</p></div>
+        <div class="card card--dark"><h3>collector trust is earned locally</h3><p>Reliability only develops when the same collectors are working the same neighborhoods. That happens in depth, not breadth.</p></div>
+        <div class="card card--dark"><h3>city-specific infrastructure</h3><p>Redemption center locations, local business relationships, and collector networks are all city-specific. We map each one before we launch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tinted">
+    <div class="section-inner">
+      <div class="cta-strip reveal">
+        <div><h3>not in San Jose?</h3><p>Join the waitlist anyway — we track city interest by zip code and use it to prioritize our next launch.</p></div>
+        <div class="cta-strip-actions">
+          <a href="join-waitlist.html" class="btn btn-green">join waitlist</a>
+          <a href="funding.html#contact-form" class="btn btn-ghost-white">request your city</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="footer-logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+      <p class="footer-tagline">recycling logistics powered by people. launching city by city.</p>
+    </div>
+    <div class="footer-col"><h4>product</h4><ul><li><a href="how-it-works.html">how it works</a></li><li><a href="earn-with-bottlr.html">earn with bottlr</a></li><li><a href="business.html">for businesses</a></li><li><a href="network.html">the network</a></li></ul></div>
+    <div class="footer-col"><h4>company</h4><ul><li><a href="about.html">about</a></li><li><a href="cities.html">cities</a></li><li><a href="press.html">press</a></li><li><a href="funding.html">partners</a></li></ul></div>
+    <div class="footer-col"><h4>resources</h4><ul><li><a href="join-waitlist.html">join waitlist</a></li><li><a href="community.html">community</a></li><li><a href="safety.html">safety</a></li><li><a href="privacy.html">privacy</a></li><li><a href="terms.html">terms</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 bottlr. all rights reserved.</span><a href="join-waitlist.html" class="footer-badge">get early access</a></div>
+</footer>
+<script src="bottlr.js"></script>
 </body>
 </html>

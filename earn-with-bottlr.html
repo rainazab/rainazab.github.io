@@ -1,20 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Earn with bottlr</title>
-  <meta name="description" content="Earn with bottlr through live pickup routes.">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css"><link rel="stylesheet" href="styles/components.css"><link rel="stylesheet" href="styles/layout.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Earn with bottlr — bottlr</title>
+  <meta name="description" content="See live pickup jobs, claim routes, and keep 100% of CRV. Free for collectors.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/brand/app-icon.png">
+  <link rel="stylesheet" href="bottlr.css">
 </head>
-<body>
-<div class="scroll-progress" id="scrollProgress"></div>
-<header class="site-header" id="header"><div class="header-inner"><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button><nav class="desktop-nav"><ul><li><a href="earn-with-bottlr.html">earn</a></li><li><a href="business.html">business</a></li><li><a href="network.html">network</a></li><li><a href="cities.html">cities</a></li><li><a href="join-waitlist.html" class="chip-cta">join waitlist</a></li></ul></nav></div></header>
-<div class="menu-overlay" id="menuOverlay"></div><nav class="mobile-menu" id="mobileMenu"><a href="earn-with-bottlr.html">earn with bottlr</a><a href="business.html">for businesses</a><a href="network.html">the network</a><a href="cities.html">cities</a><a href="join-waitlist.html" class="cta-mobile">join waitlist</a></nav>
-<main class="page-main"><div class="container"><section class="page-hero"><h1>earn with bottlr</h1><p>live route visibility for collectors, with less guesswork and clearer pickup flow.</p></section><section class="split"><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">collector-first tools</h3><p style="color:var(--muted);">see nearby opportunities, claim faster, and keep activity visible.</p></article><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">join launch waitlist</h3><form class="waitlist-form" onsubmit="handleWaitlistInline(event)" data-source="earn-page"><input type="email" name="email" placeholder="collector email" required><button class="btn btn-primary" type="submit">join waitlist</button><div class="waitlist-status" data-role="status"></div></form></article></section></div></main>
-<footer class="footer"><div class="footer-inner"><div><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><p style="margin-top:.5rem;color:var(--muted);max-width:420px;">people-powered recycling logistics. launching city by city.</p></div><div><h4>product</h4><ul><li><a href="how-it-works.html">how it works</a></li><li><a href="earn-with-bottlr.html">earn with bottlr</a></li><li><a href="business.html">for businesses</a></li><li><a href="network.html">the network</a></li></ul></div><div><h4>company</h4><ul><li><a href="about.html">about</a></li><li><a href="cities.html">cities</a></li><li><a href="press.html">press</a></li><li><a href="funding.html">partners</a></li></ul></div><div><h4>resources</h4><ul><li><a href="join-waitlist.html">join waitlist</a></li><li><a href="community.html">community</a></li><li><a href="safety.html">safety</a></li><li><a href="privacy.html">privacy</a></li><li><a href="terms.html">terms</a></li></ul></div></div><div class="footer-bottom">© 2026 bottlr. all rights reserved.</div></footer>
-<script src="site.js"></script>
+<body><div class="scroll-progress" id="scrollProgress"></div>
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+    <button class="hamburger" id="hamburger" aria-label="menu"><span></span><span></span><span></span></button>
+    <nav class="desktop-nav"><ul>
+      <li><a href="earn-with-bottlr.html">earn</a></li>
+      <li><a href="business.html">business</a></li>
+      <li><a href="network.html">network</a></li>
+      <li><a href="cities.html">cities</a></li>
+      <li><a href="join-waitlist.html" class="btn-nav">join waitlist</a></li>
+    </ul></nav>
+  </div>
+</header>
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="earn-with-bottlr.html">earn with bottlr</a>
+  <a href="business.html">for businesses</a>
+  <a href="network.html">the network</a>
+  <a href="cities.html">cities</a>
+  <a href="join-waitlist.html" class="cta-mobile">join waitlist</a>
+</nav>
+<main class="page-main">
+  <div class="page-hero-band">
+    <div class="page-hero-inner">
+      <div class="page-label">for collectors</div>
+      <h1>your work.<br>your route.<br><span style="color:var(--green)">your earnings.</span></h1>
+      <p class="sub">bottlr gives collectors live visibility into pickup jobs nearby — before leaving the house. Claim fast, route smart, keep everything you earn.</p>
+    </div>
+  </div>
+
+  <section class="section section--tinted">
+    <div class="section-inner">
+      <div class="split" style="gap:3rem;align-items:start;">
+        <div>
+          <div class="section-label reveal">how it works for you</div>
+          <h2 class="section-title reveal">less guessing.<br>more pickups.</h2>
+          <p class="section-desc reveal" style="margin-bottom:2rem;">Today, collectors walk routes hoping bottles will be there. bottlr flips the model — hosts post first, and collectors see exactly what's available, where, and when. No wasted trips.</p>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="feature-row reveal" style="--delay:0.05s"><div class="feature-icon icon-map"></div><div class="feature-text"><h3>live job map</h3><p>See all posted pickups near you on a live map before you leave home. Filter by distance and bottle count.</p></div></div>
+            <div class="feature-row reveal" style="--delay:0.1s"><div class="feature-icon icon-bolt"></div><div class="feature-text"><h3>tap once to claim</h3><p>Claim a job instantly. Get the address, bottle count, pickup window, and directions in one tap.</p></div></div>
+            <div class="feature-row reveal" style="--delay:0.15s"><div class="feature-icon icon-coin"></div><div class="feature-text"><h3>100% of CRV is yours</h3><p>We make money from businesses, not collectors. Every cent of bottle deposit redemption goes directly to you.</p></div></div>
+            <div class="feature-row reveal" style="--delay:0.2s"><div class="feature-icon icon-chart"></div><div class="feature-text"><h3>track everything</h3><p>Completed pickups, bottles diverted, and earnings history — all visible in one dashboard.</p></div></div>
+          </div>
+        </div>
+        <div class="reveal" style="--delay:0.1s;">
+          <div style="background:linear-gradient(135deg,var(--ink) 0%,#1a3552 100%);border-radius:var(--radius);padding:2.5rem;display:flex;flex-direction:column;gap:1.5rem;">
+            <div>
+              <div class="live-pill"><span class="live-dot"></span> collector early access</div>
+              <h3 style="font-family:var(--font-display);color:var(--white);font-size:1.4rem;text-transform:lowercase;line-height:1.2;margin-top:0.5rem;">be first to see<br>jobs in your city.</h3>
+              <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;margin-top:0.75rem;line-height:1.65;">Join the waitlist and get first access when San Jose routes open. We'll notify you the day pickups go live.</p>
+            </div>
+            <form class="form-stack" onsubmit="handleWaitlistInline(event)" data-source="earn-page" style="margin-top:0.5rem;">
+              <input type="email" name="email" class="form-field form-field--light" placeholder="your email" required>
+              <button type="submit" class="btn btn-green" style="width:100%;justify-content:center;">join collector waitlist</button>
+              <div data-role="status" class="form-status"></div>
+            </form>
+            <p style="font-size:0.78rem;color:rgba(255,255,255,0.4);">always free. no subscription. 100% of CRV goes to you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">why collectors choose bottlr</div>
+        <h2 class="section-title">the numbers that matter.</h2>
+      </div>
+      <div class="metrics-band reveal" style="--delay:0.1s;">
+        <div class="metric-cell"><div class="metric-big">0%</div><div class="metric-label">platform cut</div><p class="metric-desc">We take nothing from collectors. Revenue comes from business subscriptions, not your pickups.</p></div>
+        <div class="metric-cell"><div class="metric-big">live</div><div class="metric-label">job availability</div><p class="metric-desc">Jobs update in real time as hosts post them. No stale listings, no wasted trips.</p></div>
+        <div class="metric-cell"><div class="metric-big">1 tap</div><div class="metric-label">to claim a job</div><p class="metric-desc">No back-and-forth, no confirmation calls. Claim and go.</p></div>
+        <div class="metric-cell"><div class="metric-big">clear</div><div class="metric-label">earnings dashboard</div><p class="metric-desc">Every pickup and every dollar tracked in one transparent view.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tinted">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">how the money works</div>
+        <h2 class="section-title">you keep what you collect.</h2>
+        <p class="section-desc">California's CRV (California Redemption Value) is a bottle deposit paid when you buy a beverage — and redeemable when you return the bottle. bottlr routes unclaimed bottles to collectors who do the pickup and redemption. 100% of that CRV is yours.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card reveal" style="--delay:0.05s">
+          <h3 style="color:var(--blue)">for common bottles and cans</h3>
+          <p>CRV varies by container type and material. Aluminum cans, glass bottles, and plastic containers all have their own redemption rates. bottlr shows you the bottle count so you can plan the value of a pickup before you claim it.</p>
+        </div>
+        <div class="card reveal" style="--delay:0.1s">
+          <h3 style="color:var(--green)">no deductions, no surprises</h3>
+          <p>What you take to the redemption center is what you keep. bottlr charges businesses a monthly fee to post pickups — collectors pay nothing and lose nothing off the top.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--off-white);">
+    <div class="section-inner">
+      <div class="cta-strip reveal">
+        <div><h3>start finding more pickups.</h3><p>Join early access and be notified the day San Jose routes go live. Free forever for collectors.</p></div>
+        <div class="cta-strip-actions">
+          <a href="join-waitlist.html" class="btn btn-green">join waitlist</a>
+          <a href="how-it-works.html" class="btn btn-ghost-white">how it works</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="footer-logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+      <p class="footer-tagline">recycling logistics powered by people. launching city by city.</p>
+    </div>
+    <div class="footer-col"><h4>product</h4><ul><li><a href="how-it-works.html">how it works</a></li><li><a href="earn-with-bottlr.html">earn with bottlr</a></li><li><a href="business.html">for businesses</a></li><li><a href="network.html">the network</a></li></ul></div>
+    <div class="footer-col"><h4>company</h4><ul><li><a href="about.html">about</a></li><li><a href="cities.html">cities</a></li><li><a href="press.html">press</a></li><li><a href="funding.html">partners</a></li></ul></div>
+    <div class="footer-col"><h4>resources</h4><ul><li><a href="join-waitlist.html">join waitlist</a></li><li><a href="community.html">community</a></li><li><a href="safety.html">safety</a></li><li><a href="privacy.html">privacy</a></li><li><a href="terms.html">terms</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 bottlr. all rights reserved.</span><a href="join-waitlist.html" class="footer-badge">get early access</a></div>
+</footer>
+<script src="bottlr.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>

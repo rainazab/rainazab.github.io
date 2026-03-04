@@ -3,29 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>How it works - bottlr</title>
-  <meta name="description" content="How bottlr works for collectors and hosts.">
+  <title>How it works — bottlr</title>
+  <meta name="description" content="How bottlr coordinates bottle pickups between collectors and hosts in real time.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css">
-  <link rel="stylesheet" href="styles/components.css">
-  <link rel="stylesheet" href="styles/layout.css">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/brand/app-icon.png">
+  <link rel="stylesheet" href="bottlr.css">
 </head>
-<body>
-<div class="scroll-progress" id="scrollProgress"></div>
-<header class="site-header" id="header"><div class="header-inner"><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button><nav class="desktop-nav"><ul><li><a href="earn-with-bottlr.html">earn</a></li><li><a href="business.html">business</a></li><li><a href="network.html">network</a></li><li><a href="cities.html">cities</a></li><li><a href="join-waitlist.html" class="chip-cta">join waitlist</a></li></ul></nav></div></header>
-<div class="menu-overlay" id="menuOverlay"></div><nav class="mobile-menu" id="mobileMenu"><a href="earn-with-bottlr.html">earn with bottlr</a><a href="business.html">for businesses</a><a href="network.html">the network</a><a href="cities.html">cities</a><a href="join-waitlist.html" class="cta-mobile">join waitlist</a></nav>
-<main class="page-main"><div class="container">
-  <section class="page-hero"><h1>how bottlr works</h1><p>hosts post pickups, collectors claim routes, and the network tracks real-world completion.</p></section>
-  <section class="split">
-    <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">1. post</h3><p style="color:var(--muted);">hosts post bottle availability, location, and time window.</p></article>
-    <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">2. claim</h3><p style="color:var(--muted);">collectors see nearby options and claim routes in real time.</p></article>
-    <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">3. pickup</h3><p style="color:var(--muted);">handoff is completed and verified for both sides.</p></article>
-    <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">4. track</h3><p style="color:var(--muted);">activity becomes visible across collector, host, and network level.</p></article>
+<body><div class="scroll-progress" id="scrollProgress"></div>
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+    <button class="hamburger" id="hamburger" aria-label="menu"><span></span><span></span><span></span></button>
+    <nav class="desktop-nav"><ul>
+      <li><a href="earn-with-bottlr.html">earn</a></li>
+      <li><a href="business.html">business</a></li>
+      <li><a href="network.html">network</a></li>
+      <li><a href="cities.html">cities</a></li>
+      <li><a href="join-waitlist.html" class="btn-nav">join waitlist</a></li>
+    </ul></nav>
+  </div>
+</header>
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="earn-with-bottlr.html">earn with bottlr</a>
+  <a href="business.html">for businesses</a>
+  <a href="network.html">the network</a>
+  <a href="cities.html">cities</a>
+  <a href="join-waitlist.html" class="cta-mobile">join waitlist</a>
+</nav>
+<main class="page-main">
+  <div class="page-hero-band">
+    <div class="page-hero-inner">
+      <div class="page-label">how it works</div>
+      <h1>simple for everyone<br>in the<br><span style="color:var(--green)">network.</span></h1>
+      <p class="sub">bottlr works because every actor has a clear role. Hosts post. Collectors claim. The app handles coordination, verification, and tracking automatically.</p>
+    </div>
+  </div>
+
+  <section class="section section--tinted">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">for collectors</div>
+        <h2 class="section-title">find pickups. claim. go.</h2>
+      </div>
+      <div class="steps reveal" style="--delay:0.05s;">
+        <div class="step"><div class="step-num">01</div><div class="step-body"><h3>open the map</h3><p>See all available pickup postings near you in real time. Each one shows location, bottle count, and pickup window — before you leave home.</p></div></div>
+        <div class="step"><div class="step-num">02</div><div class="step-body"><h3>claim your job</h3><p>Tap to claim. The job locks to you instantly. You get the address, directions, and host contact — no back-and-forth needed.</p></div></div>
+        <div class="step"><div class="step-num">03</div><div class="step-body"><h3>complete the pickup</h3><p>Do the pickup, submit a photo in the app to verify completion. The host is notified and the job is marked complete.</p></div></div>
+        <div class="step"><div class="step-num">04</div><div class="step-body"><h3>redeem and earn</h3><p>Take bottles to your nearest redemption center. Keep 100% of the CRV. Your earnings and history are tracked in the dashboard.</p></div></div>
+      </div>
+    </div>
   </section>
-</div></main>
-<footer class="footer"><div class="footer-inner"><div><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><p style="margin-top:.5rem;color:var(--muted);max-width:420px;">people-powered recycling logistics. launching city by city.</p></div><div><h4>product</h4><ul><li><a href="how-it-works.html">how it works</a></li><li><a href="earn-with-bottlr.html">earn with bottlr</a></li><li><a href="business.html">for businesses</a></li><li><a href="network.html">the network</a></li></ul></div><div><h4>company</h4><ul><li><a href="about.html">about</a></li><li><a href="cities.html">cities</a></li><li><a href="press.html">press</a></li><li><a href="funding.html">partners</a></li></ul></div><div><h4>resources</h4><ul><li><a href="join-waitlist.html">join waitlist</a></li><li><a href="community.html">community</a></li><li><a href="safety.html">safety</a></li><li><a href="privacy.html">privacy</a></li><li><a href="terms.html">terms</a></li></ul></div></div><div class="footer-bottom">© 2026 bottlr. all rights reserved.</div></footer>
-<script src="site.js"></script>
+
+  <section class="section" style="background:var(--off-white);">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">for hosts</div>
+        <h2 class="section-title">post once. done.</h2>
+      </div>
+      <div class="steps reveal" style="--delay:0.05s;">
+        <div class="step"><div class="step-num">01</div><div class="step-body"><h3>create a posting</h3><p>Add your location, approximate bottle count, and when they're available. The whole form takes under a minute.</p></div></div>
+        <div class="step"><div class="step-num">02</div><div class="step-body"><h3>a collector claims it</h3><p>Your posting goes live on the collector map. When someone claims it, you get a notification with their name and ETA.</p></div></div>
+        <div class="step"><div class="step-num">03</div><div class="step-body"><h3>get verification</h3><p>The collector submits a photo when the pickup is complete. You receive a timestamped completion record automatically.</p></div></div>
+        <div class="step"><div class="step-num">04</div><div class="step-body"><h3>track your impact</h3><p>Your dashboard accumulates pickup history, bottle counts, and CO&sup2; estimates — exportable for sustainability reporting.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">the coordination layer</div>
+        <h2 class="section-title">what bottlr actually does.</h2>
+        <p class="section-desc">We're not a marketplace. We're a real-time coordination system. Here's what that means in practice.</p>
+      </div>
+      <div class="grid-2 reveal" style="--delay:0.05s;">
+        <div class="card card--dark"><h3>live job locking</h3><p>When a collector claims a job, it's locked instantly. No double-booking, no race conditions. One job, one collector, always.</p></div>
+        <div class="card card--dark"><h3>photo verification</h3><p>Every pickup is photo-verified at completion. This creates an immutable record for both sides and builds accountability into the network.</p></div>
+        <div class="card card--dark"><h3>route intelligence</h3><p>The app shows collectors nearby jobs in a logical order — helping them build efficient routes rather than one-off trips.</p></div>
+        <div class="card card--dark"><h3>outcome tracking</h3><p>Every completed pickup is logged: who, what, where, when. Both collectors and hosts see their full history in a persistent dashboard.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tinted">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">the app</div>
+        <h2 class="section-title">see it in action.</h2>
+        <p class="section-desc">Real screens from the working app — collector map, job claiming, host posting, and completion flows.</p>
+      </div>
+      <div class="gallery-marquee reveal" style="--delay:0.1s;">
+        <div class="gallery-track">
+          <figure class="screen-card"><img src="assets/images/screenshots/collector-map-view.png" alt="live pickup map"><figcaption>live pickup map</figcaption></figure>
+          <figure class="screen-card"><img src="assets/images/screenshots/collection-view.png" alt="pickup detail"><figcaption>pickup detail</figcaption></figure>
+          <figure class="screen-card"><img src="assets/images/screenshots/collections-list-view.png" alt="nearby pickups"><figcaption>nearby list</figcaption></figure>
+          <figure class="screen-card"><img src="assets/images/screenshots/colleciton-view1.png" alt="job status"><figcaption>job status</figcaption></figure>
+          <figure class="screen-card"><img src="assets/images/screenshots/host-home-view-map.png" alt="host map"><figcaption>host map</figcaption></figure>
+          <figure class="screen-card"><img src="assets/images/screenshots/host-post-view.png" alt="post form"><figcaption>post a pickup</figcaption></figure>
+          <figure class="screen-card"><img src="assets/images/screenshots/hos-home-view.png" alt="host overview"><figcaption>host activity</figcaption></figure>
+          <figure class="screen-card"><img src="assets/images/screenshots/onboarding-view.png" alt="onboarding"><figcaption>onboarding</figcaption></figure>
+          <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/collector-map-view.png" alt=""><figcaption>live pickup map</figcaption></figure>
+          <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/collection-view.png" alt=""><figcaption>pickup detail</figcaption></figure>
+          <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/collections-list-view.png" alt=""><figcaption>nearby list</figcaption></figure>
+          <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/colleciton-view1.png" alt=""><figcaption>job status</figcaption></figure>
+          <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/host-home-view-map.png" alt=""><figcaption>host map</figcaption></figure>
+          <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/host-post-view.png" alt=""><figcaption>post a pickup</figcaption></figure>
+          <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/hos-home-view.png" alt=""><figcaption>host activity</figcaption></figure>
+          <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/onboarding-view.png" alt=""><figcaption>onboarding</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--off-white);">
+    <div class="section-inner">
+      <div class="cta-strip reveal">
+        <div><h3>ready to use it?</h3><p>Join the waitlist for San Jose and be the first to know when routes go live.</p></div>
+        <div class="cta-strip-actions">
+          <a href="join-waitlist.html" class="btn btn-green">join waitlist</a>
+          <a href="business.html" class="btn btn-ghost-white">for businesses</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="footer-logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+      <p class="footer-tagline">recycling logistics powered by people. launching city by city.</p>
+    </div>
+    <div class="footer-col"><h4>product</h4><ul><li><a href="how-it-works.html">how it works</a></li><li><a href="earn-with-bottlr.html">earn with bottlr</a></li><li><a href="business.html">for businesses</a></li><li><a href="network.html">the network</a></li></ul></div>
+    <div class="footer-col"><h4>company</h4><ul><li><a href="about.html">about</a></li><li><a href="cities.html">cities</a></li><li><a href="press.html">press</a></li><li><a href="funding.html">partners</a></li></ul></div>
+    <div class="footer-col"><h4>resources</h4><ul><li><a href="join-waitlist.html">join waitlist</a></li><li><a href="community.html">community</a></li><li><a href="safety.html">safety</a></li><li><a href="privacy.html">privacy</a></li><li><a href="terms.html">terms</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 bottlr. all rights reserved.</span><a href="join-waitlist.html" class="footer-badge">get early access</a></div>
+</footer>
+<script src="bottlr.js"></script>
 </body>
 </html>

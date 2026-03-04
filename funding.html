@@ -3,39 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Partners - bottlr</title>
-  <meta name="description" content="Partnerships and aligned support for bottlr launch cities.">
+  <title>Partners — bottlr</title>
+  <meta name="description" content="Partnership, business host, and community inquiry for bottlr.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css">
-  <link rel="stylesheet" href="styles/components.css">
-  <link rel="stylesheet" href="styles/layout.css">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/brand/app-icon.png">
+  <link rel="stylesheet" href="bottlr.css">
 </head>
-<body>
-<div class="scroll-progress" id="scrollProgress"></div>
-<header class="site-header" id="header"><div class="header-inner"><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button><nav class="desktop-nav"><ul><li><a href="earn-with-bottlr.html">earn</a></li><li><a href="business.html">business</a></li><li><a href="network.html">network</a></li><li><a href="cities.html">cities</a></li><li><a href="join-waitlist.html" class="chip-cta">join waitlist</a></li></ul></nav></div></header>
-<div class="menu-overlay" id="menuOverlay"></div><nav class="mobile-menu" id="mobileMenu"><a href="earn-with-bottlr.html">earn with bottlr</a><a href="business.html">for businesses</a><a href="network.html">the network</a><a href="cities.html">cities</a><a href="join-waitlist.html" class="cta-mobile">join waitlist</a></nav>
-<main class="page-main"><div class="container">
-  <section class="page-hero"><h1>partners</h1><p>we are onboarding early businesses, community groups, and aligned support as launch cities open.</p></section>
-  <section class="split">
-    <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">where partners help most</h3><p style="color:var(--muted);">pilot hosts, local operator introductions, community distribution, and city expansion support.</p></article>
-    <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">how support gets used</h3><p style="color:var(--muted);">collector onboarding, route operations, product reliability, and trust workflows.</p></article>
+<body><div class="scroll-progress" id="scrollProgress"></div>
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+    <button class="hamburger" id="hamburger" aria-label="menu"><span></span><span></span><span></span></button>
+    <nav class="desktop-nav"><ul>
+      <li><a href="earn-with-bottlr.html">earn</a></li>
+      <li><a href="business.html">business</a></li>
+      <li><a href="network.html">network</a></li>
+      <li><a href="cities.html">cities</a></li>
+      <li><a href="join-waitlist.html" class="btn-nav">join waitlist</a></li>
+    </ul></nav>
+  </div>
+</header>
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="earn-with-bottlr.html">earn with bottlr</a>
+  <a href="business.html">for businesses</a>
+  <a href="network.html">the network</a>
+  <a href="cities.html">cities</a>
+  <a href="join-waitlist.html" class="cta-mobile">join waitlist</a>
+</nav>
+<main class="page-main">
+  <div class="page-hero-band">
+    <div class="page-hero-inner">
+      <div class="page-label">partners</div>
+      <h1>building this<br>with the right<br><span style="color:var(--green)">people.</span></h1>
+      <p class="sub">We're onboarding early host businesses, community partners, and aligned supporters as we open San Jose and plan the next cities. If you see what we're building and want in, this is the page.</p>
+    </div>
+  </div>
+
+  <section class="section section--tinted">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">partnership types</div>
+        <h2 class="section-title">how partners help most.</h2>
+      </div>
+      <div class="grid-3 reveal" style="--delay:0.05s;">
+        <div class="card"><h3 style="color:var(--blue);">host business pilots</h3><p>Restaurants, offices, and event venues that want to become early bottlr hosts in San Jose. First movers get priority collector matching and personal onboarding.</p><a href="#contact-form" class="btn btn-outline btn-sm" style="margin-top:1rem;">apply as host</a></div>
+        <div class="card"><h3 style="color:var(--blue);">community organizations</h3><p>Nonprofits, sustainability groups, and neighborhood orgs that work with collector communities or want verified recycling infrastructure for their programs.</p><a href="#contact-form" class="btn btn-outline btn-sm" style="margin-top:1rem;">become a community partner</a></div>
+        <div class="card"><h3 style="color:var(--blue);">grants + institutional</h3><p>University research partnerships, sustainability grants, and civic programs aligned with collector-first recycling infrastructure. Active conversations open.</p><a href="#contact-form" class="btn btn-outline btn-sm" style="margin-top:1rem;">explore institutional support</a></div>
+      </div>
+    </div>
   </section>
-  <section class="card" id="contact-form" style="margin-top:1rem;">
-    <h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">contact form</h3>
-    <p style="color:var(--muted);margin-top:.2rem;">partnership, grant, press, careers, or community inquiry.</p>
-    <form class="waitlist-form" onsubmit="handleFundingContact(event)" style="margin-top:.75rem;">
-      <input type="text" id="contactName" placeholder="name" required>
-      <input type="email" id="contactEmail" placeholder="email" required>
-      <textarea id="contactMessage" rows="4" placeholder="message" required></textarea>
-      <button type="submit" class="btn btn-primary" id="contactSubmit">send</button>
-      <div class="waitlist-status" id="contactStatus"></div>
-    </form>
+
+  <section class="section section--dark">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">where support goes</div>
+        <h2 class="section-title">every dollar is operational.</h2>
+        <p class="section-desc">We're not spending on marketing. We're spending on the things that make the network actually work.</p>
+      </div>
+      <div class="metrics-band reveal" style="--delay:0.05s;">
+        <div class="metric-cell"><div class="metric-big">ops</div><div class="metric-label">collector onboarding</div><p class="metric-desc">Time and resources to activate the right collectors in each city before launch.</p></div>
+        <div class="metric-cell"><div class="metric-big">tech</div><div class="metric-label">product reliability</div><p class="metric-desc">The live map, claim flow, and verification system need to work flawlessly from day one.</p></div>
+        <div class="metric-cell"><div class="metric-big">trust</div><div class="metric-label">verification systems</div><p class="metric-desc">Photo verification, dispute resolution, and the workflows that make both sides confident.</p></div>
+        <div class="metric-cell"><div class="metric-big">reach</div><div class="metric-label">city expansion</div><p class="metric-desc">After San Jose, resources go toward activating the next city — same disciplined approach.</p></div>
+      </div>
+    </div>
   </section>
-</div></main>
-<footer class="footer"><div class="footer-inner"><div><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><p style="margin-top:.5rem;color:var(--muted);max-width:420px;">people-powered recycling logistics. launching city by city.</p></div><div><h4>product</h4><ul><li><a href="how-it-works.html">how it works</a></li><li><a href="earn-with-bottlr.html">earn with bottlr</a></li><li><a href="business.html">for businesses</a></li><li><a href="network.html">the network</a></li></ul></div><div><h4>company</h4><ul><li><a href="about.html">about</a></li><li><a href="cities.html">cities</a></li><li><a href="press.html">press</a></li><li><a href="funding.html">partners</a></li></ul></div><div><h4>resources</h4><ul><li><a href="join-waitlist.html">join waitlist</a></li><li><a href="community.html">community</a></li><li><a href="safety.html">safety</a></li><li><a href="privacy.html">privacy</a></li><li><a href="terms.html">terms</a></li></ul></div></div><div class="footer-bottom">© 2026 bottlr. all rights reserved.</div></footer>
-<script src="site.js"></script>
+
+  <section class="section section--tinted" id="contact-form">
+    <div class="section-inner">
+      <div class="split" style="gap:3rem;align-items:start;">
+        <div class="reveal">
+          <div class="section-label">contact</div>
+          <h2 class="section-title">let's talk.</h2>
+          <p class="section-desc" style="margin-bottom:1.5rem;">Whether you're a business, grant funder, community org, journalist, or just someone who wants this to succeed — reach out. We respond to everything within 48 hours.</p>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;">
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.875rem;color:var(--gray);"><span style="width:8px;height:8px;background:var(--green);border-radius:50%;flex-shrink:0;"></span>business host pilot applications</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.875rem;color:var(--gray);"><span style="width:8px;height:8px;background:var(--green);border-radius:50%;flex-shrink:0;"></span>community partnership inquiries</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.875rem;color:var(--gray);"><span style="width:8px;height:8px;background:var(--green);border-radius:50%;flex-shrink:0;"></span>grant and institutional conversations</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.875rem;color:var(--gray);"><span style="width:8px;height:8px;background:var(--green);border-radius:50%;flex-shrink:0;"></span>press and media inquiries</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.875rem;color:var(--gray);"><span style="width:8px;height:8px;background:var(--green);border-radius:50%;flex-shrink:0;"></span>city expansion requests</div>
+          </div>
+        </div>
+        <div class="card reveal" style="--delay:0.1s;padding:2rem;">
+          <h3 style="font-size:1.1rem;color:var(--ink);margin-bottom:1.5rem;">send a message</h3>
+          <form class="form-stack" onsubmit="handleFundingContact(event)">
+            <input type="text" id="contactName" class="form-field" placeholder="your name" required>
+            <input type="email" id="contactEmail" class="form-field" placeholder="email address" required>
+            <select id="contactType" class="form-field">
+              <option value="">inquiry type...</option>
+              <option value="host">business host pilot</option>
+              <option value="community">community partnership</option>
+              <option value="grant">grant / institutional</option>
+              <option value="press">press / media</option>
+              <option value="city">city expansion request</option>
+              <option value="other">other</option>
+            </select>
+            <textarea id="contactMessage" class="form-field form-field-full" rows="5" placeholder="tell us what you're thinking — the more context the better" required></textarea>
+            <button type="submit" class="btn btn-green" id="contactSubmit" style="width:100%;justify-content:center;">send message</button>
+            <div id="contactStatus" class="form-status" style="text-align:center;"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="footer-logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+      <p class="footer-tagline">recycling logistics powered by people. launching city by city.</p>
+    </div>
+    <div class="footer-col"><h4>product</h4><ul><li><a href="how-it-works.html">how it works</a></li><li><a href="earn-with-bottlr.html">earn with bottlr</a></li><li><a href="business.html">for businesses</a></li><li><a href="network.html">the network</a></li></ul></div>
+    <div class="footer-col"><h4>company</h4><ul><li><a href="about.html">about</a></li><li><a href="cities.html">cities</a></li><li><a href="press.html">press</a></li><li><a href="funding.html">partners</a></li></ul></div>
+    <div class="footer-col"><h4>resources</h4><ul><li><a href="join-waitlist.html">join waitlist</a></li><li><a href="community.html">community</a></li><li><a href="safety.html">safety</a></li><li><a href="privacy.html">privacy</a></li><li><a href="terms.html">terms</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 bottlr. all rights reserved.</span><a href="join-waitlist.html" class="footer-badge">get early access</a></div>
+</footer>
+<script src="bottlr.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>

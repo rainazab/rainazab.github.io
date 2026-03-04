@@ -1,19 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>The network - bottlr</title>
-  <meta name="description" content="Hosts to collectors to processing to payout.">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/base.css"><link rel="stylesheet" href="styles/components.css"><link rel="stylesheet" href="styles/layout.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>The network — bottlr</title>
+  <meta name="description" content="How the bottlr network flows — from host posting to collector pickup to payout.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/brand/app-icon.png">
+  <link rel="stylesheet" href="bottlr.css">
 </head>
-<body>
-<div class="scroll-progress" id="scrollProgress"></div>
-<header class="site-header" id="header"><div class="header-inner"><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button><nav class="desktop-nav"><ul><li><a href="earn-with-bottlr.html">earn</a></li><li><a href="business.html">business</a></li><li><a href="network.html">network</a></li><li><a href="cities.html">cities</a></li><li><a href="join-waitlist.html" class="chip-cta">join waitlist</a></li></ul></nav></div></header>
-<div class="menu-overlay" id="menuOverlay"></div><nav class="mobile-menu" id="mobileMenu"><a href="earn-with-bottlr.html">earn with bottlr</a><a href="business.html">for businesses</a><a href="network.html">the network</a><a href="cities.html">cities</a><a href="join-waitlist.html" class="cta-mobile">join waitlist</a></nav>
-<main class="page-main"><div class="container"><section class="page-hero"><h1>the bottlr network</h1><p>hosts -> collectors -> processing -> payout. one local operating flow.</p></section><section class="split"><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">hosts</h3><p style="color:var(--muted);">post availability and pickup windows.</p></article><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">collectors</h3><p style="color:var(--muted);">claim nearby jobs and complete handoffs.</p></article><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">processing</h3><p style="color:var(--muted);">materials route into existing redemption pathways.</p></article><article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">payout + impact</h3><p style="color:var(--muted);">value returns to collectors and local communities.</p></article></section></div></main>
-<footer class="footer"><div class="footer-inner"><div><a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a><p style="margin-top:.5rem;color:var(--muted);max-width:420px;">people-powered recycling logistics. launching city by city.</p></div><div><h4>product</h4><ul><li><a href="how-it-works.html">how it works</a></li><li><a href="earn-with-bottlr.html">earn with bottlr</a></li><li><a href="business.html">for businesses</a></li><li><a href="network.html">the network</a></li></ul></div><div><h4>company</h4><ul><li><a href="about.html">about</a></li><li><a href="cities.html">cities</a></li><li><a href="press.html">press</a></li><li><a href="funding.html">partners</a></li></ul></div><div><h4>resources</h4><ul><li><a href="join-waitlist.html">join waitlist</a></li><li><a href="community.html">community</a></li><li><a href="safety.html">safety</a></li><li><a href="privacy.html">privacy</a></li><li><a href="terms.html">terms</a></li></ul></div></div><div class="footer-bottom">© 2026 bottlr. all rights reserved.</div></footer>
-<script src="site.js"></script>
+<body><div class="scroll-progress" id="scrollProgress"></div>
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+    <button class="hamburger" id="hamburger" aria-label="menu"><span></span><span></span><span></span></button>
+    <nav class="desktop-nav"><ul>
+      <li><a href="earn-with-bottlr.html">earn</a></li>
+      <li><a href="business.html">business</a></li>
+      <li><a href="network.html">network</a></li>
+      <li><a href="cities.html">cities</a></li>
+      <li><a href="join-waitlist.html" class="btn-nav">join waitlist</a></li>
+    </ul></nav>
+  </div>
+</header>
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="earn-with-bottlr.html">earn with bottlr</a>
+  <a href="business.html">for businesses</a>
+  <a href="network.html">the network</a>
+  <a href="cities.html">cities</a>
+  <a href="join-waitlist.html" class="cta-mobile">join waitlist</a>
+</nav>
+<main class="page-main">
+  <div class="page-hero-band">
+    <div class="page-hero-inner">
+      <div class="page-label">the network</div>
+      <h1>one local flow.<br>hosts. collectors.<br><span style="color:var(--green)">value returned.</span></h1>
+      <p class="sub">The bottlr network is a closed loop: businesses post, collectors claim, redemption centers process, and value flows back into the community. Live, local, and transparent.</p>
+    </div>
+  </div>
+
+  <section class="section section--tinted">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">the flow</div>
+        <h2 class="section-title">four actors. one clean loop.</h2>
+        <p class="section-desc">Every pickup on bottlr follows the same path — from host posting to collector earnings, with verification at every step.</p>
+      </div>
+      <div class="steps reveal" style="--delay:0.05s;">
+        <div class="step"><div class="step-num">H</div><div class="step-body"><h3>hosts post</h3><p>Businesses, households, and event venues post pickup availability: location, bottle count, and time window. Visible instantly on the live map.</p></div></div>
+        <div class="step"><div class="step-num">C</div><div class="step-body"><h3>collectors claim</h3><p>Collectors nearby see the posting, evaluate the route and count, and claim with one tap. The host gets a notification. The job is locked.</p></div></div>
+        <div class="step"><div class="step-num">P</div><div class="step-body"><h3>pickup + verify</h3><p>The collector completes the pickup and submits photo verification through the app. Both sides get a timestamped completion record.</p></div></div>
+        <div class="step"><div class="step-num">$</div><div class="step-body"><h3>payout + impact</h3><p>The collector redeems bottles and keeps 100% of CRV. The host gets an impact summary. The network records the outcome.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--off-white);">
+    <div class="section-inner">
+      <div class="split" style="gap:3rem;align-items:start;">
+        <div class="reveal">
+          <div class="section-label">network principles</div>
+          <h2 class="section-title">designed for trust at scale.</h2>
+          <p class="section-desc" style="margin-bottom:1.5rem;">The bottlr network works because every actor has clear incentives and every action is verified. There's no ambiguity about who picked up what, or when.</p>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="card card--accent reveal" style="--delay:0.05s"><h3>photo verification on every job</h3><p>Collectors submit a photo at pickup. This creates an immutable record for the host and an accountability layer for the network.</p></div>
+            <div class="card card--accent reveal" style="--delay:0.1s"><h3>real-time job locking</h3><p>Once claimed, a job is locked to that collector. No double-claiming, no race conditions, no wasted trips.</p></div>
+            <div class="card card--accent reveal" style="--delay:0.15s"><h3>transparent completion history</h3><p>Both collectors and hosts see their full history: completed pickups, quantities, timing, and outcomes. No black boxes.</p></div>
+          </div>
+        </div>
+        <div class="reveal" style="--delay:0.15s;">
+          <div style="background:var(--blue-frost);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+            <div style="padding:2rem;border-bottom:1px solid var(--border);">
+              <div class="section-label" style="margin-bottom:0.5rem;">network participants</div>
+              <h3 style="font-family:var(--font-display);font-size:1.1rem;text-transform:lowercase;color:var(--ink);">who the network runs on</h3>
+            </div>
+            <div style="padding:1.5rem;display:flex;flex-direction:column;gap:0;">
+              <div style="padding:1.25rem 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;">
+                <div style="width:36px;height:36px;background:var(--white);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-display);font-size:0.85rem;color:var(--blue);">H</div>
+                <div><div style="font-weight:700;font-size:0.9rem;text-transform:lowercase;">hosts</div><div style="font-size:0.82rem;color:var(--gray);">restaurants, offices, events, households</div></div>
+              </div>
+              <div style="padding:1.25rem 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;">
+                <div style="width:36px;height:36px;background:var(--white);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-display);font-size:0.85rem;color:var(--green);">C</div>
+                <div><div style="font-weight:700;font-size:0.9rem;text-transform:lowercase;">collectors</div><div style="font-size:0.82rem;color:var(--gray);">independent workers, neighborhood operators</div></div>
+              </div>
+              <div style="padding:1.25rem 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;">
+                <div style="width:36px;height:36px;background:var(--white);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-display);font-size:0.85rem;color:var(--ink);">R</div>
+                <div><div style="font-weight:700;font-size:0.9rem;text-transform:lowercase;">redemption centers</div><div style="font-size:0.82rem;color:var(--gray);">existing CA CRV infrastructure</div></div>
+              </div>
+              <div style="padding:1.25rem 0;display:flex;align-items:center;gap:1rem;">
+                <div style="width:36px;height:36px;background:var(--blue-pale);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-display);font-size:0.85rem;color:var(--blue);">B</div>
+                <div><div style="font-weight:700;font-size:0.9rem;text-transform:lowercase;">bottlr</div><div style="font-size:0.82rem;color:var(--gray);">coordination layer — not a middleman in the money flow</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">network economics</div>
+        <h2 class="section-title">how the money moves.</h2>
+        <p class="section-desc">bottlr charges businesses a flat monthly fee to post pickups. Collectors pay nothing — and keep everything they redeem. That's the model.</p>
+      </div>
+      <div class="metrics-band reveal" style="--delay:0.1s;">
+        <div class="metric-cell"><div class="metric-big">$0</div><div class="metric-label">cost to collectors</div><p class="metric-desc">Free to download, free to use, free forever. We never monetize the people doing the work.</p></div>
+        <div class="metric-cell"><div class="metric-big">100%</div><div class="metric-label">CRV to collector</div><p class="metric-desc">Every bottle deposit goes to the collector who picks it up. Zero cut from bottlr.</p></div>
+        <div class="metric-cell"><div class="metric-big">flat</div><div class="metric-label">business pricing</div><p class="metric-desc">Businesses pay a predictable monthly fee. No per-pickup fees, no hidden costs.</p></div>
+        <div class="metric-cell"><div class="metric-big">local</div><div class="metric-label">value stays local</div><p class="metric-desc">CRV money recirculates in the neighborhood — from host to collector to local spending.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tinted">
+    <div class="section-inner">
+      <div class="cta-strip reveal">
+        <div><h3>join the network.</h3><p>Whether you generate bottles or collect them — the network is open and growing.</p></div>
+        <div class="cta-strip-actions">
+          <a href="join-waitlist.html" class="btn btn-green">join as collector</a>
+          <a href="business.html" class="btn btn-ghost-white">join as host</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="footer-logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+      <p class="footer-tagline">recycling logistics powered by people. launching city by city.</p>
+    </div>
+    <div class="footer-col"><h4>product</h4><ul><li><a href="how-it-works.html">how it works</a></li><li><a href="earn-with-bottlr.html">earn with bottlr</a></li><li><a href="business.html">for businesses</a></li><li><a href="network.html">the network</a></li></ul></div>
+    <div class="footer-col"><h4>company</h4><ul><li><a href="about.html">about</a></li><li><a href="cities.html">cities</a></li><li><a href="press.html">press</a></li><li><a href="funding.html">partners</a></li></ul></div>
+    <div class="footer-col"><h4>resources</h4><ul><li><a href="join-waitlist.html">join waitlist</a></li><li><a href="community.html">community</a></li><li><a href="safety.html">safety</a></li><li><a href="privacy.html">privacy</a></li><li><a href="terms.html">terms</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 bottlr. all rights reserved.</span><a href="join-waitlist.html" class="footer-badge">get early access</a></div>
+</footer>
+<script src="bottlr.js"></script>
 </body>
 </html>
