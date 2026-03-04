@@ -3,33 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>bottlr - the people-powered recycling network</title>
-    <meta name="description" content="bottlr is a people-powered recycling network. Launching on iOS soon in early cities.">
+    <title>bottlr — the people's bottle network</title>
+    <meta name="description" content="bottlr connects bottle collectors with restaurants, offices, and events in real time. Real payouts. Real-time coordination.">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="bottlr - the people-powered recycling network">
-    <meta property="og:description" content="Turn bottles into real income with real-time pickup coordination.">
+    <meta property="og:title" content="bottlr — the people's bottle network">
+    <meta property="og:description" content="Real-time bottle pickup coordination. Free for collectors. Launching in San Jose.">
     <meta property="og:url" content="https://bottlr.tech/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/brand/app-icon.png">
-    <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/components.css">
-    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="apple-touch-icon" href="assets/images/brand/app-icon.png">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink: #0c1a2e;
+            --blue: #3694E8;
+            --blue-mid: #66C2FF;
+            --blue-pale: #c7e7fd;
+            --blue-frost: #EBF6FF;
+            --green: #2fa84f;
+            --green-pale: #d4f1de;
+            --white: #FFFFFF;
+            --off-white: #F6FAFE;
+            --gray: #5B6B7C;
+            --border: rgba(54,148,232,0.15);
+            --font-display: 'Archivo Black', sans-serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+            --container: clamp(1.25rem, 5vw, 2.5rem);
+            --radius: 16px;
+            --shadow-card: 0 2px 12px rgba(12,26,46,0.06), 0 8px 32px rgba(12,26,46,0.04);
+            --shadow-elevated: 0 8px 32px rgba(12,26,46,0.1), 0 24px 64px rgba(12,26,46,0.06);
+        }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font-body); background: var(--off-white); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+        a { color: inherit; text-decoration: none; }
+
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--green)); transform-origin: left; transform: scaleX(0); transition: transform 0.08s linear; z-index: 10000; width: 100%; border-radius: 0 2px 2px 0; }
+
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(246,250,254,0.88); border-bottom: 1px solid var(--border); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); transition: background 0.3s, box-shadow 0.3s; }
+        header.scrolled { background: rgba(255,255,255,0.96); box-shadow: 0 1px 0 var(--border), 0 8px 32px rgba(12,26,46,0.06); }
+        .header-inner { max-width: 1280px; margin: 0 auto; padding: 0.875rem var(--container); display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: var(--font-display); font-size: 1.4rem; color: var(--green); text-transform: lowercase; display: flex; align-items: center; gap: 0.5rem; z-index: 1001; transition: opacity 0.2s; }
+        .logo:hover { opacity: 0.8; }
+        .logo img { height: 34px; width: auto; }
+        nav.desktop-nav { display: none; }
+        .desktop-nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
+        .desktop-nav a { color: var(--gray); font-weight: 500; text-transform: lowercase; font-size: 0.875rem; transition: color 0.2s; position: relative; padding-bottom: 2px; }
+        .desktop-nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--blue); border-radius: 1px; transition: width 0.25s var(--ease); }
+        .desktop-nav a:hover { color: var(--ink); }
+        .desktop-nav a:hover::after { width: 100%; }
+        .btn-nav { background: var(--ink) !important; color: var(--white) !important; padding: 0.55rem 1.2rem; border-radius: 8px; font-weight: 600 !important; font-size: 0.82rem !important; transition: all 0.18s !important; }
+        .btn-nav::after { display: none !important; }
+        .btn-nav:hover { background: var(--blue) !important; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(54,148,232,0.35) !important; }
+
+        .hamburger { display: flex; flex-direction: column; justify-content: center; align-items: center; width: 44px; height: 44px; background: none; border: none; cursor: pointer; z-index: 1001; gap: 5px; }
+        .hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: all 0.25s var(--ease); }
+        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        .menu-overlay { position: fixed; inset: 0; background: rgba(12,26,46,0.4); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 998; }
+        .menu-overlay.open { opacity: 1; pointer-events: all; }
+        .mobile-menu { position: fixed; top: 0; right: 0; bottom: 0; width: min(82vw, 300px); background: var(--white); border-left: 1px solid var(--border); transform: translateX(100%); transition: transform 0.3s var(--ease); z-index: 999; padding-top: 72px; }
+        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu a { display: block; padding: 1rem 1.75rem; color: var(--ink); font-weight: 500; text-transform: lowercase; border-bottom: 1px solid var(--border); transition: background 0.15s, padding-left 0.2s; }
+        .mobile-menu a:hover { background: var(--blue-frost); padding-left: 2.25rem; }
+        .mobile-menu a.cta-mobile { margin: 1.25rem 1.75rem 0; background: var(--green); color: var(--white); border-radius: 10px; border: none; text-align: center; font-weight: 700; padding: 1rem; border-bottom: none; }
+
+        /* HERO */
+        .hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; background: var(--blue-pale); padding-top: 64px; overflow: hidden; position: relative; }
+        .hero-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5; pointer-events: none; }
+        .hero-blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(102,194,255,0.6) 0%, transparent 70%); top: -100px; right: -100px; animation: blobFloat1 18s ease-in-out infinite; }
+        .hero-blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(47,168,79,0.35) 0%, transparent 70%); bottom: -50px; left: 10%; animation: blobFloat2 22s ease-in-out infinite; }
+        .hero-blob-3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(54,148,232,0.4) 0%, transparent 70%); top: 40%; left: 40%; animation: blobFloat3 16s ease-in-out infinite; }
+        @keyframes blobFloat1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-30px,40px) scale(1.05)} 66%{transform:translate(20px,-20px) scale(0.95)} }
+        @keyframes blobFloat2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(40px,-30px) scale(1.08)} }
+        @keyframes blobFloat3 { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(-20px,30px) scale(1.1)} 70%{transform:translate(30px,-10px) scale(0.9)} }
+        .hero-container { max-width: 1280px; margin: 0 auto; padding: clamp(3rem,8vw,5rem) var(--container); display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; position: relative; z-index: 1; }
+        .live-pill { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(47,168,79,0.12); border: 1px solid rgba(47,168,79,0.3); color: var(--green); padding: 0.4rem 0.85rem; border-radius: 100px; font-size: 0.75rem; font-weight: 700; text-transform: lowercase; letter-spacing: 0.3px; margin-bottom: 1.5rem; width: fit-content; }
+        .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; box-shadow: 0 0 0 0 rgba(47,168,79,0.4); animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(47,168,79,0.5)} 70%{box-shadow:0 0 0 8px rgba(47,168,79,0)} 100%{box-shadow:0 0 0 0 rgba(47,168,79,0)} }
+        h1 { font-family: var(--font-display); font-size: clamp(2.8rem,10vw,5.5rem); line-height: 0.92; text-transform: lowercase; letter-spacing: -2px; color: var(--white); margin-bottom: 1.5rem; }
+        h1 .blue { color: var(--blue-mid); }
+        h1 .green { color: var(--green); }
+        .hero-sub { font-size: clamp(1rem,2.8vw,1.2rem); line-height: 1.7; color: rgba(255,255,255,0.92); margin-bottom: 2.5rem; max-width: 500px; }
+        .hero-cta-row { display: flex; gap: 0.875rem; flex-wrap: wrap; margin-bottom: 2rem; align-items: center; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--white); color: var(--ink); padding: 0.9rem 1.75rem; border-radius: 10px; font-weight: 700; font-size: 0.9rem; text-transform: lowercase; transition: all 0.2s var(--ease); box-shadow: 0 4px 24px rgba(12,26,46,0.15); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(12,26,46,0.2); }
+        .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.15); color: var(--white); padding: 0.9rem 1.75rem; border-radius: 10px; border: 1.5px solid rgba(255,255,255,0.4); font-weight: 600; font-size: 0.9rem; text-transform: lowercase; transition: all 0.2s var(--ease); }
+        .btn-ghost:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+        .hero-note { font-size: 0.78rem; color: rgba(255,255,255,0.75); font-weight: 500; }
+        .hero-stats { display: flex; gap: 2.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); flex-wrap: wrap; }
+        .stat-number { font-family: var(--font-display); color: var(--white); font-size: clamp(1.6rem,5vw,2.4rem); line-height: 1; display: block; }
+        .stat-label { color: rgba(255,255,255,0.65); font-size: 0.72rem; text-transform: lowercase; font-weight: 500; letter-spacing: 0.3px; margin-top: 0.2rem; display: block; }
+        .phone-mockup { display: flex; justify-content: center; align-items: center; }
+        .phone-mockup img { width: min(320px,85vw); filter: drop-shadow(0 32px 64px rgba(12,26,46,0.25)); animation: floatPhone 6s ease-in-out infinite; }
+        @keyframes floatPhone { 0%,100%{transform:translateY(0px) rotate(-1deg)} 50%{transform:translateY(-12px) rotate(1deg)} }
+
+        /* ANIMATIONS */
+        .fade-in-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s var(--ease), transform 0.65s var(--ease); transition-delay: var(--delay, 0s); }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* SECTIONS */
+        .section-wrap { max-width: 1280px; margin: 0 auto; padding: 0 var(--container); }
+        section { padding: clamp(4rem,9vw,7rem) var(--container); }
+        .section-label { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--blue); margin-bottom: 0.75rem; }
+        h2.section-title { font-family: var(--font-display); font-size: clamp(1.8rem,5vw,3rem); text-transform: lowercase; line-height: 1.05; letter-spacing: -1px; color: var(--ink); margin-bottom: 1rem; }
+        .section-desc { color: var(--gray); font-size: clamp(0.95rem,2vw,1.1rem); max-width: 600px; line-height: 1.7; }
+        .section-header { margin-bottom: 3rem; }
+
+        /* WHY */
+        .why-section { background: var(--white); }
+        .why-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+        .why-card { padding: 1.5rem 1.75rem; border-radius: 0 var(--radius) var(--radius) 0; background: var(--blue-frost); border: 1px solid var(--border); border-left: 4px solid var(--blue); transition: border-left-color 0.25s, transform 0.25s var(--ease); }
+        .why-card:hover { border-left-color: var(--green); transform: translateX(6px); }
+        .why-card h3 { font-family: var(--font-display); text-transform: lowercase; color: var(--ink); font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .why-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.65; }
+
+        /* COLLECTORS */
+        .collectors-section { background: var(--off-white); }
+        .two-col { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+        .points-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+        .point { display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-card); transition: transform 0.2s var(--ease), box-shadow 0.2s; }
+        .point:hover { transform: translateY(-3px); box-shadow: var(--shadow-elevated); }
+        .point-icon { width: 44px; height: 44px; flex-shrink: 0; background: var(--blue-frost); border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); position: relative; overflow: hidden; }
+        /* CSS-only icons via pseudo-elements */
+        .icon-map::before { content:''; display:block; width:18px; height:18px; border:2.5px solid var(--blue); border-radius:50% 50% 50% 0; transform:rotate(-45deg); }
+        .icon-map::after { content:''; position:absolute; width:5px; height:5px; background:var(--blue); border-radius:50%; top:50%; left:50%; transform:translate(-3px,-4px); }
+        .icon-bolt::before { content:''; display:block; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:10px solid var(--blue); transform:translateY(-3px) skewX(-10deg); }
+        .icon-bolt::after { content:''; display:block; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:10px solid var(--blue); transform:translateY(-1px) skewX(-10deg); }
+        .icon-coin::before { content:''; display:block; width:18px; height:18px; border:2.5px solid var(--green); border-radius:50%; }
+        .icon-coin::after { content:'$'; position:absolute; font-size:9px; font-weight:900; color:var(--green); font-family:var(--font-body); }
+        .icon-chart::before { content:''; display:block; width:16px; height:16px; background: linear-gradient(to top, var(--blue) 30%, var(--blue-mid) 30% 60%, transparent 60%); background-size: 5px 16px; background-repeat: repeat-x; background-position: 0 bottom; border-bottom: 2px solid var(--blue); }
+        .point-text h3 { font-weight: 700; text-transform: lowercase; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.25rem; }
+        .point-text p { color: var(--gray); font-size: 0.875rem; line-height: 1.6; }
+        .cta-block { background: linear-gradient(135deg, var(--ink) 0%, #1a3552 100%); border-radius: var(--radius); padding: 2rem 1.75rem; display: flex; flex-direction: column; gap: 1rem; }
+        .cta-block h3 { font-family: var(--font-display); text-transform: lowercase; color: var(--white); font-size: 1.3rem; line-height: 1.2; }
+        .cta-block p { color: rgba(255,255,255,0.65); font-size: 0.9rem; line-height: 1.6; }
+        .btn-download { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--green); color: var(--white); padding: 0.9rem 1.5rem; border-radius: 10px; font-weight: 700; font-size: 0.9rem; text-transform: lowercase; transition: all 0.2s; width: fit-content; }
+        .btn-download:hover { background: #268f42; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(47,168,79,0.4); }
+        .free-label { font-size: 0.78rem; color: rgba(255,255,255,0.65); font-weight: 500; }
+        .free-label span { color: #6de89d; }
+
+        /* HOSTS */
+        .hosts-section { background: var(--white); }
+        .steps-flow { display: grid; gap: 1px; grid-template-columns: 1fr; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .step-card { background: var(--white); padding: 2rem 1.75rem; display: flex; gap: 1.25rem; align-items: flex-start; transition: background 0.2s; }
+        .step-card:hover { background: var(--blue-frost); }
+        .step-number { font-family: var(--font-display); font-size: 2.5rem; color: var(--blue-pale); line-height: 1; flex-shrink: 0; min-width: 60px; transition: color 0.2s; }
+        .step-card:hover .step-number { color: var(--blue); }
+        .step-content h3 { font-weight: 700; text-transform: lowercase; color: var(--ink); font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .step-content p { color: var(--gray); font-size: 0.9rem; line-height: 1.65; }
+
+        /* GALLERY */
+        .gallery-section { background: var(--off-white); overflow: hidden; }
+        .gallery-header { max-width: 1280px; margin: 0 auto; padding: 0 var(--container); margin-bottom: 2.5rem; }
+        .demo-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+        .demo-tag { padding: 0.35rem 0.85rem; background: var(--blue-frost); border: 1px solid var(--border); border-radius: 100px; font-size: 0.75rem; font-weight: 600; color: var(--blue); text-transform: lowercase; }
+        .gallery-marquee { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
+        .gallery-track { display: flex; gap: 1rem; width: max-content; animation: marquee 42s linear infinite; padding: 0.5rem 0; }
+        .gallery-track:hover { animation-play-state: paused; }
+        @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+        .screen-card { width: clamp(160px,26vw,220px); flex-shrink: 0; background: var(--white); border-radius: 20px; border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow-card); transition: transform 0.25s var(--ease), box-shadow 0.25s; cursor: default; }
+        .screen-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-elevated); }
+        .screen-card img { width: 100%; display: block; }
+        .screen-card figcaption { padding: 0.6rem 0.85rem; font-size: 0.72rem; color: var(--gray); font-weight: 500; text-transform: lowercase; text-align: center; }
+
+        /* METRICS */
+        .metrics-section { background: var(--ink); }
+        .metrics-grid { display: grid; gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); overflow: hidden; grid-template-columns: 1fr; }
+        .metric-cell { padding: 2.25rem 2rem; background: var(--ink); transition: background 0.2s; }
+        .metric-cell:hover { background: #142035; }
+        .metric-big { font-family: var(--font-display); font-size: clamp(2.5rem,8vw,4rem); color: var(--blue-mid); line-height: 1; margin-bottom: 0.4rem; }
+        .metric-label { color: rgba(255,255,255,0.45); font-size: 0.75rem; text-transform: lowercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.75rem; }
+        .metric-desc { color: rgba(255,255,255,0.7); font-size: 0.875rem; line-height: 1.6; }
+        .metrics-section .section-title { color: var(--white); }
+        .metrics-section .section-desc { color: rgba(255,255,255,0.7); }
+        .metrics-section .section-label { color: var(--blue-mid); }
+
+        /* WAITLIST */
+        .waitlist-section { background: var(--blue-pale); position: relative; overflow: hidden; }
+        .wl-blur { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(60px); }
+        .wl-blur-1 { width: 400px; height: 400px; background: rgba(54,148,232,0.3); top: -100px; right: -100px; }
+        .wl-blur-2 { width: 300px; height: 300px; background: rgba(47,168,79,0.25); bottom: -50px; left: 5%; }
+        .waitlist-section h2.section-title { color: var(--white); }
+        .waitlist-section .section-desc { color: rgba(255,255,255,0.85); }
+        .waitlist-form { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 2rem; position: relative; z-index: 1; }
+        .waitlist-form input[type="email"] { flex: 1; min-width: 240px; max-width: 380px; padding: 0.9rem 1.25rem; background: rgba(255,255,255,0.95); border: 1.5px solid rgba(255,255,255,0.6); border-radius: 10px; font-family: var(--font-body); font-size: 0.9rem; color: var(--ink); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+        .waitlist-form input[type="email"]:focus { border-color: var(--white); box-shadow: 0 0 0 3px rgba(255,255,255,0.3); }
+        .waitlist-form button { padding: 0.9rem 1.75rem; background: var(--ink); color: var(--white); border: none; border-radius: 10px; font-family: var(--font-body); font-weight: 700; font-size: 0.9rem; text-transform: lowercase; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(12,26,46,0.25); }
+        .waitlist-form button:hover { background: var(--green); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(47,168,79,0.4); }
+        .waitlist-status { width: 100%; font-size: 0.85rem; color: rgba(255,255,255,0.85); min-height: 1.2rem; font-weight: 600; }
+        .social-proof { margin-top: 1.5rem; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+        .proof-avatars { display: flex; }
+        .proof-avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); background: linear-gradient(135deg, var(--blue-mid), var(--green)); margin-left: -8px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: white; }
+        .proof-avatars .proof-avatar:first-child { margin-left: 0; }
+        .proof-text { font-size: 0.8rem; color: rgba(255,255,255,0.82); font-weight: 500; }
+
+        /* PARTNERS */
+        .partners-section { background: var(--white); }
+        .partners-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+        .partner-card { background: var(--off-white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; display: flex; gap: 1rem; align-items: flex-start; transition: all 0.25s var(--ease); }
+        .partner-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-elevated); border-color: rgba(54,148,232,0.3); }
+        .partner-icon { width: 48px; height: 48px; flex-shrink: 0; background: var(--blue-frost); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); position: relative; overflow: hidden; }
+        .picon-building::before { content:''; display:block; width:18px; height:20px; border:2.5px solid var(--blue); border-bottom:none; background:transparent; position:relative; }
+        .picon-building::after { content:''; position:absolute; bottom:10px; width:4px; height:5px; background:var(--blue); border-radius:1px; box-shadow:-5px 0 0 var(--blue), 5px 0 0 var(--blue); }
+        .picon-cap::before { content:''; display:block; width:20px; height:6px; background:var(--blue); border-radius:2px; transform:perspective(6px) rotateX(3deg); }
+        .picon-cap::after { content:''; position:absolute; top:10px; width:10px; height:10px; border:2px solid var(--blue); border-top:none; border-radius:0 0 10px 10px; }
+        .picon-hands::before { content:''; display:block; width:8px; height:12px; background:var(--blue); border-radius:3px 3px 0 0; transform:translateX(-5px) rotate(-8deg); box-shadow:10px 0 0 2px var(--blue-mid); }
+        .partner-body h3 { font-weight: 700; font-size: 1rem; text-transform: lowercase; color: var(--ink); margin-bottom: 0.35rem; }
+        .partner-body p { color: var(--gray); font-size: 0.875rem; line-height: 1.6; }
+        .partner-link { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--blue); font-weight: 600; font-size: 0.82rem; margin-top: 0.65rem; transition: gap 0.2s; }
+        .partner-link:hover { gap: 0.55rem; }
+
+        /* FOOTER */
+        footer { background: var(--ink); padding: 3.5rem var(--container) 2rem; }
+        .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .footer-logo { font-family: var(--font-display); font-size: 1.4rem; color: var(--green); display: flex; align-items: center; gap: 0.5rem; text-transform: lowercase; margin-bottom: 0.75rem; }
+        .footer-logo img { height: 28px; }
+        .footer-tagline { color: rgba(255,255,255,0.4); font-size: 0.875rem; line-height: 1.6; max-width: 280px; }
+        .footer-col h4 { font-family: var(--font-display); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.3); margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col li + li { margin-top: 0.6rem; }
+        .footer-col a { color: rgba(255,255,255,0.5); font-size: 0.875rem; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--white); }
+        .footer-bottom { max-width: 1280px; margin: 1.75rem auto 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+        .footer-app-badge { display: inline-flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.4); font-size: 0.8rem; font-weight: 500; border: 1px solid rgba(255,255,255,0.12); padding: 0.4rem 0.85rem; border-radius: 8px; transition: all 0.2s; }
+        .footer-app-badge:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
+
+        /* RESPONSIVE */
+        @media (min-width: 640px) {
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .partners-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 860px) {
+            .two-col { grid-template-columns: 1.2fr 1fr; gap: 2rem; }
+            .steps-flow { grid-template-columns: repeat(2, 1fr); }
+            .footer-inner { grid-template-columns: 2fr 1fr 1fr 1fr; }
+        }
+        @media (min-width: 1024px) {
+            nav.desktop-nav { display: block; }
+            .hamburger { display: none; }
+            .hero-container { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; }
+            .steps-flow { grid-template-columns: repeat(4, 1fr); }
+            .metrics-grid { grid-template-columns: repeat(4, 1fr); }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .partners-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
-<header class="site-header" id="header">
+
+<header id="header">
     <div class="header-inner">
-        <a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
-        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+        <a href="index.html" class="logo">
+            <img src="assets/images/brand/wordmark.png" alt="bottlr logo"> bottlr
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="menu"><span></span><span></span><span></span></button>
         <nav class="desktop-nav">
             <ul>
                 <li><a href="earn-with-bottlr.html">earn</a></li>
                 <li><a href="business.html">business</a></li>
                 <li><a href="network.html">network</a></li>
                 <li><a href="cities.html">cities</a></li>
-                <li><a href="join-waitlist.html" class="chip-cta">join waitlist</a></li>
+                <li><a href="join-waitlist.html" class="btn-nav">join waitlist</a></li>
             </ul>
         </nav>
     </div>
@@ -40,130 +280,218 @@
     <a href="business.html">for businesses</a>
     <a href="network.html">the network</a>
     <a href="cities.html">cities</a>
-    <a href="join-waitlist.html" class="cta-mobile">join waitlist</a>
+    <a href="join-waitlist.html" class="cta-mobile">join waitlist →</a>
 </nav>
 
 <section class="hero">
-    <div class="hero-grid">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+    <div class="hero-container">
         <div class="fade-in-up">
-            <div class="hero-badges">
-                <span class="eyebrow">launching soon on iOS</span>
-                <span class="eyebrow">initial rollout: san jose</span>
-                <span class="eyebrow">early movement</span>
+            <div class="live-pill"><span class="live-dot"></span> launching in san jose</div>
+            <h1>turn bottles<br>into <span class="blue">real</span><br><span class="green">income</span></h1>
+            <p class="hero-sub">bottlr connects collectors, hosts, and neighborhoods in real time. local pickup. real payouts. recycling at community scale.</p>
+            <div class="hero-cta-row">
+                <a href="join-waitlist.html" class="btn-primary">
+                    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                    join waitlist
+                </a>
+                <a href="business.html" class="btn-ghost">for businesses →</a>
             </div>
-            <h1>
-                turn bottles<br>
-                <span class="blue">into real</span><br>
-                <span class="green">income</span>
-            </h1>
-            <p class="hero-sub">bottlr connects collectors, hosts, and neighborhoods in real time. local pickup. real payouts. community-scale recycling infrastructure.</p>
+            <p class="hero-note">always free for collectors — 100% of crv goes to you</p>
+            <div class="hero-stats">
+                <div><span class="stat-number">$1.5B</span><span class="stat-label">CA bottle value annually</span></div>
+                <div><span class="stat-number">40%</span><span class="stat-label">bottles never redeemed</span></div>
+                <div><span class="stat-number">live</span><span class="stat-label">live coordination</span></div>
+            </div>
+        </div>
+        <div class="phone-mockup fade-in-up" style="--delay:0.15s">
+            <img src="assets/images/hero/live-map-demo.png" alt="bottlr app">
+        </div>
+    </div>
+</section>
+
+<section class="why-section">
+    <div class="section-wrap">
+        <div class="section-header fade-in-up">
+            <div class="section-label">the problem</div>
+            <h2 class="section-title">coordination is<br>what's broken.</h2>
+            <p class="section-desc">Collectors already exist. Bottles already exist. The demand for pickup is real. What's missing is the infrastructure to connect them.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card fade-in-up" style="--delay:0.05s"><h3>collectors are active</h3><p>People already do this work every day. We give them better signal, route clarity, and a reliable stream of jobs.</p></div>
+            <div class="why-card fade-in-up" style="--delay:0.1s"><h3>hosts need reliability</h3><p>Businesses and households need pickup coordination without constant manual back-and-forth.</p></div>
+            <div class="why-card fade-in-up" style="--delay:0.15s"><h3>waste has real value</h3><p>We convert fragmented bottle flows into an organized local value network — visible and trackable.</p></div>
+            <div class="why-card fade-in-up" style="--delay:0.2s"><h3>movement to infrastructure</h3><p>What starts as local coordination becomes the operating layer for recycling logistics at city scale.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="collectors-section" id="collectors">
+    <div class="section-wrap">
+        <div class="section-header fade-in-up">
+            <div class="section-label">for collectors</div>
+            <h2 class="section-title">more pickups.<br>more money.</h2>
+            <p class="section-desc">Stop walking blind. bottlr shows you exactly where the bottles are — before you leave home.</p>
+        </div>
+        <div class="two-col">
+            <div class="points-grid">
+                <div class="point fade-in-up" style="--delay:0.05s"><div class="point-icon icon-map"></div><div class="point-text"><h3>see live jobs on a map</h3><p>Discover pickup postings nearby with location, count, and time window — before leaving home.</p></div></div>
+                <div class="point fade-in-up" style="--delay:0.1s"><div class="point-icon icon-bolt"></div><div class="point-text"><h3>tap once to claim</h3><p>No phone calls, no guessing. Claim a job instantly and get the address, count, and best route.</p></div></div>
+                <div class="point fade-in-up" style="--delay:0.15s"><div class="point-icon icon-coin"></div><div class="point-text"><h3>100% of crv is yours</h3><p>We never touch your earnings. Every cent of CRV redemption goes directly to you — that's the whole point.</p></div></div>
+                <div class="point fade-in-up" style="--delay:0.2s"><div class="point-icon icon-chart"></div><div class="point-text"><h3>track your impact</h3><p>See completed pickups, bottles diverted, and earnings history all in one transparent dashboard.</p></div></div>
+            </div>
+            <div class="cta-block fade-in-up" style="--delay:0.1s">
+                <h3>ready to find more pickups?</h3>
+                <p>Get early access when we launch in your city. Be first to see jobs on the map.</p>
+                <a href="join-waitlist.html" class="btn-download">
+                    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                    join collector waitlist
+                </a>
+                <p class="free-label">✓ <span>free forever</span> for collectors</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hosts-section" id="hosts">
+    <div class="section-wrap">
+        <div class="section-header fade-in-up">
+            <div class="section-label">for businesses</div>
+            <h2 class="section-title">post once.<br>bottles gone.</h2>
+            <p class="section-desc">Restaurants, offices, property managers, and event venues use bottlr to schedule verified bottle pickups — and get the impact reports to prove it.</p>
+        </div>
+        <div class="steps-flow">
+            <div class="step-card fade-in-up" style="--delay:0.05s"><div class="step-number">01</div><div class="step-content"><h3>post a pickup</h3><p>Add your location, bottle count, and when they're ready. Takes under a minute.</p></div></div>
+            <div class="step-card fade-in-up" style="--delay:0.12s"><div class="step-number">02</div><div class="step-content"><h3>a collector claims it</h3><p>Nearby collectors see your job on the live map and claim it in real time.</p></div></div>
+            <div class="step-card fade-in-up" style="--delay:0.18s"><div class="step-number">03</div><div class="step-content"><h3>verified pickup</h3><p>Photo verification confirms the handoff — you get a compliance record automatically.</p></div></div>
+            <div class="step-card fade-in-up" style="--delay:0.24s"><div class="step-number">04</div><div class="step-content"><h3>impact report</h3><p>Track bottles diverted, CO₂ saved, and pickup history — shareable for ESG reporting.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<section class="gallery-section" id="demo" style="padding-left:0;padding-right:0;">
+    <div class="gallery-header fade-in-up">
+        <div class="section-label">the app</div>
+        <h2 class="section-title">see it in action</h2>
+        <p class="section-desc">Real screens from bottlr — both the collector and host experience.</p>
+        <div class="demo-tags">
+            <span class="demo-tag">collector view</span>
+            <span class="demo-tag">host view</span>
+            <span class="demo-tag">live map</span>
+            <span class="demo-tag">job claiming</span>
+            <span class="demo-tag">onboarding</span>
+        </div>
+    </div>
+    <div class="gallery-marquee fade-in-up" style="--delay:0.1s">
+        <div class="gallery-track">
+            <figure class="screen-card"><img src="assets/images/screenshots/collector-map-view.png" alt="pickup map"><figcaption>live pickup map</figcaption></figure>
+            <figure class="screen-card"><img src="assets/images/screenshots/collection-view.png" alt="pickup detail"><figcaption>pickup detail + claim</figcaption></figure>
+            <figure class="screen-card"><img src="assets/images/screenshots/collections-list-view.png" alt="nearby pickups"><figcaption>nearby pickups list</figcaption></figure>
+            <figure class="screen-card"><img src="assets/images/screenshots/colleciton-view1.png" alt="job status"><figcaption>job status + route</figcaption></figure>
+            <figure class="screen-card"><img src="assets/images/screenshots/host-home-view-map.png" alt="host map"><figcaption>host home map</figcaption></figure>
+            <figure class="screen-card"><img src="assets/images/screenshots/host-post-view.png" alt="post form"><figcaption>new pickup post</figcaption></figure>
+            <figure class="screen-card"><img src="assets/images/screenshots/hos-home-view.png" alt="host overview"><figcaption>host activity view</figcaption></figure>
+            <figure class="screen-card"><img src="assets/images/screenshots/onboarding-view.png" alt="onboarding"><figcaption>role-based onboarding</figcaption></figure>
+            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/collector-map-view.png" alt=""><figcaption>live pickup map</figcaption></figure>
+            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/collection-view.png" alt=""><figcaption>pickup detail + claim</figcaption></figure>
+            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/collections-list-view.png" alt=""><figcaption>nearby pickups list</figcaption></figure>
+            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/colleciton-view1.png" alt=""><figcaption>job status + route</figcaption></figure>
+            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/host-home-view-map.png" alt=""><figcaption>host home map</figcaption></figure>
+            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/host-post-view.png" alt=""><figcaption>new pickup post</figcaption></figure>
+            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/hos-home-view.png" alt=""><figcaption>host activity view</figcaption></figure>
+            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/onboarding-view.png" alt=""><figcaption>role-based onboarding</figcaption></figure>
+        </div>
+    </div>
+</section>
+
+<section class="metrics-section">
+    <div class="section-wrap">
+        <div class="section-header fade-in-up">
+            <div class="section-label">why it matters</div>
+            <h2 class="section-title">built for the people<br>doing the work.</h2>
+            <p class="section-desc">Every feature in bottlr exists to make pickup faster, fairer, and more transparent for collectors and hosts alike.</p>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-cell fade-in-up" style="--delay:0.05s"><div class="metric-big">live</div><div class="metric-label">job availability</div><p class="metric-desc">Real-time job discovery — no stale listings, no wasted trips across the city.</p></div>
+            <div class="metric-cell fade-in-up" style="--delay:0.1s"><div class="metric-big">100%</div><div class="metric-label">CRV to collectors</div><p class="metric-desc">We make money from businesses, not from the people doing the collecting.</p></div>
+            <div class="metric-cell fade-in-up" style="--delay:0.15s"><div class="metric-big">clear</div><div class="metric-label">earnings dashboard</div><p class="metric-desc">Every pickup, every dollar — visible in one transparent view.</p></div>
+            <div class="metric-cell fade-in-up" style="--delay:0.2s"><div class="metric-big">zero</div><div class="metric-label">wasted bottles</div><p class="metric-desc">Every host posting is a bottle that would have been thrown away. Now it's not.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="waitlist-section">
+    <div class="wl-blur wl-blur-1"></div>
+    <div class="wl-blur wl-blur-2"></div>
+    <div class="section-wrap" style="position:relative;z-index:1;">
+        <div class="fade-in-up">
+            <div class="section-label" style="color:rgba(255,255,255,0.65)">early access</div>
+            <h2 class="section-title">be first in your city.</h2>
+            <p class="section-desc">we're rolling out city by city. get early access, first pickups, and shape the network from day one.</p>
             <form class="waitlist-form" onsubmit="handleWaitlistInline(event)" data-source="hero">
                 <input type="email" name="email" placeholder="your@email.com" required>
-                <button type="submit" class="btn btn-primary">join waitlist</button>
+                <button type="submit">get early access</button>
                 <div class="waitlist-status" data-role="status"></div>
             </form>
-            <div class="hero-stats">
-                <div><div class="stat-number">$1.5B</div><div class="stat-label">CA bottle value</div></div>
-                <div><div class="stat-number">40%</div><div class="stat-label">still unredeemed</div></div>
-                <div><div class="stat-number">live</div><div class="stat-label">coordination model</div></div>
-            </div>
-        </div>
-        <div class="phone-mockup fade-in-up" style="--delay:.15s"><img src="assets/images/hero/live-map-demo.png" alt="bottlr map and pickups"></div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="container">
-        <h2 class="section-title">why bottlr exists</h2>
-        <p class="section-lead">collectors already exist. bottles already exist. host demand already exists. coordination is what is broken.</p>
-        <div class="stacked-metric-grid">
-            <article class="card"><h3>collectors are active</h3><p>People already do this work daily. We provide better signal and route clarity.</p></article>
-            <article class="card"><h3>hosts need reliability</h3><p>Businesses and households need pickup coordination without constant manual back-and-forth.</p></article>
-            <article class="card"><h3>waste has value</h3><p>We convert fragmented bottle flows into an organized local value network.</p></article>
-            <article class="card"><h3>movement to infrastructure</h3><p>What starts as local coordination can become the operating layer for city-scale recycling logistics.</p></article>
-        </div>
-    </div>
-</section>
-
-<section class="section" id="collectors">
-    <div class="container">
-        <h2 class="section-title">for collectors</h2>
-        <p class="section-lead">see routes, claim jobs quickly, and track outcomes without guessing.</p>
-        <div class="split">
-            <article class="card feature-list">
-                <div class="feature-item"><h3>live map visibility</h3><p>Discover pickups nearby before leaving home.</p></div>
-                <div class="feature-item"><h3>one-tap claim flow</h3><p>Claim fast and move with confidence.</p></div>
-                <div class="feature-item"><h3>transparent activity</h3><p>Keep track of completed work in one place.</p></div>
-            </article>
-            <article class="card">
-                <h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">join collector early access</h3>
-                <p style="color:var(--muted);margin-top:.25rem;">Get first access in launch cities and updates as routes open.</p>
-                <form class="waitlist-form" onsubmit="handleWaitlistInline(event)" data-source="collector">
-                    <input type="email" name="email" placeholder="collector email" required>
-                    <button type="submit" class="btn btn-primary">join waitlist</button>
-                    <div class="waitlist-status" data-role="status"></div>
-                </form>
-            </article>
-        </div>
-    </div>
-</section>
-
-<section class="section" id="hosts">
-    <div class="container">
-        <h2 class="section-title">for hosts and businesses</h2>
-        <p class="section-lead">post pickup once, get local collection done, and keep clear operational visibility.</p>
-        <div class="split">
-            <article class="card feature-list">
-                <div class="feature-item"><h3>post in under a minute</h3><p>location, count, and ready window.</p></div>
-                <div class="feature-item"><h3>collector claim updates</h3><p>track status from posted to completed.</p></div>
-                <div class="feature-item"><h3>impact narrative</h3><p>show practical local outcomes to teams and stakeholders.</p></div>
-            </article>
-            <article class="card">
-                <h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">become an early host partner</h3>
-                <p style="color:var(--muted);margin-top:.25rem;">We are onboarding first businesses in early cities right now.</p>
-                <a href="funding.html#contact-form" class="btn btn-primary" style="margin-top:.7rem;">partner with bottlr</a>
-            </article>
-        </div>
-    </div>
-</section>
-
-<section class="section" id="demo">
-    <div class="container">
-        <h2 class="section-title">product proof</h2>
-        <p class="section-lead">real screens from the working flow, styled with layered motion to show live behavior.</p>
-        <div class="gallery">
-            <div class="gallery-track">
-                <figure class="shot" style="--tilt:-3deg"><img src="assets/images/screenshots/collector-map-view.png" alt="collector map"></figure>
-                <figure class="shot" style="--tilt:2deg"><img src="assets/images/screenshots/collection-view.png" alt="pickup detail"></figure>
-                <figure class="shot" style="--tilt:-2deg"><img src="assets/images/screenshots/host-post-view.png" alt="host post view"></figure>
-                <figure class="shot" style="--tilt:3deg"><img src="assets/images/screenshots/host-home-view-map.png" alt="host map view"></figure>
-                <figure class="shot" style="--tilt:-3deg"><img src="assets/images/screenshots/collector-map-view.png" alt=""></figure>
-                <figure class="shot" style="--tilt:2deg"><img src="assets/images/screenshots/collection-view.png" alt=""></figure>
-                <figure class="shot" style="--tilt:-2deg"><img src="assets/images/screenshots/host-post-view.png" alt=""></figure>
-                <figure class="shot" style="--tilt:3deg"><img src="assets/images/screenshots/host-home-view-map.png" alt=""></figure>
+            <div class="social-proof">
+                <div class="proof-avatars">
+                    <div class="proof-avatar">S</div>
+                    <div class="proof-avatar">J</div>
+                    <div class="proof-avatar">A</div>
+                    <div class="proof-avatar">M</div>
+                    <div class="proof-avatar">+</div>
+                </div>
+                <p class="proof-text">join hundreds of early members in san jose</p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="section" id="support">
-    <div class="container">
-        <h2 class="section-title">partners and momentum</h2>
-        <p class="section-lead">early-stage movement, clear operating model, and open partnership pathways.</p>
-        <div class="split">
-            <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">business pilots</h3><p style="color:var(--muted);">join early host rollouts in launch cities.</p></article>
-            <article class="card"><h3 style="font-family:var(--font-display);color:var(--blue);text-transform:lowercase;">community + grants</h3><p style="color:var(--muted);">build local participation and aligned support.</p></article>
+<section class="partners-section" id="support">
+    <div class="section-wrap">
+        <div class="section-header fade-in-up">
+            <div class="section-label">partners + momentum</div>
+            <h2 class="section-title">building together.</h2>
+            <p class="section-desc">early-stage momentum, clear operating model, open partnership pathways.</p>
+        </div>
+        <div class="partners-grid">
+            <div class="partner-card fade-in-up" style="--delay:0.05s">
+                <div class="partner-icon picon-building"></div>
+                <div class="partner-body">
+                    <h3>business partnership</h3>
+                    <p>Join early host rollouts in launch cities. Every subscription directly funds the collectors and infrastructure that make the network run.</p>
+                    <a href="business.html" class="partner-link">become a host partner →</a>
+                </div>
+            </div>
+            <div class="partner-card fade-in-up" style="--delay:0.12s">
+                <div class="partner-icon picon-cap"></div>
+                <div class="partner-body">
+                    <h3>university + grants</h3>
+                    <p>Build local participation and expand sustainability programs with verified recycling infrastructure and real impact reports.</p>
+                    <a href="funding.html" class="partner-link">explore partnerships →</a>
+                </div>
+            </div>
+            <div class="partner-card fade-in-up" style="--delay:0.2s">
+                <div class="partner-icon picon-hands"></div>
+                <div class="partner-body">
+                    <h3>community orgs</h3>
+                    <p>Nonprofits, sustainability groups, neighborhood organizations — if you work with collectors, let's build something together.</p>
+                    <a href="community.html" class="partner-link">connect with us →</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<footer class="footer">
+<footer>
     <div class="footer-inner">
         <div>
-            <a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
-            <p style="margin-top:.5rem;color:var(--muted);max-width:420px;">people-powered recycling logistics. launching city by city.</p>
+            <a href="index.html" class="footer-logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+            <p class="footer-tagline">recycling logistics powered by people. launching city by city.</p>
         </div>
-        <div>
+        <div class="footer-col">
             <h4>product</h4>
             <ul>
                 <li><a href="how-it-works.html">how it works</a></li>
@@ -172,7 +500,7 @@
                 <li><a href="network.html">the network</a></li>
             </ul>
         </div>
-        <div>
+        <div class="footer-col">
             <h4>company</h4>
             <ul>
                 <li><a href="about.html">about</a></li>
@@ -181,7 +509,7 @@
                 <li><a href="funding.html">partners</a></li>
             </ul>
         </div>
-        <div>
+        <div class="footer-col">
             <h4>resources</h4>
             <ul>
                 <li><a href="join-waitlist.html">join waitlist</a></li>
@@ -192,9 +520,62 @@
             </ul>
         </div>
     </div>
-    <div class="footer-bottom">© 2026 bottlr. all rights reserved.</div>
+    <div class="footer-bottom">
+        <span>© 2026 bottlr. all rights reserved.</span>
+        <a href="join-waitlist.html" class="footer-app-badge">get early access</a>
+    </div>
 </footer>
 
+<script>
+    const progress = document.getElementById('scrollProgress');
+    const hdr = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        const h = document.documentElement;
+        progress.style.transform = `scaleX(${h.scrollTop / (h.scrollHeight - h.clientHeight)})`;
+        hdr.classList.toggle('scrolled', h.scrollTop > 20);
+    }, { passive: true });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenu = () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); menuOverlay.classList.remove('open'); document.body.style.overflow = ''; };
+    hamburger.addEventListener('click', () => {
+        const open = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        menuOverlay.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+    });
+    menuOverlay.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in-up').forEach(el => io.observe(el));
+
+    function handleWaitlistInline(e) {
+        e.preventDefault();
+        const form = e.target;
+        const emailInput = form.querySelector('input[type="email"]');
+        const statusEl = form.querySelector('[data-role="status"]');
+        const btn = form.querySelector('button[type="submit"]');
+        const email = emailInput.value.trim();
+        if (!email) return;
+        btn.disabled = true;
+        btn.textContent = 'joining...';
+        const finish = () => {
+            btn.textContent = "✓ you're on the list!";
+            btn.style.background = 'var(--green)';
+            if (statusEl) statusEl.textContent = "we'll reach out when we launch near you.";
+            emailInput.value = '';
+        };
+        if (typeof db !== 'undefined') {
+            db.collection('waitlist').add({ email, source: form.dataset.source || 'general', timestamp: new Date().toISOString() }).then(finish).catch(() => { btn.disabled = false; btn.textContent = 'get early access'; });
+        } else {
+            setTimeout(finish, 800);
+        }
+    }
+</script>
 <script src="site.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
