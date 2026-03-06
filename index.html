@@ -61,7 +61,7 @@
 
         /* ── HEADER (transparent at top; frosted glass when scrolled) ── */
         header { position:fixed; top:0; left:0; right:0; z-index:1000; background:transparent; transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        header.scrolled { background:rgba(255,255,255,0.8); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+        header.scrolled { background:rgba(255,255,255,0.55); backdrop-filter:saturate(180%) blur(24px); -webkit-backdrop-filter:saturate(180%) blur(24px); border-bottom:1px solid rgba(255,255,255,0.4); box-shadow:0 1px 3px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.5); }
         .hdr { max-width:100%; margin:0 auto; padding:0 0.5rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
         .logo { font-family:var(--fd); font-size:1.28rem; color:var(--blue); text-transform:lowercase; display:flex; align-items:center; gap:.42rem; transition:opacity .2s; }
         .logo:hover { opacity:.75; }
