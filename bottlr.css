@@ -708,33 +708,74 @@ select.form-field {
 .team-bio { color: var(--gray); font-size: 0.85rem; margin-top: 0.7rem; line-height: 1.65; }
 
 /* ══════════════════════════════════════════
-   GALLERY MARQUEE
+   GALLERY MARQUEE (matches index.html)
 ══════════════════════════════════════════ */
+.gallery-section {
+  background: var(--off-white);
+  overflow: hidden;
+  padding-left: 0;
+  padding-right: 0;
+}
+.gallery-header {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 var(--container);
+  margin-bottom: 2.5rem;
+}
+.demo-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+.demo-tag {
+  padding: 0.32rem 0.85rem;
+  background: var(--blue-frost);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.73rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-transform: lowercase;
+}
 .gallery-marquee {
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   overflow: hidden;
 }
 .gallery-track {
-  display: flex; gap: 1rem; width: max-content;
-  animation: marquee 44s linear infinite; padding: 0.75rem 0;
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: marquee 42s linear infinite;
+  padding: 0.5rem 0;
 }
 .gallery-track:hover { animation-play-state: paused; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 .screen-card {
-  width: clamp(155px, 25vw, 215px); flex-shrink: 0;
-  background: var(--white); border-radius: 22px;
-  border: 1px solid var(--border); overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: transform 0.28s var(--ease), box-shadow 0.28s;
+  width: clamp(155px, 25vw, 210px);
+  flex-shrink: 0;
+  background: transparent;
+  border-radius: 22px;
+  overflow: hidden;
+  transition: transform 0.25s var(--ease);
+  cursor: default;
 }
-.screen-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: var(--shadow-lg); }
-.screen-card img { width: 100%; }
+.screen-card:hover { transform: translateY(-8px) scale(1.025); }
+.screen-card img {
+  width: 100%;
+  display: block;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(10, 22, 40, 0.18);
+}
 .screen-card figcaption {
-  padding: 0.65rem 0.9rem; font-size: 0.7rem;
-  color: var(--gray-light); font-weight: 600;
-  text-transform: lowercase; text-align: center; letter-spacing: 0.3px;
+  padding: 0.55rem 0.5rem;
+  font-size: 0.7rem;
+  color: var(--gray);
+  font-weight: 500;
+  text-transform: lowercase;
+  text-align: center;
 }
 
 /* ══════════════════════════════════════════
