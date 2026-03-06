@@ -3,726 +3,573 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>bottlr — the people's bottle network</title>
-    <meta name="description" content="bottlr connects bottle collectors with restaurants, offices, and events in real time. Real payouts. Real-time coordination.">
+    <title>bottlr — circular economy infrastructure</title>
+    <meta name="description" content="Real-time coordination layer for container recovery. Cities and businesses use bottlr to close California's $600M annual recycling gap.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/brand/new-icon.png">
     <link rel="apple-touch-icon" href="assets/images/brand/new-icon.png">
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
         :root {
-            --ink:         #0f2337;
-            --ink-2:       #162236;
-            --ink-soft:    #1e3a52;
-            --blue:        #2e8de0;
-            --blue-bright: #4fa3f0;
-            --blue-mid:    #74b9ff;
-            --blue-pale:   #bddcfa;
-            --blue-frost:  #eaf4fd;
-            --teal:        #0ea5a0;
-            --teal-mid:    #3ecbc6;
-            --teal-pale:   #b8f0ee;
-            --teal-frost:  #edfafa;
-            --green:       #22a84a;
-            --green-bright: #2ec55a;
-            --green-dim:   #16a34a;
-            --green-pale:  #c6f0d4;
-            --off-white:   #f5f9fd;
-            --white:       #ffffff;
-            --gray:        #546070;
-            --gray-light:  #8698a8;
-            --border:      rgba(46,141,224,0.13);
-            --border-dark: rgba(255,255,255,0.09);
-            --font-display: 'Archivo Black', sans-serif;
-            --font-body:    'DM Sans', system-ui, sans-serif;
-            --ease:         cubic-bezier(0.22, 1, 0.36, 1);
-            --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
-            --container:    clamp(1.25rem, 5vw, 2.5rem);
-            --wrap:         1280px;
-            --r:            18px;
-            --r-sm:         10px;
-            --shadow:       0 2px 8px rgba(15,35,55,0.06), 0 8px 28px rgba(15,35,55,0.04);
-            --shadow-md:    0 4px 16px rgba(15,35,55,0.08), 0 16px 48px rgba(15,35,55,0.05);
-            --shadow-lg:    0 8px 32px rgba(15,35,55,0.09), 0 32px 80px rgba(15,35,55,0.06);
-            --shadow-blue:  0 6px 24px rgba(46,141,224,0.22);
-            --shadow-green: 0 6px 24px rgba(34,168,74,0.25);
+            --ink:        #0f2337;
+            --blue:       #2e8de0;
+            --blue-mid:   #74b9ff;
+            --blue-pale:  #bddcfa;
+            --blue-frost: #eaf4fd;
+            --green:      #16a34a;
+            --green-br:   #22c55e;
+            --green-pale: #bbf7d0;
+            --teal:       #0ea5a0;
+            --off-white:  #f5f9fd;
+            --white:      #ffffff;
+            --gray:       #546070;
+            --gray-lt:    #8698a8;
+            --border:     rgba(46,141,224,0.12);
+            --fd: 'Archivo Black', sans-serif;
+            --fb: 'DM Sans', system-ui, sans-serif;
+            --ease: cubic-bezier(0.22,1,0.36,1);
+            --pad: clamp(1.25rem,5vw,2.5rem);
+            --wrap: 1160px;
+            --r: 16px;
+            --sh: 0 2px 8px rgba(9,23,43,.06), 0 8px 28px rgba(9,23,43,.04);
+            --sh-md: 0 4px 16px rgba(9,23,43,.09), 0 16px 48px rgba(9,23,43,.05);
         }
+        html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+        body { font-family:var(--fb); background:var(--off-white); color:var(--ink); line-height:1.6; overflow-x:hidden; }
+        a { color:inherit; text-decoration:none; }
+        img { display:block; max-width:100%; }
 
-        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-        body { font-family: var(--font-body); background: var(--off-white); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
-        a { color: inherit; text-decoration: none; }
-        img { display: block; max-width: 100%; }
+        /* grain */
+        body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.024;
+            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:128px; }
 
-        /* ── SCROLL PROGRESS ── */
-        .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--blue), var(--green)); transform-origin: left; transform: scaleX(0); transition: transform 0.06s linear; z-index: 10000; width: 100%; }
+        /* scroll progress */
+        .prog { position:fixed; top:0; left:0; height:2px; background:linear-gradient(90deg,var(--blue),var(--green)); transform-origin:left; transform:scaleX(0); transition:transform .06s linear; z-index:10000; width:100%; }
 
-        /* ── HEADER (logic & styling preserved per request) ── */
-        header { --border: rgba(14,165,160,0.16); position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 1000; background: rgba(244,250,250,0.88); border-bottom: 1px solid var(--border); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); transition: background 0.3s, box-shadow 0.3s; }
-        header.scrolled { background: rgba(255,255,255,0.97); box-shadow: 0 1px 0 var(--border), 0 8px 32px rgba(10,22,40,0.06); }
-        .header-inner { width: 100%; box-sizing: border-box; margin: 0; padding-left: max(0.65rem, env(safe-area-inset-left)); padding-right: max(0.65rem, env(safe-area-inset-right)); padding-top: 0; padding-bottom: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-dim); text-transform: lowercase; display: flex; align-items: center; gap: 0.5rem; z-index: 1001; transition: opacity 0.2s; }
-        .logo:hover { opacity: 0.78; }
-        .logo img { height: 32px; width: auto; }
+        /* ── HEADER (shrunk, light) ── */
+        header { position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(244,250,252,0.9); border-bottom:1px solid rgba(46,141,224,0.14); backdrop-filter:saturate(160%) blur(20px); -webkit-backdrop-filter:saturate(160%) blur(20px); transition:background .3s, box-shadow .3s; }
+        header.scrolled { background:rgba(255,255,255,0.97); box-shadow:0 1px 0 rgba(46,141,224,0.1), 0 8px 32px rgba(9,23,43,0.06); }
+        .hdr { max-width:100%; margin:0 auto; padding:0 0.5rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
+        .logo { font-family:var(--fd); font-size:1.28rem; color:var(--green-br); text-transform:lowercase; display:flex; align-items:center; gap:.42rem; transition:opacity .2s; }
+        .logo:hover { opacity:.75; }
+        .logo img { height:26px; }
+        nav.dn { display:none; }
+        .dn ul { list-style:none; display:flex; gap:.18rem; align-items:center; }
+        .dn li a { color:var(--gray); font-weight:500; text-transform:lowercase; font-size:.855rem; padding:.42rem .8rem; border-radius:7px; transition:color .16s, background .16s; }
+        .dn li a:hover { color:var(--ink); background:var(--blue-frost); }
+        .btn-nav { background:var(--ink) !important; color:var(--white) !important; padding:.44rem 1.05rem !important; border-radius:7px !important; font-weight:700 !important; font-size:.82rem !important; transition:all .18s !important; }
+        .btn-nav:hover { background:var(--blue) !important; }
+        .ham { display:flex; flex-direction:column; justify-content:center; align-items:center; width:40px; height:40px; background:none; border:none; cursor:pointer; z-index:1001; gap:5px; }
+        .ham span { display:block; width:20px; height:1.5px; background:var(--ink); border-radius:2px; transition:all .25s var(--ease); }
+        .ham.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+        .ham.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+        .ham.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+        .ovl { position:fixed; inset:0; background:rgba(10,22,40,0.4); backdrop-filter:blur(4px); opacity:0; pointer-events:none; transition:opacity .3s; z-index:998; }
+        .ovl.open { opacity:1; pointer-events:all; }
+        .mmenu { position:fixed; top:0; right:0; bottom:0; width:min(80vw,300px); background:var(--white); border-left:1px solid var(--border); transform:translateX(105%); transition:transform .32s var(--ease); z-index:999; padding-top:60px; overflow-y:auto; }
+        .mmenu.open { transform:translateX(0); }
+        .mmenu a { display:block; padding:.95rem 1.75rem; color:var(--ink); font-weight:500; text-transform:lowercase; font-size:.95rem; border-bottom:1px solid var(--border); transition:background .15s, padding-left .18s; }
+        .mmenu a:hover { background:var(--blue-frost); padding-left:2.25rem; }
+        .mmenu a.cta-m { margin:1.25rem 1.5rem 0; background:var(--green); color:var(--white); border-radius:10px; border:none; text-align:center; font-weight:700; padding:.95rem; }
+        .mmenu a.cta-m:hover { background:#15803d; padding-left:1.75rem; }
 
-        /* Desktop nav */
-        nav.desktop-nav { display: none; }
-        .desktop-nav ul { list-style: none; display: flex; gap: 0.25rem; align-items: center; }
-        .desktop-nav li a {
-            color: var(--gray); font-weight: 500; text-transform: lowercase; font-size: 0.875rem;
-            padding: 0.45rem 0.85rem; border-radius: 8px;
-            transition: color 0.18s, background 0.18s;
-            position: relative;
-        }
-        .desktop-nav li a:not(.btn-waitlist):hover { color: var(--ink); background: rgba(14,165,160,0.08); }
+        /* ── HERO (light ocean blue) ── */
+        .hero { min-height:100vh; min-height:100svh; display:flex; align-items:center; background:linear-gradient(135deg, #b8dff5 0%, #a8d8ea 30%, #b2e8e0 65%, #c5ecd6 100%); padding-top:60px; overflow:hidden; position:relative; }
+        .hero-bg { position:absolute; inset:0; pointer-events:none;
+            background-image: linear-gradient(rgba(46,141,224,.04) 1px, transparent 1px), linear-gradient(90deg,rgba(46,141,224,.04) 1px, transparent 1px);
+            background-size:72px 72px;
+            mask-image:radial-gradient(ellipse 80% 75% at 55% 40%, black 0%, transparent 100%); }
+        .orb { position:absolute; border-radius:50%; pointer-events:none; filter:blur(88px); }
+        .o1 { width:560px; height:560px; background:radial-gradient(circle,rgba(46,141,224,.25) 0%,transparent 65%); top:-80px; right:0; animation:o1 20s ease-in-out infinite; }
+        .o2 { width:420px; height:420px; background:radial-gradient(circle,rgba(22,163,74,.2) 0%,transparent 65%); bottom:-60px; left:3%; animation:o2 26s ease-in-out infinite; }
+        .o3 { width:280px; height:280px; background:radial-gradient(circle,rgba(14,165,160,.18) 0%,transparent 65%); top:42%; left:36%; animation:o3 17s ease-in-out infinite; }
+        @keyframes o1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-28px,38px) scale(1.05)} }
+        @keyframes o2 { 0%,100%{transform:translate(0,0)} 55%{transform:translate(36px,-28px) scale(1.07)} }
+        @keyframes o3 { 0%,100%{transform:translate(0,0) scale(1)} 48%{transform:translate(-18px,26px) scale(1.1)} }
 
-        /* Waitlist button — proper pill, high contrast */
-        .btn-waitlist {
-            display: inline-flex; align-items: center; gap: 0.45rem;
-            background: var(--ink); color: var(--white) !important;
-            padding: 0.52rem 1.1rem; border-radius: 8px;
-            font-weight: 700 !important; font-size: 0.82rem !important;
-            letter-spacing: 0.1px; white-space: nowrap;
-            border: 1.5px solid transparent;
-            transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
-        }
-        .btn-waitlist:hover {
-            background: #3694e8 !important; transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(54,148,232,0.35);
-        }
-        .btn-waitlist-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+        .hero-wrap { max-width:var(--wrap); margin:0 auto; padding:clamp(3rem,7vw,5rem) var(--pad); position:relative; z-index:1; display:grid; grid-template-columns:1fr; gap:3rem; align-items:center; }
 
-        /* Hamburger */
-        .hamburger { display: flex; flex-direction: column; justify-content: center; align-items: center; width: 44px; height: 44px; background: none; border: none; cursor: pointer; z-index: 1001; gap: 5px; }
-        .hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: all 0.25s var(--ease); }
-        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-        .menu-overlay { position: fixed; inset: 0; background: rgba(10,22,40,0.45); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 998; }
-        .menu-overlay.open { opacity: 1; pointer-events: all; }
-        .mobile-menu { --border: rgba(14,165,160,0.16); position: fixed; top: 0; right: 0; bottom: 0; width: min(82vw, 300px); background: var(--white); border-left: 1px solid var(--border); transform: translateX(100%); transition: transform 0.3s var(--ease); z-index: 999; padding-top: 64px; padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px)); overflow-y: auto; }
-        .mobile-menu.open { transform: translateX(0); }
-        .mobile-menu a { display: block; padding: 1rem 1.75rem; color: var(--ink); font-weight: 500; text-transform: lowercase; border-bottom: 1px solid var(--border); transition: background 0.15s, padding-left 0.2s; }
-        .mobile-menu a:hover { background: var(--teal-frost); padding-left: 2.25rem; }
-        .mobile-menu a.cta-mobile { margin: 1.25rem 1.75rem 0; background: var(--green-dim); color: var(--white); border-radius: 10px; border: none; text-align: center; font-weight: 700; padding: 1rem; border-bottom: none; }
-        .mobile-menu a.cta-mobile:hover { padding-left: 1.75rem; background: #3694e8; }
+        h1 { font-family:var(--fd); font-size:clamp(3rem,9.5vw,5.8rem); line-height:.91; text-transform:lowercase; letter-spacing:-3px; color:var(--ink); margin-bottom:1.55rem; }
+        .h1d { color:var(--gray-lt); }
+        .h1g { color:var(--green-br); }
 
-        /* ── HERO ── */
-        .hero {
-            min-height: 100vh; min-height: 100svh;
-            display: flex; align-items: center;
-            background: linear-gradient(135deg, #b8dff5 0%, #a8d8ea 30%, #b2e8e0 65%, #c5ecd6 100%);
-            padding-top: 64px; overflow: hidden; position: relative;
-        }
-        .hero::before { display: none; }
-        .hero-glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px); opacity: 0.55; }
-        .hero-glow-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(102,210,230,0.55) 0%, transparent 65%); top: -200px; right: -150px; animation: gf1 20s ease-in-out infinite; }
-        .hero-glow-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(100,200,160,0.4) 0%, transparent 65%); bottom: -100px; left: 5%; animation: gf2 26s ease-in-out infinite; }
-        .hero-glow-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(140,210,240,0.45) 0%, transparent 65%); top: 35%; left: 38%; animation: gf3 18s ease-in-out infinite; }
-        @keyframes gf1 { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(-40px,50px) scale(1.06)} 70%{transform:translate(25px,-25px) scale(0.94)} }
-        @keyframes gf2 { 0%,100%{transform:translate(0,0)} 55%{transform:translate(50px,-35px) scale(1.1)} }
-        @keyframes gf3 { 0%,100%{transform:translate(0,0) scale(1)} 45%{transform:translate(-25px,35px) scale(1.12)} 75%{transform:translate(35px,-15px) scale(0.9)} }
+        .hero-sub { font-size:clamp(.98rem,2.2vw,1.1rem); line-height:1.77; color:rgba(15,35,55,.65); margin-bottom:2.5rem; max-width:470px; }
+        .hero-sub strong { color:var(--ink); font-weight:600; }
 
-        .hero-container { max-width: var(--wrap); margin: 0 auto; padding: clamp(3rem,8vw,5rem) var(--container); display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; position: relative; z-index: 1; }
+        .cta-row { display:flex; gap:.7rem; flex-wrap:wrap; margin-bottom:1.45rem; align-items:center; }
+        .btn-w { display:inline-flex; align-items:center; gap:.52rem; background:var(--white); color:var(--ink); padding:.82rem 1.55rem; border-radius:9px; font-weight:700; font-size:.875rem; text-transform:lowercase; transition:all .2s var(--ease); box-shadow:0 4px 20px rgba(9,23,43,.12); border:1px solid rgba(15,35,55,.1); }
+        .btn-w:hover { background:var(--blue-frost); transform:translateY(-2px); box-shadow:0 8px 28px rgba(46,141,224,.2); }
+        .btn-g { display:inline-flex; align-items:center; gap:.48rem; background:rgba(15,35,55,.08); color:var(--ink); padding:.82rem 1.55rem; border-radius:9px; border:1px solid rgba(15,35,55,.18); font-weight:600; font-size:.875rem; text-transform:lowercase; transition:all .2s var(--ease); }
+        .btn-g:hover { background:rgba(15,35,55,.12); transform:translateY(-2px); }
 
-        /* Live pill */
-        .live-pill { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(22,163,74,0.12); border: 1px solid rgba(22,163,74,0.28); color: var(--green-dim); padding: 0.38rem 0.85rem; border-radius: 100px; font-size: 0.73rem; font-weight: 700; text-transform: lowercase; letter-spacing: 0.4px; margin-bottom: 1.5rem; width: fit-content; }
-        .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-dim); flex-shrink: 0; animation: pulse 2.2s ease-in-out infinite; }
-        @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(22,163,74,0.5)} 70%{box-shadow:0 0 0 9px rgba(22,163,74,0)} 100%{box-shadow:0 0 0 0 rgba(22,163,74,0)} }
+        .hero-note { font-size:.77rem; color:rgba(15,35,55,.55); display:flex; align-items:center; gap:.48rem; }
+        .chk { width:13px; height:13px; border-radius:50%; background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.3); display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .chk::before { content:''; display:block; width:4px; height:2.5px; border-left:1.5px solid var(--green-br); border-bottom:1.5px solid var(--green-br); transform:rotate(-45deg) translateY(-.5px); }
 
-        h1 { font-family: var(--font-display); font-size: clamp(2.8rem,10vw,5.5rem); line-height: 0.92; text-transform: lowercase; letter-spacing: -2px; color: var(--white); margin-bottom: 1.5rem; }
-        h1 .accent-teal { color: var(--ink); }
-        h1 .accent-green { color: var(--green); }
+        .hero-stats { display:flex; gap:2.5rem; margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(15,35,55,.12); flex-wrap:wrap; }
+        .sn { font-family:var(--fd); color:var(--ink); font-size:clamp(1.8rem,4.5vw,2.4rem); line-height:1; display:block; letter-spacing:-1px; }
+        .sl { color:var(--gray); font-size:.67rem; text-transform:uppercase; font-weight:600; letter-spacing:.8px; margin-top:.28rem; display:block; }
 
-        .hero-sub { font-size: clamp(1rem,2.8vw,1.15rem); line-height: 1.72; color: rgba(15,35,55,0.65); margin-bottom: 2.5rem; max-width: 500px; }
-        .hero-cta-row { display: flex; gap: 0.875rem; flex-wrap: wrap; margin-bottom: 1.75rem; align-items: center; }
+        .phone-wrap { display:flex; justify-content:center; align-items:center; }
+        .phone-wrap img { width:min(290px,78vw); filter:drop-shadow(0 32px 80px rgba(9,23,43,.25)); animation:fp 7s ease-in-out infinite; }
+        @keyframes fp { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-11px) rotate(.5deg)} }
 
-        .btn-hero-primary { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--white); color: var(--ink); padding: 0.9rem 1.75rem; border-radius: 10px; font-weight: 700; font-size: 0.9rem; text-transform: lowercase; transition: all 0.2s var(--ease); box-shadow: 0 4px 24px rgba(10,22,40,0.12); border: 1.5px solid rgba(15,35,55,0.15); }
-        .btn-hero-primary:hover { transform: translateY(-2px); background: var(--ink); color: var(--white); box-shadow: 0 8px 24px rgba(15,35,55,0.22); }
-        .btn-hero-ghost { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(10,22,40,0.08); color: rgba(10,22,40,0.8); padding: 0.9rem 1.75rem; border-radius: 10px; border: 1.5px solid rgba(10,22,40,0.2); font-weight: 600; font-size: 0.9rem; text-transform: lowercase; transition: all 0.2s var(--ease); }
-        .btn-hero-ghost:hover { background: rgba(10,22,40,0.14); transform: translateY(-2px); }
+        /* ── TICKER (light) ── */
+        .ticker { background:var(--blue-frost); border-top:1px solid rgba(46,141,224,.1); border-bottom:1px solid rgba(46,141,224,.1); padding:.6rem 0; overflow:hidden; }
+        .t-track { display:flex; width:max-content; animation:tscroll 32s linear infinite; }
+        .t-track:hover { animation-play-state:paused; }
+        @keyframes tscroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+        .ti { display:inline-flex; align-items:center; gap:.55rem; padding:0 2rem; white-space:nowrap; font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.85px; color:var(--gray); }
+        .ti-sep { color:rgba(46,141,224,.4); font-size:1rem; }
 
-        .hero-note { font-size: 0.8rem; color: rgba(15,35,55,0.58); font-weight: 500; display: flex; align-items: center; gap: 0.5rem; }
-        .hero-note-check { width: 14px; height: 14px; border-radius: 50%; background: rgba(22,163,74,0.15); border: 1px solid rgba(22,163,74,0.35); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .hero-note-check::before { content: ''; display: block; width: 5px; height: 3px; border-left: 1.5px solid var(--green-dim); border-bottom: 1.5px solid var(--green-dim); transform: rotate(-45deg) translateY(-0.5px); }
+        /* ── SECTION PRIMITIVES ── */
+        .sw { max-width:var(--wrap); margin:0 auto; padding:0 var(--pad); }
+        section { padding:clamp(4rem,8vw,6.5rem) var(--pad); }
+        .lbl { display:inline-flex; align-items:center; gap:.42rem; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:1.8px; color:var(--blue); margin-bottom:.75rem; }
+        .lbl::before { content:''; display:block; width:12px; height:1.5px; background:currentColor; border-radius:1px; }
+        h2.st { font-family:var(--fd); font-size:clamp(1.9rem,4.5vw,3rem); text-transform:lowercase; line-height:1.0; letter-spacing:-1.5px; color:var(--ink); margin-bottom:.9rem; }
+        .sd { color:var(--gray); font-size:clamp(.95rem,2vw,1.06rem); max-width:540px; line-height:1.8; }
+        .sh { margin-bottom:3.25rem; }
 
-        .hero-stats { display: flex; gap: 2.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(15,35,55,0.12); flex-wrap: wrap; }
-        .stat-number { font-family: var(--font-display); color: var(--ink); font-size: clamp(1.75rem,5vw,2.4rem); line-height: 1; display: block; }
-        .stat-label { color: rgba(15,35,55,0.45); font-size: 0.7rem; text-transform: uppercase; font-weight: 600; letter-spacing: 0.8px; margin-top: 0.3rem; display: block; }
+        /* reveal animation */
+        .rv { opacity:0; transform:translateY(20px); transition:opacity .58s var(--ease), transform .58s var(--ease); transition-delay:var(--d,0s); }
+        .rv.in { opacity:1; transform:translateY(0); }
 
-        .phone-mockup { display: flex; justify-content: center; align-items: center; }
-        .phone-mockup img { width: min(320px,85vw); filter: drop-shadow(0 32px 64px rgba(0,0,0,0.35)); animation: floatPhone 6s ease-in-out infinite; }
-        @keyframes floatPhone { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-14px) rotate(1deg)} }
+        /* ── PROBLEM SECTION ── */
+        .prob-sec { background:var(--white); }
+        .prob-grid { display:grid; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+        .prob-card { padding:2rem; background:var(--white); transition:background .2s; position:relative; overflow:hidden; }
+        .prob-card:hover { background:var(--blue-frost); }
+        .prob-card .num { position:absolute; top:1.4rem; right:1.6rem; font-family:var(--fd); font-size:3.2rem; line-height:1; color:rgba(46,141,224,.08); letter-spacing:-2px; pointer-events:none; }
+        .prob-card h3 { font-family:var(--fd); text-transform:lowercase; color:var(--ink); font-size:.97rem; margin-bottom:.5rem; letter-spacing:-.2px; }
+        .prob-card p { color:var(--gray); font-size:.875rem; line-height:1.7; max-width:300px; }
 
-        /* ── ANIMATIONS ── */
-        .fade-in-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s var(--ease), transform 0.65s var(--ease); transition-delay: var(--delay, 0s); }
-        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+        /* ── THREE PATHS ── */
+        .paths-sec { background:var(--off-white); }
+        .paths-grid { display:grid; gap:1.5rem; grid-template-columns:1fr; }
+        .path-card { background:var(--white); border:1px solid var(--border); border-radius:var(--r); padding:2rem; display:flex; flex-direction:column; gap:.9rem; box-shadow:var(--sh); transition:transform .25s var(--ease), box-shadow .25s, border-color .25s; cursor:default; }
+        .path-card:hover { transform:translateY(-4px); box-shadow:var(--sh-md); border-color:rgba(46,141,224,.22); }
+        .path-icon { width:42px; height:42px; border-radius:11px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .path-icon svg { width:19px; height:19px; display:block; }
+        .ic-green { background:#edfff3; border:1px solid rgba(22,163,74,.15); }
+        .ic-blue  { background:#eaf4fd; border:1px solid rgba(46,141,224,.15); }
+        .ic-teal  { background:#edfafa; border:1px solid rgba(14,165,160,.15); }
+        .path-card h3 { font-family:var(--fd); text-transform:lowercase; font-size:1.05rem; color:var(--ink); letter-spacing:-.3px; line-height:1.1; }
+        .path-card p { color:var(--gray); font-size:.875rem; line-height:1.7; flex-grow:1; }
+        .path-link { display:inline-flex; align-items:center; gap:.42rem; font-size:.82rem; font-weight:700; text-transform:lowercase; color:var(--blue); transition:gap .18s; width:fit-content; }
+        .path-link:hover { gap:.65rem; color:var(--green-br); }
 
-        /* ── SECTION SCAFFOLDING ── */
-        .section-wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--container); }
-        section { padding: clamp(4rem,9vw,7rem) var(--container); }
-        .section-label { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.67rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: var(--blue); margin-bottom: 0.85rem; }
-        .section-label::before { content: ''; display: block; width: 12px; height: 1.5px; background: var(--blue); border-radius: 1px; }
-        h2.section-title { font-family: var(--font-display); font-size: clamp(1.8rem,5vw,3rem); text-transform: lowercase; line-height: 1.02; letter-spacing: -1px; color: var(--ink); margin-bottom: 1rem; }
-        .section-desc { color: var(--gray); font-size: clamp(0.95rem,2vw,1.08rem); max-width: 600px; line-height: 1.75; }
-        .section-header { margin-bottom: 3rem; }
-
-        /* ── WHY ── */
-        .why-section { background: var(--white); }
-        .why-grid { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
-        .why-card { padding: 1.75rem 2rem; background: var(--white); transition: background 0.22s, transform 0.22s, box-shadow 0.22s var(--ease); cursor: default; }
-        .why-card:hover { background: var(--blue-frost); transform: translateY(-3px); box-shadow: var(--shadow); }
-        .why-card h3 { font-family: var(--font-display); text-transform: lowercase; color: var(--ink); font-size: 1rem; margin-bottom: 0.4rem; }
-        .why-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.65; }
-        .card-link { display: inline-block; margin-top: 0.75rem; font-size: 0.9rem; font-weight: 600; color: var(--blue); }
-        .card-link:hover { color: var(--green); }
-
-        /* ── COLLECTORS ── */
-        .collectors-section { background: var(--off-white); }
-        .two-col { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
-        .points-grid { display: flex; flex-direction: column; gap: 1rem; }
-
-        /* Point cards — full redesign */
-        .point {
-            display: flex; gap: 1.25rem; align-items: flex-start;
-            padding: 1.35rem 1.5rem;
-            background: var(--white); border: 1px solid var(--border);
-            border-radius: var(--r); box-shadow: var(--shadow);
-            transition: transform 0.22s var(--ease), box-shadow 0.22s, border-color 0.22s;
-        }
-        .point:hover { transform: translateX(4px); box-shadow: var(--shadow); border-color: rgba(46,141,224,0.22); }
-
-        /* SVG-based icons — v3 blue/color palette */
-        .point-icon {
-            width: 44px; height: 44px; flex-shrink: 0;
-            border-radius: 11px; display: flex; align-items: center; justify-content: center;
-            border: 1px solid var(--border);
-        }
-        .pi-map   { background: linear-gradient(135deg, #e0f2ff 0%, #bde4fa 100%); border-color: rgba(46,141,224,0.15); }
-        .pi-bolt  { background: linear-gradient(135deg, #fef9e7 0%, #fde9a2 100%); border-color: rgba(217,119,6,0.15); }
-        .pi-coin  { background: linear-gradient(135deg, #e8faf0 0%, #bbf5ce 100%); border-color: rgba(34,168,74,0.15); }
-        .pi-coin svg { transform: scaleX(-1); }
-        .pi-chart { background: linear-gradient(135deg, #f0ecff 0%, #d8cbff 100%); border-color: rgba(124,58,237,0.15); }
-
-        .point-icon svg { width: 20px; height: 20px; display: block; }
-        .point-text h3 { font-weight: 700; text-transform: lowercase; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.22rem; }
-        .point-text p { color: var(--gray); font-size: 0.875rem; line-height: 1.6; }
-
-        /* CTA block — v3 airy blue gradient */
-        .cta-block {
-            background: linear-gradient(150deg, var(--blue-frost) 0%, #e0eff9 100%);
-            border-radius: var(--r); padding: 2rem 1.85rem;
-            display: flex; flex-direction: column; gap: 1rem;
-            height: fit-content; border: 1px solid var(--border);
-            position: relative; overflow: hidden;
-        }
-        .cta-block::before {
-            content: ''; position: absolute; width: 260px; height: 260px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(46,141,224,0.1) 0%, transparent 70%);
-            top: -80px; right: -80px; pointer-events: none;
-        }
-        .cta-block > * { position: relative; }
-        .cta-block h3 { font-family: var(--font-display); text-transform: lowercase; color: var(--ink); font-size: 1.2rem; line-height: 1.15; }
-        .cta-block > p { color: var(--gray); font-size: 0.875rem; line-height: 1.65; }
-        .btn-collect {
-            display: inline-flex; align-items: center; gap: 0.55rem;
-            background: var(--green); color: var(--white);
-            padding: 0.85rem 1.5rem; border-radius: 10px;
-            font-weight: 700; font-size: 0.875rem; text-transform: lowercase;
-            transition: all 0.2s var(--ease); width: fit-content; box-shadow: var(--shadow-green);
-        }
-        .btn-collect:hover { background: var(--blue); transform: translateY(-2px); box-shadow: var(--shadow-blue); }
-        .free-tag { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.77rem; color: var(--gray); font-weight: 500; }
-        .free-tag-check {
-            width: 14px; height: 14px; border-radius: 50%;
-            background: rgba(34,168,74,0.12); border: 1px solid rgba(34,168,74,0.3);
-            display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
-        }
-        .free-tag-check::before { content: ''; display: block; width: 5px; height: 3px; border-left: 1.5px solid var(--green); border-bottom: 1.5px solid var(--green); transform: rotate(-45deg) translateY(-0.5px); }
-        .free-tag strong { color: var(--green); font-weight: 700; }
-
-        /* ── HOSTS ── */
-        .hosts-section { background: var(--white); }
-        .steps-flow { display: grid; gap: 1px; grid-template-columns: 1fr; background: var(--border); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
-        .step-card { background: var(--white); padding: 2rem 1.75rem; display: flex; gap: 1.25rem; align-items: flex-start; transition: background 0.22s; position: relative; }
-        .step-card:hover { background: var(--blue-frost); }
-        .step-card::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--blue); transition: width 0.26s var(--ease); }
-        .step-card:hover::after { width: 3px; }
-        .step-number { font-family: var(--font-display); font-size: 2.6rem; color: var(--blue-pale); line-height: 1; flex-shrink: 0; min-width: 60px; letter-spacing: -2px; transition: color 0.22s; }
-        .step-card:hover .step-number { color: var(--blue); }
-        .step-content h3 { font-weight: 700; text-transform: lowercase; color: var(--ink); font-size: 1.05rem; margin-bottom: 0.4rem; }
-        .step-content p { color: var(--gray); font-size: 0.9rem; line-height: 1.65; }
+        /* ── HOW IT WORKS ── */
+        .hiw-sec { background:var(--white); }
+        .steps { display:grid; gap:1px; grid-template-columns:1fr; background:var(--border); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+        .step { background:var(--white); padding:1.9rem 1.75rem; display:flex; gap:1.25rem; align-items:flex-start; transition:background .2s; position:relative; }
+        .step:hover { background:var(--blue-frost); }
+        .step::after { content:''; position:absolute; left:0; top:0; bottom:0; width:0; background:var(--blue); transition:width .26s var(--ease); }
+        .step:hover::after { width:3px; }
+        .sn2 { font-family:var(--fd); font-size:2.4rem; color:rgba(46,141,224,.18); line-height:1; flex-shrink:0; min-width:52px; letter-spacing:-2px; transition:color .2s; }
+        .step:hover .sn2 { color:rgba(46,141,224,.42); }
+        .step h3 { font-weight:700; text-transform:lowercase; color:var(--ink); font-size:.97rem; margin-bottom:.32rem; }
+        .step p { color:var(--gray); font-size:.875rem; line-height:1.65; }
 
         /* ── GALLERY ── */
-        .gallery-section { background: var(--off-white); overflow: hidden; padding-left: 0; padding-right: 0; }
-        .gallery-header { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--container); margin-bottom: 2.5rem; }
-        .demo-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
-        .demo-tag { padding: 0.32rem 0.85rem; background: var(--blue-frost); border: 1px solid var(--border); border-radius: 100px; font-size: 0.73rem; font-weight: 600; color: var(--blue); text-transform: lowercase; }
-        .gallery-marquee { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
-        .gallery-track { display: flex; gap: 1rem; width: max-content; animation: marquee 42s linear infinite; padding: 0.5rem 0; }
-        .gallery-track:hover { animation-play-state: paused; }
-        @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+        .gal-sec { background:var(--off-white); overflow:hidden; padding-left:0; padding-right:0; }
+        .gal-head { max-width:var(--wrap); margin:0 auto; padding:0 var(--pad) 2.5rem; }
+        .g-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:1rem; }
+        .g-tag { padding:.26rem .74rem; background:var(--white); border:1px solid var(--border); border-radius:100px; font-size:.68rem; font-weight:600; color:var(--blue); text-transform:lowercase; }
+        .marquee { -webkit-mask-image:linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%); mask-image:linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%); }
+        .m-track { display:flex; gap:1rem; width:max-content; animation:mq 44s linear infinite; padding:.5rem 0; }
+        .m-track:hover { animation-play-state:paused; }
+        @keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+        .sc { width:clamp(145px,21vw,195px); flex-shrink:0; border-radius:18px; overflow:hidden; transition:transform .25s var(--ease); cursor:default; }
+        .sc:hover { transform:translateY(-8px) scale(1.022); }
+        .sc img { width:100%; border-radius:16px; box-shadow:0 12px 40px rgba(9,23,43,.18); }
+        .sc figcaption { padding:.48rem .4rem; font-size:.67rem; color:var(--gray); font-weight:500; text-transform:lowercase; text-align:center; }
 
-        /* Screen cards — no white box artefact, transparent bg on card */
-        .screen-card {
-            width: clamp(155px,25vw,210px); flex-shrink: 0;
-            background: transparent; border-radius: 22px;
-            overflow: hidden;
-            transition: transform 0.25s var(--ease);
-            cursor: default;
-        }
-        .screen-card:hover { transform: translateY(-8px) scale(1.025); }
-        .screen-card img { width: 100%; display: block; border-radius: 20px; box-shadow: 0 12px 40px rgba(10,22,40,0.18); }
-        .screen-card figcaption { padding: 0.55rem 0.5rem; font-size: 0.7rem; color: var(--gray); font-weight: 500; text-transform: lowercase; text-align: center; }
+        /* ── METRICS (light) ── */
+        .met-sec { background:linear-gradient(135deg, #c5e4f7 0%, #b8e0e8 40%, #c8ece0 100%); }
+        .met-grid { display:grid; gap:1px; background:rgba(255,255,255,.5); border:1px solid rgba(46,141,224,.12); border-radius:var(--r); overflow:hidden; }
+        .met-cell { padding:2.1rem 1.85rem; background:rgba(255,255,255,.6); backdrop-filter:blur(8px); transition:background .2s; }
+        .met-cell:hover { background:rgba(255,255,255,.85); }
+        .mb { font-family:var(--fd); font-size:clamp(2.1rem,5vw,3.2rem); color:var(--ink); line-height:1; margin-bottom:.38rem; letter-spacing:-1.5px; }
+        .ml { color:var(--gray); font-size:.64rem; text-transform:uppercase; letter-spacing:1.2px; font-weight:700; margin-bottom:.65rem; }
+        .md { color:var(--gray); font-size:.855rem; line-height:1.68; }
+        .met-sec .st { color:var(--ink); }
+        .met-sec .sd { color:var(--gray); }
+        .met-sec .lbl { color:var(--blue); }
+        .met-sec .lbl::before { background:var(--blue); }
 
-        /* ── METRICS ── */
-        .metrics-section { background: var(--ink); }
-        .metrics-grid { display: grid; gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r); overflow: hidden; grid-template-columns: 1fr; }
-        .metric-cell { padding: 2.25rem 2rem; background: rgba(15,35,55,0.96); transition: background 0.22s; }
-        .metric-cell:hover { background: rgba(30,58,82,0.98); }
-        .metric-big { font-family: var(--font-display); font-size: clamp(2.4rem,5.5vw,3.8rem); color: var(--blue-mid); line-height: 1; margin-bottom: 0.45rem; letter-spacing: -2px; }
-        .metric-label { color: rgba(255,255,255,0.35); font-size: 0.67rem; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; margin-bottom: 0.8rem; }
-        .metric-desc { color: rgba(255,255,255,0.62); font-size: 0.875rem; line-height: 1.65; }
-        .metrics-section .section-title { color: var(--white); }
-        .metrics-section .section-desc { color: rgba(255,255,255,0.68); }
-        .metrics-section .section-label { color: var(--blue-mid); }
-
-        /* ── WAITLIST ── */
-        .waitlist-section { background: linear-gradient(135deg, #b8dff5 0%, #a8d8ea 35%, #b2e8e0 70%, #c5ecd6 100%); position: relative; overflow: hidden; }
-        .wl-blur { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(70px); opacity: 0.55; }
-        .wl-blur-1 { width: 500px; height: 500px; background: rgba(100,200,230,0.45); top: -150px; right: -80px; }
-        .wl-blur-2 { width: 350px; height: 350px; background: rgba(80,190,150,0.3); bottom: -60px; left: 5%; }
-        .waitlist-section h2.section-title { color: var(--white); }
-        .waitlist-section .section-desc { color: rgba(15,35,55,0.65); }
-        .waitlist-section .section-label { color: rgba(15,35,55,0.5); letter-spacing: 1.8px; }
-
-        .wl-form-row { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 2rem; position: relative; z-index: 1; max-width: 560px; }
-        .wl-input { flex: 1; min-width: 220px; padding: 0.9rem 1.25rem; background: rgba(255,255,255,0.82); border: 1.5px solid rgba(255,255,255,0.9); border-radius: 10px; font-family: var(--font-body); font-size: 0.9rem; color: var(--ink); outline: none; transition: border-color 0.2s, background 0.2s; }
-        .wl-input::placeholder { color: rgba(15,35,55,0.4); }
-        .wl-input:focus { border-color: var(--white); background: rgba(255,255,255,0.96); box-shadow: 0 0 0 3px rgba(255,255,255,0.4); }
-        .wl-btn { padding: 0.9rem 1.75rem; background: var(--ink); color: var(--white); border: none; border-radius: 10px; font-family: var(--font-body); font-weight: 700; font-size: 0.9rem; text-transform: lowercase; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(10,22,40,0.22); white-space: nowrap; }
-        .wl-btn:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46,141,224,0.45); }
-        .waitlist-status { width: 100%; font-size: 0.85rem; color: rgba(15,35,55,0.65); min-height: 1rem; font-weight: 600; }
-
-        .social-proof { margin-top: 2rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-        .proof-avatars { display: flex; }
-        .proof-avatar { width: 30px; height: 30px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.85); margin-left: -8px; overflow: hidden; flex-shrink: 0; }
-        .proof-avatars .proof-avatar:first-child { margin-left: 0; }
-        .proof-avatar-dot { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; color: white; }
-        .pa-1 { background: linear-gradient(135deg, #0ea5a0, #22c55e); }
-        .pa-2 { background: linear-gradient(135deg, #3b82f6, #0ea5a0); }
-        .pa-3 { background: linear-gradient(135deg, #8b5cf6, #3b82f6); }
-        .pa-4 { background: linear-gradient(135deg, #f59e0b, #ef4444); }
-        .pa-1::before { content: 'K'; }
-        .pa-2::before { content: 'R'; }
-        .pa-3::before { content: 'M'; }
-        .pa-4::before { content: 'J'; }
-        .pa-plus { background: rgba(15,35,55,0.25); }
-        .proof-text { font-size: 0.82rem; color: rgba(15,35,55,0.62); font-weight: 500; }
+        /* ── WAITLIST (light ocean blue) ── */
+        .wl-sec { background:linear-gradient(135deg, #b8dff5 0%, #a8d8ea 35%, #b2e8e0 70%, #c5ecd6 100%); border-top:1px solid rgba(46,141,224,.12); position:relative; overflow:hidden; }
+        .wl-sec::before { content:''; position:absolute; width:600px; height:400px; border-radius:50%; background:radial-gradient(ellipse,rgba(46,141,224,.12) 0%,transparent 65%); top:-100px; right:-80px; pointer-events:none; }
+        .wl-sec::after { content:''; position:absolute; width:400px; height:300px; border-radius:50%; background:radial-gradient(ellipse,rgba(22,163,74,.1) 0%,transparent 65%); bottom:-60px; left:-60px; pointer-events:none; }
+        .wl-inner { position:relative; z-index:1; }
+        .wl-inner .st { color:var(--ink); }
+        .wl-inner .sd { color:var(--gray); }
+        .wl-inner .lbl { color:var(--blue); }
+        .wl-inner .lbl::before { background:var(--blue); }
+        .wl-form { display:flex; flex-wrap:wrap; gap:.58rem; margin-top:2rem; max-width:510px; }
+        .wl-in { flex:1; min-width:200px; padding:.86rem 1.15rem; background:rgba(255,255,255,.85); border:1px solid rgba(46,141,224,.2); border-radius:9px; font-family:var(--fb); font-size:.9rem; color:var(--ink); outline:none; transition:border-color .2s, background .2s; }
+        .wl-in::placeholder { color:var(--gray-lt); }
+        .wl-in:focus { border-color:var(--blue); background:var(--white); }
+        .wl-btn { padding:.86rem 1.6rem; background:var(--ink); color:var(--white); border:none; border-radius:9px; font-family:var(--fb); font-weight:700; font-size:.875rem; text-transform:lowercase; cursor:pointer; transition:all .2s; white-space:nowrap; }
+        .wl-btn:hover { background:var(--blue); transform:translateY(-2px); }
+        .wl-stat { width:100%; font-size:.8rem; color:var(--gray); min-height:1.1rem; font-weight:500; }
+        .soc { margin-top:1.9rem; display:flex; align-items:center; gap:.9rem; flex-wrap:wrap; }
+        .avts { display:flex; }
+        .av { width:27px; height:27px; border-radius:50%; border:2px solid rgba(15,35,55,.15); margin-left:-6px; overflow:hidden; flex-shrink:0; }
+        .avts .av:first-child { margin-left:0; }
+        .av-d { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:.58rem; font-weight:700; color:white; }
+        .a1{background:linear-gradient(135deg,#0ea5a0,#22c55e)} .a1::before{content:'K'}
+        .a2{background:linear-gradient(135deg,#3b82f6,#0ea5a0)} .a2::before{content:'R'}
+        .a3{background:linear-gradient(135deg,#8b5cf6,#3b82f6)} .a3::before{content:'M'}
+        .a4{background:linear-gradient(135deg,#f59e0b,#ef4444)} .a4::before{content:'J'}
+        .ax{background:rgba(15,35,55,.25)}
+        .soc-txt { font-size:.78rem; color:var(--gray); font-weight:500; }
 
         /* ── FOOTER ── */
-        footer {
-            background: var(--ink);
-            padding: 3.25rem var(--container) 2rem;
-            position: relative;
-        }
-        footer::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(74,163,240,0.18) 40%, rgba(34,168,74,0.18) 70%, transparent);
-        }
-        .footer-inner {
-            max-width: var(--wrap); margin: 0 auto;
-            display: grid; grid-template-columns: 1fr; gap: 2.5rem;
-            padding-bottom: 2.25rem;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
-        .footer-logo { font-family: var(--font-display); font-size: 1.15rem; color: var(--green); display: flex; align-items: center; gap: 0.4rem; text-transform: lowercase; margin-bottom: 0.7rem; }
-        .footer-logo img { height: 22px; }
-        .footer-tagline { color: rgba(255,255,255,0.26); font-size: 0.82rem; line-height: 1.6; max-width: 230px; }
-
-        .footer-col h4 { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1.4px; color: rgba(255,255,255,0.2); margin-bottom: 0.85rem; font-weight: 700; }
-        .footer-col ul { list-style: none; }
-        .footer-col li + li { margin-top: 0.5rem; }
-        .footer-col a { color: rgba(255,255,255,0.38); font-size: 0.83rem; transition: color 0.18s; }
-        .footer-col a:hover { color: rgba(255,255,255,0.82); }
-
-        .footer-bottom { max-width: var(--wrap); margin: 1.5rem auto 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; color: rgba(255,255,255,0.18); font-size: 0.75rem; }
-        .footer-badge { color: rgba(255,255,255,0.32); font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); padding: 0.36rem 0.8rem; border-radius: 7px; transition: all 0.2s; }
-        .footer-badge:hover { color: var(--white); border-color: rgba(255,255,255,0.25); }
+        footer { background:var(--ink); padding:3rem var(--pad) 2rem; border-top:1px solid rgba(255,255,255,.06); }
+        .ft-inner { max-width:var(--wrap); margin:0 auto; display:grid; grid-template-columns:1fr; gap:2.5rem; padding-bottom:2rem; border-bottom:1px solid rgba(255,255,255,.08); }
+        .ft-logo { font-family:var(--fd); font-size:1.08rem; color:var(--green-br); display:flex; align-items:center; gap:.38rem; text-transform:lowercase; margin-bottom:.58rem; }
+        .ft-logo img { height:19px; }
+        .ft-tag { color:rgba(255,255,255,.4); font-size:.78rem; line-height:1.6; max-width:200px; }
+        .ft-col h4 { font-size:.57rem; text-transform:uppercase; letter-spacing:1.4px; color:rgba(255,255,255,.35); margin-bottom:.75rem; font-weight:700; }
+        .ft-col ul { list-style:none; }
+        .ft-col li+li { margin-top:.42rem; }
+        .ft-col a { color:rgba(255,255,255,.55); font-size:.8rem; transition:color .18s; }
+        .ft-col a:hover { color:var(--white); }
+        .ft-btm { max-width:var(--wrap); margin:1.4rem auto 0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.9rem; color:rgba(255,255,255,.4); font-size:.72rem; }
+        .ft-badge { color:rgba(255,255,255,.6); font-size:.72rem; font-weight:600; border:1px solid rgba(255,255,255,.2); padding:.3rem .72rem; border-radius:6px; transition:all .2s; }
+        .ft-badge:hover { color:var(--white); border-color:rgba(255,255,255,.4); }
 
         /* ── RESPONSIVE ── */
-        /* Prevent iOS zoom on input focus (inputs < 16px trigger zoom) */
-        @media (max-width: 768px) {
-            .wl-input, .wl-btn { font-size: 16px; }
+        @media (max-width:480px) {
+            h1 { font-size:clamp(2.5rem,12vw,3.2rem); letter-spacing:-2px; }
+            .cta-row { flex-direction:column; align-items:stretch; }
+            .cta-row .btn-w, .cta-row .btn-g { justify-content:center; }
+            .wl-form { flex-direction:column; }
+            .wl-in,.wl-btn { font-size:16px; min-width:0; width:100%; }
         }
-        /* Small phones (320–480px) */
-        @media (max-width: 480px) {
-            .hero-container { padding: clamp(2rem, 6vw, 3rem) var(--container); gap: 2rem; }
-            h1 { font-size: clamp(2.2rem, 11vw, 3rem); }
-            .hero-cta-row { flex-direction: column; align-items: stretch; }
-            .hero-cta-row .btn-hero-primary,
-            .hero-cta-row .btn-hero-ghost { justify-content: center; }
-            .hero-stats { gap: 1.5rem; padding-top: 1.5rem; }
-            .stat-number { font-size: 1.5rem; }
-            .wl-form-row { flex-direction: column; }
-            .wl-input { min-width: 0; width: 100%; }
-            .wl-btn { width: 100%; justify-content: center; }
-            section { padding: clamp(3rem, 8vw, 5rem) var(--container); }
-            .point, .step-card, .metric-cell { padding: 1.5rem 1.25rem; }
-            .cta-block { padding: 1.5rem 1.25rem; }
-            .footer-inner { gap: 2rem; }
-            .footer-bottom { flex-direction: column; align-items: flex-start; text-align: left; }
+        @media (min-width:600px) {
+            .prob-grid { grid-template-columns:repeat(2,1fr); }
+            .paths-grid { grid-template-columns:repeat(2,1fr); }
+            .met-grid { grid-template-columns:repeat(2,1fr); }
+            .ft-inner { grid-template-columns:1fr 1fr; }
         }
-        /* Phones + small tablets (481–639px) */
-        @media (min-width: 481px) and (max-width: 639px) {
-            .hero-stats { gap: 2rem; }
+        @media (min-width:768px) {
+            .hero-wrap { grid-template-columns:1fr 1fr; gap:3.5rem; }
         }
-        /* Tablets (640–859px) */
-        @media (min-width: 640px) {
-            .why-grid { grid-template-columns: repeat(2, 1fr); }
-            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+        @media (min-width:860px) {
+            .steps { grid-template-columns:repeat(2,1fr); }
+            .ft-inner { grid-template-columns:2fr 1fr 1fr 1fr; }
         }
-        /* Tablets landscape / small laptop (768px) */
-        @media (min-width: 768px) {
-            .hero-container { grid-template-columns: 1fr 1fr; gap: 3rem; }
+        @media (min-width:1024px) {
+            nav.dn { display:block; }
+            .ham { display:none; }
+            .hero-wrap { grid-template-columns:1.05fr .95fr; }
+            .steps { grid-template-columns:repeat(4,1fr); }
+            .met-grid { grid-template-columns:repeat(4,1fr); }
+            .paths-grid { grid-template-columns:repeat(3,1fr); }
         }
-        /* Laptop (860px+) */
-        @media (min-width: 860px) {
-            .two-col { grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
-            .steps-flow { grid-template-columns: repeat(2, 1fr); }
-            .footer-inner { grid-template-columns: 2fr 1fr 1fr 1fr; }
-        }
-        /* Desktop (1024px+) */
-        @media (min-width: 1024px) {
-            nav.desktop-nav { display: block; }
-            .hamburger { display: none; }
-            .hero-container { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; }
-            .steps-flow { grid-template-columns: repeat(4, 1fr); }
-            .metrics-grid { grid-template-columns: repeat(4, 1fr); }
-            .why-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        /* Safe area for notched devices */
-        @supports (padding: max(0px, env(safe-area-inset-bottom))) {
-            footer { padding-bottom: max(2rem, calc(2rem + env(safe-area-inset-bottom))); }
-        }
+        @media (max-width:768px) { .wl-in,.wl-btn { font-size:16px; } }
     </style>
 </head>
 <body>
-<div class="scroll-progress" id="scrollProgress"></div>
+<div class="prog" id="scrollProgress"></div>
 
 <header id="header">
-    <div class="header-inner">
-        <a href="index.html" class="logo">
-            <img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr
-        </a>
-        <button class="hamburger" id="hamburger" aria-label="menu"><span></span><span></span><span></span></button>
-        <nav class="desktop-nav">
+    <div class="hdr">
+        <a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+        <button class="ham" id="hamburger" aria-label="menu"><span></span><span></span><span></span></button>
+        <nav class="dn">
             <ul>
                 <li><a href="earn-with-bottlr.html">earn</a></li>
                 <li><a href="business.html">business</a></li>
-                <li><a href="for-cities.html">for cities</a></li>
+                <li><a href="for-cities.html">cities</a></li>
                 <li><a href="network.html">network</a></li>
                 <li><a href="about.html">about</a></li>
-                <li><a href="funding.html">for cities & enterprise</a></li>
-                <li><a href="join-waitlist.html" class="btn-waitlist">join waitlist</a></li>
+                <li><a href="join-waitlist.html" class="btn-nav">join waitlist</a></li>
             </ul>
         </nav>
     </div>
 </header>
-<div class="menu-overlay" id="menuOverlay"></div>
-<nav class="mobile-menu" id="mobileMenu">
+
+<div class="ovl" id="menuOverlay"></div>
+<nav class="mmenu" id="mobileMenu">
     <a href="earn-with-bottlr.html">earn with bottlr</a>
     <a href="business.html">for businesses</a>
     <a href="for-cities.html">for cities</a>
     <a href="network.html">the network</a>
     <a href="about.html">about</a>
-    <a href="funding.html">for cities & enterprise</a>
-    <a href="join-waitlist.html" class="cta-mobile">join waitlist</a>
+    <a href="join-waitlist.html" class="cta-m">join waitlist</a>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section class="hero">
-    <div class="hero-glow hero-glow-1"></div>
-    <div class="hero-glow hero-glow-2"></div>
-    <div class="hero-glow hero-glow-3"></div>
-    <div class="hero-container">
-        <div class="fade-in-up">
-            <h1>the operating layer<br>for <span class="accent-teal">container</span><br><span class="accent-green">recovery</span></h1>
-            <p class="hero-sub">bottlr coordinates collectors, businesses, and governments to close the loop on California's $1.5B bottle deposit system — in real time, city by city. The app is access, not the product.</p>
-            <div class="hero-cta-row">
-                <a href="join-waitlist.html" class="btn-hero-primary">
-                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4L6 12l-4-4"/></svg>
+    <div class="hero-bg"></div>
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+    <div class="hero-wrap">
+        <div class="rv">
+            <h1>the operating<br><span class="h1d">layer</span> for<br><span class="h1g">recovery.</span></h1>
+            <p class="hero-sub">California's bottle deposit system generates <strong>$1.5B annually</strong> — but 40% never gets reclaimed. bottlr is the real-time infrastructure that closes the gap.</p>
+            <div class="cta-row">
+                <a href="join-waitlist.html" class="btn-w">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4L6 12l-4-4"/></svg>
                     join waitlist
                 </a>
-                <a href="for-cities.html" class="btn-hero-ghost">for cities & enterprise →</a>
+                <a href="for-cities.html" class="btn-g">for cities &amp; enterprise →</a>
             </div>
-            <p class="hero-note">
-                <span class="hero-note-check"></span>
-                always free for collectors — 100% of crv goes to you
-            </p>
+            <p class="hero-note"><span class="chk"></span> free forever for collectors — 100% of crv is yours</p>
             <div class="hero-stats">
-                <div><span class="stat-number">$1.5B</span><span class="stat-label">CA bottle value annually</span></div>
-                <div><span class="stat-number">40%</span><span class="stat-label">bottles never redeemed</span></div>
-                <div><span class="stat-number">SB 1383</span><span class="stat-label">compliance gap cities need solved</span></div>
-                <div><span class="stat-number">live</span><span class="stat-label">ESG-verified pickups</span></div>
+                <div><span class="sn">$1.5B</span><span class="sl">CA CRV annually</span></div>
+                <div><span class="sn">40%</span><span class="sl">never redeemed</span></div>
+                <div><span class="sn">SB&nbsp;1383</span><span class="sl">compliance mandate</span></div>
             </div>
         </div>
-        <div class="phone-mockup fade-in-up" style="--delay:0.15s">
-            <img src="assets/images/hero/live-map-demo.png" alt="bottlr app live map">
+        <div class="phone-wrap rv" style="--d:.12s">
+            <img src="assets/images/hero/live-map-demo.png" alt="bottlr live map app">
         </div>
     </div>
 </section>
 
-<!-- ── WHY ── -->
-<section class="why-section">
-    <div class="section-wrap">
-        <div class="section-header fade-in-up">
-            <div class="section-label">the problem</div>
-            <h2 class="section-title">California has a $600M<br>annual recovery gap.<br>bottlr closes it.</h2>
-            <p class="section-desc">Coordination is what's broken. SB 1383 mandates and EPR legislation are coming. Scope 3 corporate pressure is real. Collectors exist. Bottles exist. We're the infrastructure that connects them — with verified data cities and enterprises need.</p>
+<!-- TICKER -->
+<div class="ticker">
+    <div class="t-track">
+        <span class="ti">real-time coordination <span class="ti-sep">·</span></span>
+        <span class="ti">SB 1383 compliance infrastructure <span class="ti-sep">·</span></span>
+        <span class="ti">ESG-verified pickups <span class="ti-sep">·</span></span>
+        <span class="ti">100% CRV to collectors <span class="ti-sep">·</span></span>
+        <span class="ti">Bay Area first · city by city <span class="ti-sep">·</span></span>
+        <span class="ti">photo-verified completion records <span class="ti-sep">·</span></span>
+        <span class="ti">EPR-ready data infrastructure <span class="ti-sep">·</span></span>
+        <span class="ti">seed stage · raising now <span class="ti-sep">·</span></span>
+        <span class="ti">real-time coordination <span class="ti-sep">·</span></span>
+        <span class="ti">SB 1383 compliance infrastructure <span class="ti-sep">·</span></span>
+        <span class="ti">ESG-verified pickups <span class="ti-sep">·</span></span>
+        <span class="ti">100% CRV to collectors <span class="ti-sep">·</span></span>
+        <span class="ti">Bay Area first · city by city <span class="ti-sep">·</span></span>
+        <span class="ti">photo-verified completion records <span class="ti-sep">·</span></span>
+        <span class="ti">EPR-ready data infrastructure <span class="ti-sep">·</span></span>
+        <span class="ti">seed stage · raising now <span class="ti-sep">·</span></span>
+    </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="prob-sec">
+    <div class="sw">
+        <div class="sh rv">
+            <div class="lbl">the gap</div>
+            <h2 class="st">$600M left on the table.<br>every year.</h2>
+            <p class="sd">The people, the bottles, and the redemption infrastructure all exist. What's missing is the coordination layer.</p>
         </div>
-        <div class="why-grid">
-            <div class="why-card fade-in-up" style="--delay:0.05s"><h3>collectors are active</h3><p>People already do this work every day. We give them better signal, route clarity, and a reliable stream of jobs.</p></div>
-            <div class="why-card fade-in-up" style="--delay:0.1s"><h3>hosts need reliability</h3><p>Businesses and households need pickup coordination without constant manual back-and-forth.</p></div>
-            <div class="why-card fade-in-up" style="--delay:0.15s"><h3>waste has real value</h3><p>We convert fragmented bottle flows into an organized local value network — visible and trackable.</p></div>
-            <div class="why-card fade-in-up" style="--delay:0.2s"><h3>movement to infrastructure</h3><p>What starts as local coordination becomes the operating layer for recycling logistics at city scale.</p></div>
-        </div>
-        <div class="section-header fade-in-up" style="margin-top:4rem;">
-            <div class="section-label">who uses bottlr</div>
-            <h2 class="section-title">three pathways.<br>one infrastructure.</h2>
-            <p class="section-desc">The app is access, not the product. bottlr serves collectors, enterprises, and governments — each with the layer they need.</p>
-        </div>
-        <div class="why-grid fade-in-up" style="--delay:0.05s;">
-            <div class="why-card"><h3>collectors</h3><p>Build real income from bottle recovery. See live jobs on the map, claim instantly, keep 100% of CRV. Free forever.</p><a href="earn-with-bottlr.html" class="card-link">earn with bottlr →</a></div>
-            <div class="why-card"><h3>businesses & campuses</h3><p>Universities, offices, and venues get verified pickups plus ESG reports exportable for Scope 3 and zero-waste certification.</p><a href="business.html" class="card-link">for business →</a></div>
-            <div class="why-card"><h3>cities & government</h3><p>Municipal partners use verified data for SB 1383 compliance, mandate fulfillment, and EPR preparation — no new infrastructure required.</p><a href="for-cities.html" class="card-link">for cities →</a></div>
+        <div class="prob-grid">
+            <div class="prob-card rv" style="--d:.04s"><span class="num">01</span><h3>collectors work blind</h3><p>Collectors walk routes not knowing if bottles will be there. No signal, no advance notice. Wasted time and income every day.</p></div>
+            <div class="prob-card rv" style="--d:.08s"><span class="num">02</span><h3>hosts have no system</h3><p>Businesses pile bottles out back with no pickup scheduled, no record of what happened, and no ESG documentation to show for it.</p></div>
+            <div class="prob-card rv" style="--d:.12s"><span class="num">03</span><h3>cities miss their targets</h3><p>SB 1383 mandates container diversion. Most cities have no real-time, verified mechanism to track or improve their redemption rate.</p></div>
+            <div class="prob-card rv" style="--d:.16s"><span class="num">04</span><h3>enterprises can't verify</h3><p>Scope 3 reporting requires granular recovery data. There's no existing infrastructure to produce it at the level ESG filings demand.</p></div>
         </div>
     </div>
 </section>
 
-<!-- ── COLLECTORS ── -->
-<section class="collectors-section" id="collectors">
-    <div class="section-wrap">
-        <div class="section-header fade-in-up">
-            <div class="section-label">for collectors</div>
-            <h2 class="section-title">more pickups.<br>more money.</h2>
-            <p class="section-desc">Stop walking blind. bottlr shows you exactly where the bottles are — before you leave home.</p>
+<!-- THREE PATHS -->
+<section class="paths-sec">
+    <div class="sw">
+        <div class="sh rv">
+            <div class="lbl">who bottlr serves</div>
+            <h2 class="st">one platform.<br>three audiences.</h2>
+            <p class="sd">The app is access, not the product. Collectors, enterprises, and governments — each gets the infrastructure layer they need.</p>
         </div>
-        <div class="two-col">
-            <div class="points-grid">
-                <div class="point fade-in-up" style="--delay:0.05s">
-                    <div class="point-icon pi-map">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#2e8de0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-                        </svg>
-                    </div>
-                    <div class="point-text"><h3>see live jobs on a map</h3><p>Discover pickup postings nearby with location, count, and time window — before leaving home.</p></div>
-                </div>
-                <div class="point fade-in-up" style="--delay:0.1s">
-                    <div class="point-icon pi-bolt">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                        </svg>
-                    </div>
-                    <div class="point-text"><h3>tap once to claim</h3><p>No phone calls, no guessing. Claim a job instantly and get the address, count, and best route.</p></div>
-                </div>
-                <div class="point fade-in-up" style="--delay:0.15s">
-                    <div class="point-icon pi-coin">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5c0 2.5-5 2.5-5 5 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5"/>
-                        </svg>
-                    </div>
-                    <div class="point-text"><h3>100% of crv is yours</h3><p>We never touch your earnings. Every cent of CRV redemption goes directly to you — that's the whole point.</p></div>
-                </div>
-                <div class="point fade-in-up" style="--delay:0.2s">
-                    <div class="point-icon pi-chart">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>
-                        </svg>
-                    </div>
-                    <div class="point-text"><h3>track your impact</h3><p>See completed pickups, bottles diverted, and earnings history all in one transparent dashboard.</p></div>
-                </div>
+        <div class="paths-grid">
+            <div class="path-card rv" style="--d:.04s">
+                <div class="path-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5c0 2.5-5 2.5-5 5 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5"/></svg></div>
+                <h3>collectors</h3>
+                <p>Live jobs on a map. Claim in one tap. Keep 100% of CRV. Free forever — bottlr is funded by businesses, not by you.</p>
+                <a href="earn-with-bottlr.html" class="path-link">earn with bottlr <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
             </div>
-            <div class="cta-block fade-in-up" style="--delay:0.1s">
-                <h3>start finding more pickups.</h3>
-                <p>Get early access when we launch in your city. Be first to see jobs on the map.</p>
-                <a href="join-waitlist.html" class="btn-collect">
-                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4L6 12l-4-4"/></svg>
-                    join collector waitlist
-                </a>
-                <div class="free-tag">
-                    <span class="free-tag-check"></span>
-                    <strong>free forever</strong> for collectors
-                </div>
+            <div class="path-card rv" style="--d:.09s">
+                <div class="path-icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="#2e8de0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+                <h3>businesses &amp; campuses</h3>
+                <p>Post a pickup in under a minute. Get verified completion records, Scope 3-ready ESG reports, and zero operational overhead.</p>
+                <a href="business.html" class="path-link">for businesses <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            </div>
+            <div class="path-card rv" style="--d:.14s">
+                <div class="path-icon ic-teal"><svg viewBox="0 0 24 24" fill="none" stroke="#0ea5a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                <h3>cities &amp; government</h3>
+                <p>Real-time verified pickup data for SB 1383 compliance, mandate fulfillment, and EPR preparation — no new infrastructure required.</p>
+                <a href="for-cities.html" class="path-link">for cities <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ── HOSTS ── -->
-<section class="hosts-section" id="hosts">
-    <div class="section-wrap">
-        <div class="section-header fade-in-up">
-            <div class="section-label">for businesses</div>
-            <h2 class="section-title">post once.<br>bottles gone.</h2>
-            <p class="section-desc">Restaurants, offices, property managers, and event venues use bottlr to schedule verified bottle pickups — and get the impact reports to prove it.</p>
+<!-- HOW IT WORKS -->
+<section class="hiw-sec">
+    <div class="sw">
+        <div class="sh rv">
+            <div class="lbl">how it works</div>
+            <h2 class="st">post once.<br>bottles gone.</h2>
+            <p class="sd">Four steps from host posting to verified completion record. The network handles the rest.</p>
         </div>
-        <div class="steps-flow">
-            <div class="step-card fade-in-up" style="--delay:0.05s"><div class="step-number">01</div><div class="step-content"><h3>post a pickup</h3><p>Add your location, bottle count, and when they're ready. Takes under a minute.</p></div></div>
-            <div class="step-card fade-in-up" style="--delay:0.12s"><div class="step-number">02</div><div class="step-content"><h3>a collector claims it</h3><p>Nearby collectors see your job on the live map and claim it in real time.</p></div></div>
-            <div class="step-card fade-in-up" style="--delay:0.18s"><div class="step-number">03</div><div class="step-content"><h3>verified pickup</h3><p>Photo verification confirms the handoff — you get a compliance record automatically.</p></div></div>
-            <div class="step-card fade-in-up" style="--delay:0.24s"><div class="step-number">04</div><div class="step-content"><h3>impact report</h3><p>Track bottles diverted, CO&#x2082; saved, and pickup history — shareable for ESG reporting.</p></div></div>
-        </div>
-    </div>
-</section>
-
-<!-- ── GALLERY ── -->
-<section class="gallery-section" id="demo">
-    <div class="gallery-header fade-in-up">
-        <div class="section-label">the app</div>
-        <h2 class="section-title">see it in action</h2>
-        <p class="section-desc">Real screens from bottlr — both the collector and host experience.</p>
-        <div class="demo-tags">
-            <span class="demo-tag">collector view</span>
-            <span class="demo-tag">host view</span>
-            <span class="demo-tag">live map</span>
-            <span class="demo-tag">job claiming</span>
-            <span class="demo-tag">onboarding</span>
-        </div>
-    </div>
-    <div class="gallery-marquee fade-in-up" style="--delay:0.1s">
-        <div class="gallery-track">
-            <figure class="screen-card"><img src="assets/images/screenshots/collector-map-view.png" alt="pickup map"><figcaption>live pickup map</figcaption></figure>
-            <figure class="screen-card"><img src="assets/images/screenshots/collection-view.png" alt="pickup detail"><figcaption>pickup detail + claim</figcaption></figure>
-            <figure class="screen-card"><img src="assets/images/screenshots/collections-list-view.png" alt="nearby pickups"><figcaption>nearby pickups list</figcaption></figure>
-            <figure class="screen-card"><img src="assets/images/screenshots/colleciton-view1.png" alt="job status"><figcaption>job status + route</figcaption></figure>
-            <figure class="screen-card"><img src="assets/images/screenshots/host-home-view-map.png" alt="host map"><figcaption>host home map</figcaption></figure>
-            <figure class="screen-card"><img src="assets/images/screenshots/host-post-view.png" alt="post form"><figcaption>new pickup post</figcaption></figure>
-            <figure class="screen-card"><img src="assets/images/screenshots/hos-home-view.png" alt="host overview"><figcaption>host activity view</figcaption></figure>
-            <figure class="screen-card"><img src="assets/images/screenshots/onboarding-view.png" alt="onboarding"><figcaption>role-based onboarding</figcaption></figure>
-            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/collector-map-view.png" alt=""><figcaption>live pickup map</figcaption></figure>
-            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/collection-view.png" alt=""><figcaption>pickup detail + claim</figcaption></figure>
-            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/collections-list-view.png" alt=""><figcaption>nearby pickups list</figcaption></figure>
-            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/colleciton-view1.png" alt=""><figcaption>job status + route</figcaption></figure>
-            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/host-home-view-map.png" alt=""><figcaption>host home map</figcaption></figure>
-            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/host-post-view.png" alt=""><figcaption>new pickup post</figcaption></figure>
-            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/hos-home-view.png" alt=""><figcaption>host activity view</figcaption></figure>
-            <figure class="screen-card" aria-hidden="true"><img src="assets/images/screenshots/onboarding-view.png" alt=""><figcaption>role-based onboarding</figcaption></figure>
+        <div class="steps">
+            <div class="step rv" style="--d:.04s"><div class="sn2">01</div><div><h3>post a pickup</h3><p>Add location, bottle count, and timing. Under a minute from any device.</p></div></div>
+            <div class="step rv" style="--d:.1s"><div class="sn2">02</div><div><h3>a collector claims it</h3><p>Nearby collectors see it on the live map and claim instantly. You get notified.</p></div></div>
+            <div class="step rv" style="--d:.16s"><div class="sn2">03</div><div><h3>photo-verified handoff</h3><p>Collector submits a photo at completion. Timestamped record created automatically.</p></div></div>
+            <div class="step rv" style="--d:.22s"><div class="sn2">04</div><div><h3>ESG report generated</h3><p>Dashboard tracks bottles diverted, CO₂ saved — exportable for compliance or filing.</p></div></div>
         </div>
     </div>
 </section>
 
-<!-- ── METRICS ── -->
-<section class="metrics-section">
-    <div class="section-wrap">
-        <div class="section-header fade-in-up">
-            <div class="section-label">why it matters</div>
-            <h2 class="section-title">built for the people<br>doing the work.</h2>
-            <p class="section-desc">Every feature in bottlr exists to make pickup faster, fairer, and more transparent for collectors and hosts alike.</p>
+<!-- GALLERY -->
+<section class="gal-sec">
+    <div class="gal-head rv">
+        <div class="lbl">the app</div>
+        <h2 class="st">see it in action.</h2>
+        <p class="sd">Real screens — collector and host flows, live map, job claiming, onboarding.</p>
+        <div class="g-tags">
+            <span class="g-tag">collector view</span>
+            <span class="g-tag">host view</span>
+            <span class="g-tag">live map</span>
+            <span class="g-tag">job claiming</span>
+            <span class="g-tag">onboarding</span>
         </div>
-        <div class="metrics-grid">
-            <div class="metric-cell fade-in-up" style="--delay:0.05s"><div class="metric-big">live</div><div class="metric-label">job availability</div><p class="metric-desc">Real-time job discovery — no stale listings, no wasted trips across the city.</p></div>
-            <div class="metric-cell fade-in-up" style="--delay:0.1s"><div class="metric-big">100%</div><div class="metric-label">CRV to collectors</div><p class="metric-desc">We make money from businesses, not from the people doing the collecting.</p></div>
-            <div class="metric-cell fade-in-up" style="--delay:0.15s"><div class="metric-big">clear</div><div class="metric-label">earnings dashboard</div><p class="metric-desc">Every pickup, every dollar — visible in one transparent view.</p></div>
-            <div class="metric-cell fade-in-up" style="--delay:0.2s"><div class="metric-big">zero</div><div class="metric-label">wasted bottles</div><p class="metric-desc">Every host posting is a bottle that would have been thrown away. Now it's not.</p></div>
+    </div>
+    <div class="marquee rv" style="--d:.1s">
+        <div class="m-track">
+            <figure class="sc"><img src="assets/images/screenshots/collector-map-view.png" alt="pickup map"><figcaption>live pickup map</figcaption></figure>
+            <figure class="sc"><img src="assets/images/screenshots/collection-view.png" alt="pickup detail"><figcaption>pickup detail + claim</figcaption></figure>
+            <figure class="sc"><img src="assets/images/screenshots/collections-list-view.png" alt="nearby pickups"><figcaption>nearby pickups list</figcaption></figure>
+            <figure class="sc"><img src="assets/images/screenshots/colleciton-view1.png" alt="job status"><figcaption>job status + route</figcaption></figure>
+            <figure class="sc"><img src="assets/images/screenshots/host-home-view-map.png" alt="host map"><figcaption>host home map</figcaption></figure>
+            <figure class="sc"><img src="assets/images/screenshots/host-post-view.png" alt="post form"><figcaption>new pickup post</figcaption></figure>
+            <figure class="sc"><img src="assets/images/screenshots/hos-home-view.png" alt="host overview"><figcaption>host activity view</figcaption></figure>
+            <figure class="sc"><img src="assets/images/screenshots/onboarding-view.png" alt="onboarding"><figcaption>role-based onboarding</figcaption></figure>
+            <figure class="sc" aria-hidden="true"><img src="assets/images/screenshots/collector-map-view.png" alt=""><figcaption>live pickup map</figcaption></figure>
+            <figure class="sc" aria-hidden="true"><img src="assets/images/screenshots/collection-view.png" alt=""><figcaption>pickup detail + claim</figcaption></figure>
+            <figure class="sc" aria-hidden="true"><img src="assets/images/screenshots/collections-list-view.png" alt=""><figcaption>nearby pickups list</figcaption></figure>
+            <figure class="sc" aria-hidden="true"><img src="assets/images/screenshots/colleciton-view1.png" alt=""><figcaption>job status + route</figcaption></figure>
+            <figure class="sc" aria-hidden="true"><img src="assets/images/screenshots/host-home-view-map.png" alt=""><figcaption>host home map</figcaption></figure>
+            <figure class="sc" aria-hidden="true"><img src="assets/images/screenshots/host-post-view.png" alt=""><figcaption>new pickup post</figcaption></figure>
+            <figure class="sc" aria-hidden="true"><img src="assets/images/screenshots/hos-home-view.png" alt=""><figcaption>host activity view</figcaption></figure>
+            <figure class="sc" aria-hidden="true"><img src="assets/images/screenshots/onboarding-view.png" alt=""><figcaption>role-based onboarding</figcaption></figure>
         </div>
     </div>
 </section>
 
-<!-- ── WAITLIST ── -->
-<section class="waitlist-section">
-    <div class="wl-blur wl-blur-1"></div>
-    <div class="wl-blur wl-blur-2"></div>
-    <div class="section-wrap" style="position:relative;z-index:1;">
-        <div class="fade-in-up">
-            <div class="section-label">early access</div>
-            <h2 class="section-title">be first in your city.</h2>
-            <p class="section-desc">We're rolling out city by city. Get early access, first pickups, and shape the network from day one.</p>
-            <form class="wl-form-row" onsubmit="handleWaitlistInline(event)" data-source="hero">
-                <input type="email" name="email" class="wl-input" placeholder="your@email.com" required>
+<!-- METRICS -->
+<section class="met-sec">
+    <div class="sw">
+        <div class="sh rv">
+            <div class="lbl">why it matters</div>
+            <h2 class="st">infrastructure, not an app.</h2>
+            <p class="sd">The app is access. The verified data layer is the product — and it has defensible value at every tier.</p>
+        </div>
+        <div class="met-grid">
+            <div class="met-cell rv" style="--d:.04s"><div class="mb">live</div><div class="ml">real-time coordination</div><p class="md">Jobs update as hosts post. No stale listings. Collectors see exactly what's available before they leave home.</p></div>
+            <div class="met-cell rv" style="--d:.09s"><div class="mb">100%</div><div class="ml">CRV to collectors</div><p class="md">Revenue comes from businesses and governments — never from the people doing the physical work.</p></div>
+            <div class="met-cell rv" style="--d:.14s"><div class="mb">verified</div><div class="ml">ESG data layer</div><p class="md">Every pickup is photo-verified and timestamped. Compliance records exist at the pickup level, not estimate level.</p></div>
+            <div class="met-cell rv" style="--d:.19s"><div class="mb">EPR</div><div class="ml">-ready infrastructure</div><p class="md">Extended Producer Responsibility legislation is passing state by state. Bottlr is the data layer those programs need.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- WAITLIST (light, your copy) -->
+<section class="wl-sec">
+    <div class="sw wl-inner">
+        <div class="rv">
+            <div class="lbl">early access</div>
+            <h2 class="st">be first in your city.</h2>
+            <p class="sd">We roll out city by city. San Jose is first. Get early access and shape the network from the ground up.</p>
+            <form class="wl-form" onsubmit="handleWaitlistInline(event)" data-source="home">
+                <input type="email" name="email" class="wl-in" placeholder="your@email.com" required>
                 <button type="submit" class="wl-btn">get early access</button>
-                <div class="waitlist-status" data-role="status"></div>
+                <div class="wl-stat" data-role="status"></div>
             </form>
-            <div class="social-proof">
-                <div class="proof-avatars">
-                    <div class="proof-avatar"><div class="proof-avatar-dot pa-1"></div></div>
-                    <div class="proof-avatar"><div class="proof-avatar-dot pa-2"></div></div>
-                    <div class="proof-avatar"><div class="proof-avatar-dot pa-3"></div></div>
-                    <div class="proof-avatar"><div class="proof-avatar-dot pa-4"></div></div>
-                    <div class="proof-avatar"><div class="proof-avatar-dot pa-plus">+</div></div>
+            <div class="soc">
+                <div class="avts">
+                    <div class="av"><div class="av-d a1"></div></div>
+                    <div class="av"><div class="av-d a2"></div></div>
+                    <div class="av"><div class="av-d a3"></div></div>
+                    <div class="av"><div class="av-d a4"></div></div>
+                    <div class="av"><div class="av-d ax">+</div></div>
                 </div>
-                <p class="proof-text">join hundreds of early members</p>
+                <p class="soc-txt">join hundreds of early members</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
-    <div class="footer-inner">
-        <div class="footer-brand">
-            <a href="index.html" class="footer-logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
-            <p class="footer-tagline">recycling logistics powered by people. launching city by city.</p>
+    <div class="ft-inner">
+        <div>
+            <a href="index.html" class="ft-logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+            <p class="ft-tag">circular economy infrastructure. city by city.</p>
         </div>
-        <div class="footer-col">
+        <div class="ft-col">
             <h4>product</h4>
             <ul>
                 <li><a href="how-it-works.html">how it works</a></li>
                 <li><a href="earn-with-bottlr.html">earn with bottlr</a></li>
                 <li><a href="business.html">for businesses</a></li>
-                <li><a href="for-cities.html">for cities</a></li>
                 <li><a href="network.html">the network</a></li>
             </ul>
         </div>
-        <div class="footer-col">
+        <div class="ft-col">
             <h4>company</h4>
             <ul>
                 <li><a href="about.html">about</a></li>
                 <li><a href="cities.html">cities</a></li>
+                <li><a href="press.html">press</a></li>
                 <li><a href="impact.html">impact</a></li>
             </ul>
         </div>
-        <div class="footer-col">
+        <div class="ft-col">
             <h4>resources</h4>
             <ul>
                 <li><a href="join-waitlist.html">join waitlist</a></li>
+                <li><a href="funding.html">partners</a></li>
                 <li><a href="safety.html">safety</a></li>
                 <li><a href="privacy.html">privacy</a></li>
-                <li><a href="terms.html">terms</a></li>
             </ul>
         </div>
     </div>
-    <div class="footer-bottom">
+    <div class="ft-btm">
         <span>© 2026 bottlr. all rights reserved.</span>
-        <a href="join-waitlist.html" class="footer-badge">get early access</a>
+        <a href="join-waitlist.html" class="ft-badge">get early access</a>
     </div>
 </footer>
 
 <script>
-    function handleWaitlistInline(e) {
-        e.preventDefault();
-        const form = e.target;
-        const emailInput = form.querySelector('input[type="email"]');
-        const statusEl = form.querySelector('[data-role="status"]');
-        const btn = form.querySelector('button[type="submit"]');
-        const email = emailInput.value.trim();
-        if (!email) return;
-        btn.disabled = true;
-        btn.textContent = 'joining...';
-        const finish = () => {
-            btn.textContent = "on the list";
-            btn.style.background = 'var(--teal)';
-            if (statusEl) { statusEl.textContent = "we'll reach out when we launch near you."; }
-            emailInput.value = '';
-        };
-        if (typeof db !== 'undefined') {
-            db.collection('waitlist').add({ email, source: form.dataset.source || 'general', timestamp: new Date().toISOString() }).then(finish).catch(() => { btn.disabled = false; btn.textContent = 'get early access'; });
-        } else {
-            setTimeout(finish, 800);
-        }
-    }
+    // scroll progress
+    const prog = document.getElementById('scrollProgress');
+    if (prog) window.addEventListener('scroll', () => {
+        prog.style.transform = `scaleX(${window.scrollY / (document.body.scrollHeight - window.innerHeight)})`;
+    }, { passive: true });
+
+    // header scroll
+    const hdr = document.getElementById('header');
+    if (hdr) window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+
+    // mobile menu
+    const ham = document.getElementById('hamburger');
+    const ovl = document.getElementById('menuOverlay');
+    const mm = document.getElementById('mobileMenu');
+    const close = () => { ham?.classList.remove('open'); ovl?.classList.remove('open'); mm?.classList.remove('open'); document.body.style.overflow = ''; };
+    ham?.addEventListener('click', () => {
+        const o = mm?.classList.toggle('open');
+        ham?.classList.toggle('open', o);
+        ovl?.classList.toggle('open', o);
+        document.body.style.overflow = o ? 'hidden' : '';
+    });
+    ovl?.addEventListener('click', close);
+
+    // reveal
+    const rvEls = document.querySelectorAll('.rv');
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }), { threshold: .08 });
+    rvEls.forEach(el => obs.observe(el));
 </script>
 <script src="site.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
