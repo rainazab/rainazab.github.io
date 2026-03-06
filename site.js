@@ -7,7 +7,7 @@
             const h = document.documentElement;
             const ratio = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
             progress.style.transform = `scaleX(${ratio})`;
-            header.classList.toggle("scrolled", h.scrollTop > 20);
+            header.classList.toggle("scrolled", h.scrollTop > 100);
         }, { passive: true });
     }
 

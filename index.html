@@ -59,11 +59,11 @@
         /* scroll progress — blue to green journey */
         .prog { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--blue) 0%,var(--teal) 50%,var(--green-br) 100%); transform-origin:left; transform:scaleX(0); transition:transform .08s var(--ease-out); z-index:10000; width:100%; }
 
-        /* ── HEADER (shrunk, light, blue-green) ── */
-        header { position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(255,255,255,0.92); border-bottom:1px solid rgba(54,148,232,0.1); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); transition:background .35s var(--ease), box-shadow .35s var(--ease), border-color .35s; }
-        header.scrolled { background:rgba(255,255,255,0.98); box-shadow:0 1px 0 rgba(54,148,232,0.08), 0 12px 40px rgba(54,148,232,0.06); }
+        /* ── HEADER (transparent at top; frosted glass when scrolled) ── */
+        header { position:fixed; top:0; left:0; right:0; z-index:1000; background:transparent; transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        header.scrolled { background:rgba(255,255,255,0.8); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); box-shadow:0 1px 3px rgba(0,0,0,0.05); }
         .hdr { max-width:100%; margin:0 auto; padding:0 0.5rem; height:60px; display:flex; align-items:center; justify-content:space-between; }
-        .logo { font-family:var(--fd); font-size:1.28rem; color:var(--green-br); text-transform:lowercase; display:flex; align-items:center; gap:.42rem; transition:opacity .2s; }
+        .logo { font-family:var(--fd); font-size:1.28rem; color:var(--blue); text-transform:lowercase; display:flex; align-items:center; gap:.42rem; transition:opacity .2s; }
         .logo:hover { opacity:.75; }
         .logo img { height:26px; }
         nav.dn { display:none; }
@@ -231,7 +231,7 @@
         .wl-stat { width:100%; font-size:.8rem; color:var(--gray); min-height:1.1rem; font-weight:500; }
         .soc { margin-top:1.9rem; display:flex; align-items:center; gap:.9rem; flex-wrap:wrap; }
         .avts { display:flex; }
-        .av { width:28px; height:28px; border-radius:50%; border:2px solid rgba(54,148,232,.2); margin-left:-6px; overflow:hidden; flex-shrink:0; }
+        .av { width:28px; height:28px; border-radius:50%; border:2px solid white; margin-left:-6px; overflow:hidden; flex-shrink:0; }
         .avts .av:first-child { margin-left:0; }
         .av-d { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:.58rem; font-weight:700; color:white; }
         .a1{background:linear-gradient(135deg,#0ea5a0,#22c55e)} .a1::before{content:'K'}
@@ -307,7 +307,7 @@
 
 <header id="header">
     <div class="hdr">
-        <a href="index.html" class="logo"><img src="assets/images/brand/wordmark.png" alt="bottlr"> bottlr</a>
+        <a href="index.html" class="logo"><img src="assets/images/brand/new-icon.png" alt="bottlr"> bottlr</a>
         <button class="ham" id="hamburger" aria-label="menu"><span></span><span></span><span></span></button>
         <nav class="dn">
             <ul>
@@ -578,20 +578,7 @@
 
     // header scroll
     const hdr = document.getElementById('header');
-    if (hdr) window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
-
-    // mobile menu
-    const ham = document.getElementById('hamburger');
-    const ovl = document.getElementById('menuOverlay');
-    const mm = document.getElementById('mobileMenu');
-    const close = () => { ham?.classList.remove('open'); ovl?.classList.remove('open'); mm?.classList.remove('open'); document.body.style.overflow = ''; };
-    ham?.addEventListener('click', () => {
-        const o = mm?.classList.toggle('open');
-        ham?.classList.toggle('open', o);
-        ovl?.classList.toggle('open', o);
-        document.body.style.overflow = o ? 'hidden' : '';
-    });
-    ovl?.addEventListener('click', close);
+    if (hdr) window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 100), { passive: true });
 
     // reveal
     const rvEls = document.querySelectorAll('.rv');
